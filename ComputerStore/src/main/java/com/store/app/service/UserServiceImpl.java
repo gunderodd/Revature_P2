@@ -3,10 +3,13 @@ package com.store.app.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.store.app.dao.UserRepo;
 import com.store.app.model.User;
 
+// we need this, no?
+@Service
 public class UserServiceImpl implements UserService {
 	private UserRepo ur;
 	
