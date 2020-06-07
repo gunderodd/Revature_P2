@@ -1,0 +1,17 @@
+  
+<div align="center">
+    <h3><u>Create User Page</u></h3>
+<table border="1px">
+<tr>
+    <td><input type="text" placeholder="Enter Username" [(ngModel)]="user.username"/></td>
+</tr>
+<tr>
+    <td><input type="password" placeholder="Enter Password" [(ngModel)]="user.password"/></td>
+</tr>
+<tr>
+    <td><input type="number" placeholder="Enter Access Level" [(ngModel)]="user.access_level"/></td>
+</tr>
+
+</table>
+<button (click)="createUser()">Add User</button>
+</div>
