@@ -10,8 +10,12 @@ import com.store.app.model.User;
 
 @Service
 public class UserServiceImpl implements UserService {
-	@Autowired
 	private UserRepo ur;
+	
+	@Autowired
+	public UserServiceImpl(UserRepo ur) {
+		this.ur = ur;
+	}
 
 	@Override
 	public User createUser(User u) {

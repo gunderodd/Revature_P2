@@ -3,7 +3,6 @@ package com.store.app.model;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,10 +22,6 @@ public class StoreCard {
 	@Column(name = "card_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int card_id;
-	
-//	@Column
-//	@OneToOne(cascade = CascadeType.ALL)
-//	private int user_id;
 	
 	@Column(name = "balance", nullable = false)
 	private double balance;
