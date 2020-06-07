@@ -15,15 +15,18 @@ import javax.persistence.Table;
 @Table(name = "StoreCard")
 public class StoreCard {
 	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id")
+	private User user;
+	
 	@Id
 	@Column(name = "card_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int card_id;
 	
-	@Column
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", referencedColumnName = "user_id")
-	private int user_id;
+//	@Column
+//	@OneToOne(cascade = CascadeType.ALL)
+//	private int user_id;
 	
 	@Column(name = "balance", nullable = false)
 	private double balance;
@@ -34,40 +37,47 @@ public class StoreCard {
 		super();
 	}
 	
-	public StoreCard(int card_id, int user_id, double balance) {
+	public StoreCard(User user, int card_id, double balance) {
 		super();
+		this.user = user;
 		this.card_id = card_id;
-		this.user_id = user_id;
 		this.balance = balance;
 	}
 	
+	
 	// Getters and Setters
+	
 	
 	public int getCard_id() {
 		return card_id;
 	}
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	public void setCard_id(int card_id) {
 		this.card_id = card_id;
 	}
-	public int getUser_id() {
-		return user_id;
-	}
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
-	}
+
 	public double getBalance() {
 		return balance;
 	}
 	public void setBalance(double balance) {
 		this.balance = balance;
 	}
+
 	
 	//To String
-	
 	@Override
 	public String toString() {
-		return "StoreCard [card_id=" + card_id + ", user_id=" + user_id + ", balance=" + balance + "]";
+		return "StoreCard [card_id=" + card_id + ", balance=" + balance + " " + ", user_id=" + user.getId() + "]";
 	}
+	
+
 	
 	
 
