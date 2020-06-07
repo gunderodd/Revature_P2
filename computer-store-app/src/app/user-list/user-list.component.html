@@ -1,0 +1,26 @@
+<div align="center">
+    <h3>User List</h3>
+        <table border="1px">
+            <tr>
+                <th>Id</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Access Level</th>
+            </tr>
+            <tr *ngFor="let user of users">
+                <td>
+                    {{user.id}}
+                </td>
+                <td>
+                    {{user.username}}
+                </td>
+                <td>
+                    {{user.password}}
+                </td>
+                <td>
+                    {{user.access_level}}
+                </td>
+            </tr>
+        </table>
+    
+    </div>
