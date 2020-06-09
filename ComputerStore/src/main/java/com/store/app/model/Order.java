@@ -13,7 +13,6 @@ import javax.persistence.Table;
 
 // general notes: 
 // 1. add in not nullable later if we want
-// 2. are status and created_at supposed to be strings?
 
 
 @Entity
@@ -33,6 +32,7 @@ public class Order {
 	@Column(name = "status")
 	private String status;
 	
+	// Make this datetime object
 	@Column(name = "created_at")
 	private String created_at;
 
