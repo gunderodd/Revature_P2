@@ -2,7 +2,8 @@
 # - name: S3 Sync
 #   uses: jakejarvis/s3-sync-action@v0.5.1
 
-name: Upload Website
+# name: S3 Sync
+# or name: Update Website
 
 on:
   push:
@@ -15,6 +16,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - uses: jakejarvis/s3-sync-action@master
+#   - uses: jakejarvis/s3-sync-action@v0.5.1 ???
       with:
         args: --acl public-read --follow-symlinks --delete
       env:
