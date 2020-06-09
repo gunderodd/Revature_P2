@@ -28,6 +28,7 @@ public class StoreCard {
 	
 	// Constructors
 	
+	// a useless comment
 	public StoreCard() {
 		super();
 	}
