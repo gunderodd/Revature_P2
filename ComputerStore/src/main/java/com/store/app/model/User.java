@@ -26,13 +26,13 @@ public class User {
 	private List<Order> orderList;
 	
 	// getters and setters for orderList?
-	public List<Order> getOrderList() {
-		return orderList;
-	}
-	
-	public void setOrderList(List<Order> orderList) {
-		this.orderList = orderList;
-	}
+//	public List<Order> getOrderList() {
+//		return orderList;
+//	}
+//	
+//	public void setOrderList(List<Order> orderList) {
+//		this.orderList = orderList;
+//	}
 	
 	
 	@Id

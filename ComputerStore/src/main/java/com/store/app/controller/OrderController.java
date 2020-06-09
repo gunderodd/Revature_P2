@@ -44,12 +44,12 @@ public class OrderController {
 		return os.getAllOrders();
 	}
 	
-	@GetMapping("/order{id}")
+	@GetMapping("/order/{id}")
 	public Order getOrderByOrderId(@PathVariable("id") int id) {
 		return os.getOrderByOrderId(id);
 	}
 	
-	@GetMapping("/order{user_id}")
+	@GetMapping("/order/{user_id}")
 	public Order getOrderByUserId(@PathVariable("user_id") int user_id) {
 		return os.getOrderByUserId(user_id);
 	}
@@ -61,7 +61,7 @@ public class OrderController {
 	}
 	
 		//delete
-	@DeleteMapping("/order{id}")
+	@DeleteMapping("/order/{id}")
 	public void deleteOrder(@PathVariable("id") int id) {
 		os.deleteOrderById(id);
 	}

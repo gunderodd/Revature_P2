@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+// Adding User to the constructor?
+
 @Entity
 @Table(name = "StoreCard")
 public class StoreCard {
