@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+// Ethan note: I think we should change this to 
+// User singular (but if we do use escapes for reserved keyword
+
 @Entity
 @Table(name = "Users")
 public class User {
@@ -18,7 +21,6 @@ public class User {
 	@Id
 	@Column(name = "user_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-//	@OneToOne(mappedBy = "storecard")
 	private int id;
 	
 	@Column(name = "username", unique = true, nullable = false)
@@ -33,6 +35,12 @@ public class User {
 	// 2 - Administrator
 	@Column(name = "access_level", nullable = false)
 	private int access_level;
+	
+	// Constructors
+	
+	public User() {
+		super();
+	}
 
 	public User(int id, String username, String password, int access_level) {
 		super();
@@ -42,9 +50,7 @@ public class User {
 		this.access_level = access_level;
 	}
 
-	public User() {
-		super();
-	}
+	// Getters and Setters
 
 	public int getId() {
 		return id;
@@ -78,6 +84,8 @@ public class User {
 		this.access_level = access_level;
 	}
 
+	// To String
+	
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", access_level=" + access_level

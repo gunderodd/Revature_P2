@@ -10,12 +10,16 @@ import com.store.app.model.User;
 
 @Service
 public class UserServiceImpl implements UserService {
+	
+	// Access Repo Bean
 	private UserRepo ur;
 	
 	@Autowired
 	public UserServiceImpl(UserRepo ur) {
 		this.ur = ur;
 	}
+	
+	// Basic CRUD Methods...
 
 	@Override
 	public User createUser(User u) {
@@ -46,4 +50,7 @@ public class UserServiceImpl implements UserService {
 	public void deleteUserById(int id) {
 		ur.deleteById(id);
 	}
+	
+	// ...Other Methods:
+	
 }

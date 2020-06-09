@@ -10,12 +10,16 @@ import com.store.app.model.StoreCard;
 
 @Service
 public class StoreCardServiceImpl implements StoreCardService {
+	
+	// Access StoreCardRepo Bean
 	private StoreCardRepo repo;
 	
 	@Autowired
 	public StoreCardServiceImpl(StoreCardRepo repo) {
 		this.repo = repo;
 	}
+	
+	// Basic CRUD Methods...
 
 	@Override
 	public StoreCard createStoreCard(StoreCard s) {
@@ -41,4 +45,7 @@ public class StoreCardServiceImpl implements StoreCardService {
 	public void deleteStoreCardById(int id) {
 		repo.deleteById(id);
 	}
+	
+	// ...other methods:
+	
 }

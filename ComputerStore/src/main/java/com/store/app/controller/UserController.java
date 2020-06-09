@@ -18,8 +18,12 @@ import com.store.app.model.User;
 @CrossOrigin
 @RestController
 public class UserController {
+	
+	// Access Service Bean
 	@Autowired
 	private UserService us;
+	
+	// Mappings
 	
 	@PostMapping("/user")
 	public User createUser(@RequestBody User u) {

@@ -19,8 +19,12 @@ import com.store.app.service.StoreCardService;
 @RestController
 public class StoreCardController {
 	
+	//Access Service Bean
+	
 	@Autowired
 	private StoreCardService storecardservice;
+	
+	// Mappings
 	
 	@PostMapping("/storecard")
 	public StoreCard createStoreCard(@RequestBody StoreCard s) {
