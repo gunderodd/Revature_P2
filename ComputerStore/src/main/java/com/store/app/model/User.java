@@ -25,15 +25,6 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private List<Order> orderList;
 	
-	// getters and setters for orderList?
-//	public List<Order> getOrderList() {
-//		return orderList;
-//	}
-//	
-//	public void setOrderList(List<Order> orderList) {
-//		this.orderList = orderList;
-//	}
-	
 	
 	@Id
 	@Column(name = "user_id")
