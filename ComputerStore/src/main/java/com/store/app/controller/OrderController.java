@@ -34,7 +34,7 @@ public class OrderController {
 	
 		// create
 	@PostMapping("/order")
-	public Order createUser(@RequestBody Order order) {
+	public Order createOrder(@RequestBody Order order) {
 		return os.createOrder(order);
 	}
 	

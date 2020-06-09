@@ -1,10 +1,13 @@
 package com.store.app.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -18,12 +21,27 @@ public class User {
 	@OneToOne(mappedBy = "user")
 	private StoreCard storecard;
 	
+
+	@OneToMany(mappedBy = "user")
+	private List<Order> orderList;
+	
+	// getters and setters for orderList?
+	public List<Order> getOrderList() {
+		return orderList;
+	}
+	
+	public void setOrderList(List<Order> orderList) {
+		this.orderList = orderList;
+	}
+	
+	
 	@Id
 	@Column(name = "user_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	@Column(name = "username", unique = true, nullable = false)
+	// later, make unique
+	@Column(name = "username", nullable = false)
 	// regex, username must have a letter
 	private String username;
 	
