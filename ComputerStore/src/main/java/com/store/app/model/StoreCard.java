@@ -28,7 +28,6 @@ public class StoreCard {
 	
 	// Constructors
 	
-	// a useless comment
 	public StoreCard() {
 		super();
 	}
@@ -47,16 +46,17 @@ public class StoreCard {
 	public int getCard_id() {
 		return card_id;
 	}
+	
+	public void setCard_id(int card_id) {
+		this.card_id = card_id;
+	}
+	
 	public User getUser() {
 		return user;
 	}
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public void setCard_id(int card_id) {
-		this.card_id = card_id;
 	}
 
 	public double getBalance() {
