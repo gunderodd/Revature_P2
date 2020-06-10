@@ -8,12 +8,24 @@ import { UserListComponent } from './user-list/user-list.component';
 import {UserService} from './user.service';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import { CustomerHomeComponent } from './customer-home/customer-home.component';
+import { StorecardComponent } from './storecard/storecard.component';
+import { PurchaseHistoryComponent } from './purchase-history/purchase-history.component';
+import { ReturnItemsComponent } from './return-items/return-items.component';
+import { ShopMainComponent } from './shop-main/shop-main.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateUserComponent,
-    UserListComponent
+    UserListComponent,
+    CustomerHomeComponent,
+    StorecardComponent,
+    PurchaseHistoryComponent,
+    ReturnItemsComponent,
+    ShopMainComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,

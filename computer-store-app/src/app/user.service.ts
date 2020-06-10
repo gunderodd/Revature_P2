@@ -12,13 +12,15 @@ export class UserService {
 
   constructor(private http:HttpClient) {
     this.url = "http://54.244.36.228:9000/";
-   }
+  }
 
-   public createUser(user:User){
-     return this.http.post<User>(this.url+"user", user);
-   }
+  public createUser(user:User){
+    return this.http.post<User>(this.url+"user", user);
 
-   public getAllUsers():Observable<User[]>{
-     return this.http.get<User[]>(this.url+"users");
-   }
+  }
+
+  public getAllUsers():Observable<User[]>{
+    return this.http.get<User[]>(this.url+"users");
+  }
+  
 }

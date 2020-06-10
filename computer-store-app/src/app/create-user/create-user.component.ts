@@ -14,12 +14,13 @@ export class CreateUserComponent implements OnInit {
 
   constructor(private service:UserService, private router:Router) {
     this.user= new User();
-   }
+    }
 
-   createUser(){
-     this.service.createUser(this.user).subscribe(res=>this.router.navigate(['/listUsers']));
-     this.user = new User();
-   }
+    createUser(){
+      this.service.createUser(this.user).subscribe(res=>this.router.navigate(['customerhome']));
+      this.user = new User();
+      console.log(this.user);
+    }
 
   ngOnInit(){
   }
