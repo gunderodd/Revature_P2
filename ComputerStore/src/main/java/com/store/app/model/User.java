@@ -43,7 +43,7 @@ public class User {
 	// 1 - Employee
 	// 2 - Administrator
 	@Column(name = "access_level", nullable = false)
-	private int access_level;
+	private int accessLevel;
 	
 	// Constructors
 	
@@ -51,12 +51,12 @@ public class User {
 		super();
 	}
 
-	public User(int id, String username, String password, int access_level) {
+	public User(int id, String username, String password, int accessLevel) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
-		this.access_level = access_level;
+		this.accessLevel = accessLevel;
 	}
 
 	// Getters and Setters
@@ -85,19 +85,19 @@ public class User {
 		this.password = password;
 	}
 
-	public int getAccess_level() {
-		return access_level;
+	public int getAccessLevel() {
+		return accessLevel;
 	}
 
-	public void setAccess_level(int access_level) {
-		this.access_level = access_level;
+	public void setAccessLevel(int accessLevel) {
+		this.accessLevel = accessLevel;
 	}
 
 	// To String
 	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", access_level=" + access_level
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", accessLevel=" + accessLevel
 				+ "]";
 	}
 	

@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.store.app.model.Product;
-import com.store.app.model.User;
 import com.store.app.service.ProductService;
-import com.store.app.service.UserService;
 
 @CrossOrigin
 @RestController

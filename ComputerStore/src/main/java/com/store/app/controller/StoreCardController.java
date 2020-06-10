@@ -2,6 +2,8 @@ package com.store.app.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,27 +29,28 @@ public class StoreCardController {
 	// Mappings
 	
 	@PostMapping("/storecard")
-	public StoreCard createStoreCard(@RequestBody StoreCard s) {
+	public StoreCard createStoreCard(HttpSession session, @RequestBody StoreCard s) {
+		// we need to fix this. Store cards can only be created when you have a valid User that the card can be attached to.
 		return storecardservice.createStoreCard(s);
 	}
 
 	@GetMapping("/storedcard/{id}")
-	public StoreCard getStoreCardById(@PathVariable("card_id" )int id) {
+	public StoreCard getStoreCardById(HttpSession session, @PathVariable("card_id" )int id) {
 		return storecardservice.getStoreCardById(id);
 	}
 
 	@GetMapping("/storecards")
-	public List<StoreCard> getAllStoreCards() {
+	public List<StoreCard> getAllStoreCards(HttpSession session) {
 		return storecardservice.getAllStoreCards();
 	}
 
 	@PutMapping("/storedcard")
-	public StoreCard updateStoreCard(@RequestBody StoreCard s) {
+	public StoreCard updateStoreCard(HttpSession session, @RequestBody StoreCard s) {
 		return storecardservice.updateStoreCard(s);
 	}
 
 	@DeleteMapping("/storedcard/{id}")
-	public void deleteStoreCardById(@PathVariable("card_id")int id) {
+	public void deleteStoreCardById(HttpSession session, @PathVariable("card_id")int id) {
 		storecardservice.deleteStoreCardById(id);
 	}
 

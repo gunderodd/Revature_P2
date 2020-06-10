@@ -2,7 +2,6 @@ package com.store.app.service;
 
 import java.util.List;
 
-import com.store.app.model.Order;
 import com.store.app.model.Order_Product;
 
 public interface Order_ProductService {
