@@ -1,0 +1,21 @@
+                simple list of specific, manageable tasks that need done:
+
+
+to do:
+
+- add ngIf logic so that products from the database get displayed on store page
+
+- create user controller login method with session for user
+- create ts login method to call the user controller login method
+
+- create file of a couple dozen products that we can use to fill the database and
+refill it later if it gets deleted, with urls for images
+
+
+
+done (cut and paste in here after):
+
+- add mock up of store contents
+- add mock up of employee view
+- add mock up of admin view
+- add mock up of customer view
