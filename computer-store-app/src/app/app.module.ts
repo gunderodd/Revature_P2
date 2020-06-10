@@ -14,6 +14,8 @@ import { PurchaseHistoryComponent } from './purchase-history/purchase-history.co
 import { ReturnItemsComponent } from './return-items/return-items.component';
 import { ShopMainComponent } from './shop-main/shop-main.component';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { EmployeeViewComponent } from './employee-view/employee-view.component';
+import { AdminViewComponent } from './admin-view/admin-view.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { LoginPageComponent } from './login-page/login-page.component';
     PurchaseHistoryComponent,
     ReturnItemsComponent,
     ShopMainComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    EmployeeViewComponent,
+    AdminViewComponent
   ],
   imports: [
     BrowserModule,
