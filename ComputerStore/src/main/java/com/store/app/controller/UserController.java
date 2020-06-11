@@ -33,19 +33,23 @@ public class UserController {
 	
 	@PostMapping("/login")
 	public ResponseEntity<Object> login(@RequestBody User u, HttpSession session, HttpServletResponse res) {
-		User real = us.getUserByUsername(u.getUsername());
-		if (real != null && real.getPassword().equals(u.getPassword())) {
-			Cookie cookie = new Cookie("username",u.getUsername());
-			cookie.setPath("/computerStore");
-			res.addCookie(cookie);
-			session.setAttribute("user", real);
+		try {
+			User real = us.getUserByUsername(u.getUsername());
+			if (real != null && real.getPassword().equals(u.getPassword())) {
+				Cookie cookie = new Cookie("username",u.getUsername());
+				cookie.setPath("/computerStore");
+				res.addCookie(cookie);
+				session.setAttribute("user", real);
+				return new ResponseEntity<>(real, HttpStatus.ACCEPTED);
+			}
+		} catch (Exception e) {
 			// TODO
-			// going to have to fix this for the angular side, this is just a placeholder
-			return new ResponseEntity<>("{ \"type\":\"redirect\",\"body\":\"loggedInPage.html??\" }", HttpStatus.ACCEPTED);
+			// LOG THE ERROR
+			return new ResponseEntity<>("Invalid Login Credentials! Username: " + u.getUsername() + ", Password: " + u.getPassword(), HttpStatus.BAD_REQUEST);
 		}
 		// TODO
-		// going to have to fix this for the angular side, this is just a placeholder
-		return new ResponseEntity<>("{ \"type\":\"message\",\"body\":\"Invalid Login Credentials! Username: " + u.getUsername() + ", Password: " + u.getPassword() + "\" }", HttpStatus.BAD_REQUEST);
+		// LOG BAD LOGIN ATTEMPT
+		return new ResponseEntity<>("Invalid Login Credentials! Username: " + u.getUsername() + ", Password: " + u.getPassword(), HttpStatus.BAD_REQUEST);
 	}
 	
 	@PostMapping("/logout")
