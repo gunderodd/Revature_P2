@@ -1,4 +1,4 @@
-package com.store.app.service;
+package com.store.app.service.impl;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.store.app.dao.OrderRepo;
 import com.store.app.model.Order;
+import com.store.app.service.OrderService;
 
 
 // Will it work to have one by user id and one by order id?

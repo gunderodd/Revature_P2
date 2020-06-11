@@ -23,7 +23,7 @@ public class StoreCard {
 	@Id
 	@Column(name = "card_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int card_id;
+	private int cardId;
 	
 	@Column(name = "balance", nullable = false)
 	private double balance;
@@ -34,10 +34,10 @@ public class StoreCard {
 		super();
 	}
 	
-	public StoreCard(User user, int card_id, double balance) {
+	public StoreCard(User user, int cardId, double balance) {
 		super();
 		this.user = user;
-		this.card_id = card_id;
+		this.cardId = cardId;
 		this.balance = balance;
 	}
 	
@@ -45,12 +45,12 @@ public class StoreCard {
 	// Getters and Setters
 	
 	
-	public int getCard_id() {
-		return card_id;
+	public int getCardId() {
+		return cardId;
 	}
 	
-	public void setCard_id(int card_id) {
-		this.card_id = card_id;
+	public void setCardId(int cardId) {
+		this.cardId = cardId;
 	}
 	
 	public User getUser() {
@@ -72,7 +72,7 @@ public class StoreCard {
 	//To String
 	@Override
 	public String toString() {
-		return "StoreCard [card_id=" + card_id + ", balance=" + balance + " " + ", user_id=" + user.getId() + "]";
+		return "StoreCard [cardId=" + cardId + ", balance=" + balance + " " + ", user_id=" + user.getUserId() + "]";
 	}
 
 }

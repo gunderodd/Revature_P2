@@ -2,12 +2,11 @@ package com.store.app.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 // This whole table maps out the ManyToMany relationship
@@ -15,19 +14,16 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Order_Product")
-public class Order_Product {
+public class OrderProduct {
+	@EmbeddedId 
+	private OrderProductId orderProductId;
 	
-	@Id
-	@Column(name = "orderProduct_id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-		
-	// order_id
+	@MapsId("orderId")
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "order_id")
 	private Order order;
 	
-	// product_id
+	@MapsId("productId")
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "product_id")
 	private Product product;
@@ -38,11 +34,11 @@ public class Order_Product {
 
 	// Constructors
 	
-	public Order_Product() {
+	public OrderProduct() {
 		super();
 	}
 
-	public Order_Product(Order order, Product product, int quantity) {
+	public OrderProduct(Order order, Product product, int quantity) {
 		super();
 		this.order = order;
 		this.product = product;
@@ -50,6 +46,14 @@ public class Order_Product {
 	}
 
 	// Getters and Setters
+	
+	public OrderProductId getOrderProductId() {
+		return orderProductId;
+	}
+
+	public void setOrderProductId(OrderProductId orderProductId) {
+		this.orderProductId = orderProductId;
+	}
 	
 	public Order getOrder() {
 		return order;
@@ -75,7 +79,7 @@ public class Order_Product {
 		this.quantity = quantity;
 	}
 
-	// To String
+	// toString
 
 	@Override
 	public String toString() {
