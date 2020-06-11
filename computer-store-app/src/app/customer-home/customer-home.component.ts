@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
+import {UserService} from '../user.service';
+import { User } from '../user';
 
 
 @Component({
@@ -8,13 +9,13 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./customer-home.component.css']
 })
 export class CustomerHomeComponent implements OnInit {
-  private usernameCookie: string;
+  public user: User;
 
-  constructor(private cookieService: CookieService) { }
+  constructor(private service: UserService) { }
 
   ngOnInit(): void {
-    this.usernameCookie = this.cookieService.get('username');
-    console.log(this.usernameCookie);
+    this.user = this.service.getCurrentUser();
+    
   }
 
 }

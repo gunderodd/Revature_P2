@@ -16,17 +16,17 @@ export class UserService {
 
   user: User;
 
-  public loginUser(username, password) {
-    this.user = new User();
+  public setCurrentUser(user: User){
+    this.user = user;
+    return user;
+  }
 
-    console.log(username);
-    console.log(password);
-    
-    this.user.username = username;
-    this.user.password = password;
-    console.log(this.user + "this is the user object");
-    
-    return this.http.post<User>(this.url+"login", this.user);
+  public getCurrentUser(){
+    return this.user;
+  }
+  
+  public loginUser(username, password) {
+    return this.http.post<User>(this.url+"login", {username, password});
   }
 
   public createUser(user:User){
