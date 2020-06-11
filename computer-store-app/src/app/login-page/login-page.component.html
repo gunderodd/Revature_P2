@@ -2,13 +2,13 @@
     <h3><u>Log In</u></h3>
 <table border="1px">
 <tr>
-    <td><input type="text" placeholder="Enter Username" [(ngModel)]="user.username"/></td>
+    <td><input type="text" placeholder="Enter Username" [(ngModel)]="username"/></td>
 </tr>
 <tr>
-    <td><input type="password" placeholder="Enter Password" [(ngModel)]="user.password"/></td>
+    <td><input type="password" placeholder="Enter Password" [(ngModel)]="password"/></td>
 </tr>
 
 </table>
-<!-- <button (click)="loginUser()">Log In</button> -->
-<button>log in</button>
+<button (click)="loginUser(username, password)">Log In</button>
+<!-- <button>log in</button> -->
 </div>

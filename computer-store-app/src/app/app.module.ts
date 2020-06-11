@@ -17,6 +17,9 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { EmployeeViewComponent } from './employee-view/employee-view.component';
 import { AdminViewComponent } from './admin-view/admin-view.component';
 
+import { CookieService } from 'ngx-cookie-service';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +40,10 @@ import { AdminViewComponent } from './admin-view/admin-view.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [UserService],
+  providers: [
+    UserService,
+    CookieService
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
