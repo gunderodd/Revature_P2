@@ -17,9 +17,7 @@
         <td><img style="width: 200px;" src= {{product.url}} /></td>
         <td>
             <input id= {{product.id}} type="number">
-            <!-- <input type="number" [(ngModel)] = 'pokeId'/> -->
-            <!-- <button (click)=addToCart({{product.id}},{{product.id}}.value)>Buy</button> -->
-            <button (click)="addToCart(product.id, product.id.value)">Buy</button>
+            <button (click)="addToCart(product.id)">Buy</button>
         </td>
     </tr>
 </table>
