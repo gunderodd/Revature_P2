@@ -33,6 +33,9 @@ public class Product {
 	
 	@Column(name = "stock")
 	private int stock;
+	
+	@Column(name = "url")
+	private String url;
 
 	
 	// Constructors
@@ -40,13 +43,14 @@ public class Product {
 		super();
 	}	
 	
-	public Product(int id, String name, String description, double price, int stock) {
+	public Product(int id, String name, String description, double price, int stock, String url) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.stock = stock;
+		this.url = url;
 	}
 
 	
@@ -90,12 +94,20 @@ public class Product {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
+	
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
 
 	// To String
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", description=" + description + ", price=" + price + ", stock="
-				+ stock + "]";
+				+ stock + ", url=" + url + "]";
 	}
 	
 }
