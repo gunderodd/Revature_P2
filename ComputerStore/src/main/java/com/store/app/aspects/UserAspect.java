@@ -42,12 +42,8 @@ public class UserAspect {
 			throw new BusinessException("You do not have a high enough access level to view this resource.");
 		}
 	}
-
 	
-//	@AfterThrowing("execution(* com.store.app.controller.UserController.get*(..))")
-//	public void getThrower(JoinPoint jp) {
-//		System.out.println("oh boy we threw something and now we're in afterthrowing");
-//	}
-	
+	// need an aspect that runs each time we are given a User object.
+	// need to ensure that the User's information is all valid before bothering to do checks etc.
 	
 }

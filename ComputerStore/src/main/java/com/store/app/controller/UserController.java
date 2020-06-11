@@ -2,9 +2,13 @@ package com.store.app.controller;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,10 +33,18 @@ public class UserController {
 	
 	
 	
-//	@PostMapping("/login")
-//	public Cookie login(@RequestBody User u) {
-//		// I'm guessing we're going to return a cookie that contains the username. -WK
-//	}
+	@PostMapping("/login")
+	public ResponseEntity<Object> login(@RequestBody User u, HttpSession session, HttpServletResponse res) {
+		User real = us.getUserByUsername(u.getUsername());
+		if (real != null && real.getPassword().equals(u.getPassword())) {
+			Cookie cookie = new Cookie("username",u.getUsername());
+			res.addCookie(cookie);
+			session.setAttribute("user", real);
+			// going to have to fix this for the angular side, this is just a placeholder
+			return new ResponseEntity<>("{ \"type\":\"redirect\",\"body\":\"loggedInPage.html??\" }", HttpStatus.ACCEPTED);
+		}
+		return new ResponseEntity<>("Invalid Login!", HttpStatus.NOT_FOUND);
+	}
 	
 	// I added request and response parameters for all of the get, update, and delete methods.
 	// These may need to be changed to just HttpSession objects.
