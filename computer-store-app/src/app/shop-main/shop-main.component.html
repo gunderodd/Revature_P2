@@ -1,49 +1,25 @@
-<p>shop-main works!</p>
-<table border="1px">
+<h1>Shop Parts</h1>
+
+<table border="1px solid black;">
     <tr>
-        <th>Part Name</th>
-        <th>Part Type</th>
+        <th>Name</th>
         <th>Description</th>
         <th>Price</th>
-        <th>Number in stock</th>
+        <th>Number in Stock</th>
         <th>Image</th>
-        <th>Add to Cart</th>
+        <th>Purchase</th>
     </tr>
-    <tr>
-        <td>thing 1</td>
-        <td>monitor</td>
-        <td>very cool</td>
-        <td>2300</td>
-        <td>10</td>
-        <td><img style="width: 100px;" src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" alt=""></td>
+    <tr *ngFor="let product of products">
+        <td>{{ product.name }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.stock }}</td>
+        <td><img style="width: 200px;" src= {{product.url}} /></td>
         <td>
-            <input type="number"/>
-            <button>Add to cart</button>
+            <input id= {{product.id}} type="number">
+            <!-- <input type="number" [(ngModel)] = 'pokeId'/> -->
+            <!-- <button (click)=addToCart({{product.id}},{{product.id}}.value)>Buy</button> -->
+            <button (click)="addToCart(product.id, product.id.value)">Buy</button>
         </td>
     </tr>
-    <tr>
-        <td>thing 1</td>
-        <td>monitor</td>
-        <td>very cool</td>
-        <td>2300</td>
-        <td>10</td>
-        <td><img style="width: 100px;" src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" alt=""></td>
-        <td>
-            <input type="number"/>
-            <button>Add to cart</button>
-        </td>
-    </tr>
-    <tr>
-        <td>thing 1</td>
-        <td>monitor</td>
-        <td>very cool</td>
-        <td>2300</td>
-        <td>10</td>
-        <td><img style="width: 100px;" src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" alt=""></td>
-        <td>
-            <input type="number"/>
-            <button>Add to cart</button>
-        </td>
-    </tr>
-    
-    </table>
+</table>

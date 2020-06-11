@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PRODUCTS } from '../mock-product';
 
 @Component({
   selector: 'app-shop-main',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShopMainComponent implements OnInit {
 
+  
+  products = PRODUCTS;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  addToCart(id) {
+    let amount = (<HTMLInputElement>document.getElementById(id)).value;
+    console.log(id);
+    console.log(amount);
+    
+    
   }
 
 }
