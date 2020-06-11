@@ -12,38 +12,42 @@ import com.store.app.model.StoreCard;
 public class StoreCardServiceImpl implements StoreCardService {
 	
 	// Access StoreCardRepo Bean
-	private StoreCardRepo repo;
+	private StoreCardRepo scr;
+	// Access UserRepo Bean
+//	private UserRepo ur;
+	
 	
 	@Autowired
-	public StoreCardServiceImpl(StoreCardRepo repo) {
-		this.repo = repo;
+	public StoreCardServiceImpl(StoreCardRepo scr) {
+		this.scr = scr;
+//		this.ur = ur;
 	}
 	
 	// Basic CRUD Methods...
 
 	@Override
 	public StoreCard createStoreCard(StoreCard s) {
-		return repo.save(s);
+		return scr.save(s);
 	}
 
 	@Override
 	public StoreCard getStoreCardById(int id) {
-		return repo.findById(id).get();
+		return scr.findById(id).get();
 	}
 
 	@Override
 	public List<StoreCard> getAllStoreCards() {
-		return repo.findAll();
+		return scr.findAll();
 	}
 
 	@Override
 	public StoreCard updateStoreCard(StoreCard s) {
-		return repo.save(s);
+		return scr.save(s);
 	}
 
 	@Override
 	public void deleteStoreCardById(int id) {
-		repo.deleteById(id);
+		scr.deleteById(id);
 	}
 	
 	// ...other methods:
