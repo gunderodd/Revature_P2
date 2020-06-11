@@ -32,7 +32,7 @@ import { CookieService } from 'ngx-cookie-service';
     ShopMainComponent,
     LoginPageComponent,
     EmployeeViewComponent,
-    AdminViewComponent
+    AdminViewComponent,
   ],
   imports: [
     BrowserModule,

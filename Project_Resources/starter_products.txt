@@ -1,0 +1,47 @@
+{
+    "name": "monitor",
+    "description": "a monitor for a computer",
+    "price": 22.00,
+    "stock": 4,
+    "url": "shorturl.at/jzJL1"
+}
+
+{
+    "name": "better monitor",
+    "description": "a better monitor for a computer",
+    "price": 50.00,
+    "stock": 2,
+    "url": "shorturl.at/fmOQ5"
+}
+
+{
+    "name": "Acme Motherboard",
+    "description": "run smoothly",
+    "price": 40.00,
+    "stock": 10,
+    "url": "shorturl.at/hpOY7"
+}
+
+{
+    "name": "BestBrand Motherboard",
+    "description": "run faster",
+    "price": 140.00,
+    "stock": 7,
+    "url": "shorturl.at/dmtBS"
+}
+
+{
+    "name": "BestBrand SSD",
+    "description": "retain memory",
+    "price": 20.00,
+    "stock": 10,
+    "url": "shorturl.at/zATWY"
+}
+
+{
+    "name": "NewTower SSD",
+    "description": "retain all the memory",
+    "price": 40.00,
+    "stock": 0,
+    "url": "shorturl.at/czCG4"
+}
