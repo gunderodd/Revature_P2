@@ -36,7 +36,7 @@ public class UserController {
 		User real = us.getUserByUsername(u.getUsername());
 		if (real != null && real.getPassword().equals(u.getPassword())) {
 			Cookie cookie = new Cookie("username",u.getUsername());
-			cookie.setPath("/computerStore");
+// 			cookie.setPath("/computerStore");
 			res.addCookie(cookie);
 			session.setAttribute("user", real);
 			// TODO
