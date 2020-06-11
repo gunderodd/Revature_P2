@@ -18,6 +18,7 @@ import { EmployeeViewComponent } from './employee-view/employee-view.component';
 import { AdminViewComponent } from './admin-view/admin-view.component';
 
 import { CookieService } from 'ngx-cookie-service';
+import { ProductService } from './product.service';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { CookieService } from 'ngx-cookie-service';
   ],
   providers: [
     UserService,
-    CookieService
+    CookieService,
+    ProductService
 ],
   bootstrap: [AppComponent]
 })
