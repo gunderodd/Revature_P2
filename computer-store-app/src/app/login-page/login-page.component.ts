@@ -14,18 +14,24 @@ export class LoginPageComponent implements OnInit {
 
   constructor(private service:UserService, private router:Router) {
     this.user= new User();
-    // console.log(this.user.username);
+    
   }
 
-  loginUser(username, password) : void {
-    console.log("user login fired on component");
-    console.log(username);
-    console.log(password);
+  loginUser(){
+    console.log(this.user.username)
+    console.log(this.user.password)
+    this.service.loginUser(this.user.username, this.user.password).subscribe(res=>
+      {if (typeof res === "object"){
+        this.service.setCurrentUser(res); this.router.navigate(['customerhome']);
+        console.log(res)
+      }else if (typeof res === "string"){
+        console.log("type is string")
+        console.log(res)
+      }
+      
+      
+      });
     
-    
-    this.service.loginUser(username, password).subscribe(res=>this.router.navigate(['customerhome']));
-    // this.service.createUser(this.user).subscribe(res=>this.router.navigate(['customerhome']));
-    // this.user = new User();
   }
 
   ngOnInit(): void {
