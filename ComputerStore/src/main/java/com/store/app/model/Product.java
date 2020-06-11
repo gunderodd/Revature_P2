@@ -15,12 +15,12 @@ import javax.persistence.Table;
 public class Product {
 	
 	@OneToMany(mappedBy = "product")
-	private List<Order_Product> order_productList;
+	private List<OrderProduct> order_productList;
 
 	@Id
 	@Column(name = "product_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private int productId;
 	
 	@Column(name = "name")
 	private String name;
@@ -33,9 +33,6 @@ public class Product {
 	
 	@Column(name = "stock")
 	private int stock;
-	
-	@Column(name = "url")
-	private String url;
 
 	
 	// Constructors
@@ -43,24 +40,23 @@ public class Product {
 		super();
 	}	
 	
-	public Product(int id, String name, String description, double price, int stock, String url) {
+	public Product(int productId, String name, String description, double price, int stock) {
 		super();
-		this.id = id;
+		this.productId = productId;
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.stock = stock;
-		this.url = url;
 	}
 
 	
 	// Getters and Setters
-	public int getId() {
-		return id;
+	public int getProductId() {
+		return productId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
 
 	public String getName() {
@@ -94,20 +90,12 @@ public class Product {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
-	
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
 
 	// To String
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", description=" + description + ", price=" + price + ", stock="
-				+ stock + ", url=" + url + "]";
+		return "Product [productId=" + productId + ", name=" + name + ", description=" + description + ", price=" + price + ", stock="
+				+ stock + "]";
 	}
 	
 }

@@ -21,15 +21,13 @@ public class User {
 	@OneToOne(mappedBy = "user")
 	private StoreCard storecard;
 	
-
 	@OneToMany(mappedBy = "user")
 	private List<Order> orderList;
-	
 	
 	@Id
 	@Column(name = "user_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private int userId;
 	
 	// later, make unique
 	@Column(name = "username", nullable = false)
@@ -51,9 +49,9 @@ public class User {
 		super();
 	}
 
-	public User(int id, String username, String password, int accessLevel) {
+	public User(int userId, String username, String password, int accessLevel) {
 		super();
-		this.id = id;
+		this.userId = userId;
 		this.username = username;
 		this.password = password;
 		this.accessLevel = accessLevel;
@@ -61,12 +59,12 @@ public class User {
 
 	// Getters and Setters
 
-	public int getId() {
-		return id;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public String getUsername() {
@@ -97,7 +95,7 @@ public class User {
 	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", accessLevel=" + accessLevel
+		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", accessLevel=" + accessLevel
 				+ "]";
 	}
 	
