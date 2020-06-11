@@ -16,20 +16,12 @@ public class UserAspect {
 //	final Logger L = Logger.getLogger(UserAspect.class);
 	
 	
-	@Before("execution(* com.store.app.controller.UserController.get*(..)) "
-			+ "&& execution(* com.store.app.controller.UserController.delete*(..)) "
-			+ "&& execution(* com.store.app.controller.UserController.update*(..))")
+	@Before("execution(* com.store.app.controller.UserController.get*(..))"
+			+ "&& execution(* com.store.app.controller.UserController.delete*(..))")
 	public void beforeGet(JoinPoint jp) {
 		HttpSession session = (HttpSession) jp.getArgs()[0];
 		User u = null;
-		try { // Check if the request is from someone who's logged in
-			u = (User) session.getAttribute("user");
-		} catch (NullPointerException e) {
-			// TODO LOG EXCEPTION
-			throw new BusinessException("You are not logged in. Please log in before trying to access this resource.");
-		}
-		
-		// please someone come up with something better here lol (lines 35 - 40)
+		// please someone come up with something better here lol
 		// I think this is a little too hacky, but it works for all get methods, so....
 		String pathVar = "";
 		int pathVarInt = 0;
@@ -37,9 +29,36 @@ public class UserAspect {
 			pathVar = jp.getArgs()[1].toString();
 			pathVarInt = Integer.parseInt(pathVar);
 		} catch (Exception e) {}
-		if (u.getAccessLevel() < 1 && u.getId() != pathVarInt && u.getUsername().equals(pathVar)) {
+		
+		try { // Check if the request is from someone who's logged in
+			u = (User) session.getAttribute("user");
+			if (u.getAccessLevel() < 1 && u.getId() != pathVarInt && !u.getUsername().equals(pathVar)) {
+				// TODO LOG EXCEPTION
+				throw new BusinessException("You do not have a high enough access level to view this resource.");
+			}
+		} catch (NullPointerException e) {
 			// TODO LOG EXCEPTION
-			throw new BusinessException("You do not have a high enough access level to view this resource.");
+			throw new BusinessException("You are not logged in. Please log in before trying to access this resource.");
+		}
+	}
+	
+	@Before("execution(* com.store.app.controller.UserController.update*(..))")
+	public void beforeUpdate(JoinPoint jp) {
+		HttpSession session = (HttpSession) jp.getArgs()[0];
+		User updated = (User) jp.getArgs()[1];
+		User u = null;
+		try { // Check if the request is from someone who's logged in
+			u = (User) session.getAttribute("user");
+			if (u.getAccessLevel() < 1 && u.getId() != updated.getId() && !u.getUsername().equals(updated.getUsername())) {
+				// TODO LOG EXCEPTION
+				throw new BusinessException("You do not have a high enough access level to update this resource.");
+			} else if (u.getAccessLevel() != updated.getAccessLevel()) {
+				// TODO LOG HUGE WARNING, USER JUST TRIED TO UPDATE THEIR ACCESS LEVEL
+				throw new BusinessException("You do not have a high enough access level to update this resource.");
+			}
+		} catch (NullPointerException e) {
+			// TODO LOG EXCEPTION
+			throw new BusinessException("You are not logged in. Please log in before trying to update this resource.");
 		}
 	}
 	

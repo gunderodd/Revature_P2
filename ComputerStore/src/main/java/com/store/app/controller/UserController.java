@@ -31,24 +31,33 @@ public class UserController {
 	
 	// Mappings
 	
-	
-	
 	@PostMapping("/login")
 	public ResponseEntity<Object> login(@RequestBody User u, HttpSession session, HttpServletResponse res) {
 		User real = us.getUserByUsername(u.getUsername());
 		if (real != null && real.getPassword().equals(u.getPassword())) {
 			Cookie cookie = new Cookie("username",u.getUsername());
+			cookie.setPath("/computerStore");
 			res.addCookie(cookie);
 			session.setAttribute("user", real);
+			// TODO
 			// going to have to fix this for the angular side, this is just a placeholder
 			return new ResponseEntity<>("{ \"type\":\"redirect\",\"body\":\"loggedInPage.html??\" }", HttpStatus.ACCEPTED);
 		}
-		return new ResponseEntity<>("Invalid Login!", HttpStatus.NOT_FOUND);
+		// TODO
+		// going to have to fix this for the angular side, this is just a placeholder
+		return new ResponseEntity<>("{ \"type\":\"message\",\"body\":\"Invalid Login Credentials! Username: " + u.getUsername() + ", Password: " + u.getPassword() + "\" }", HttpStatus.BAD_REQUEST);
 	}
 	
-	// I added request and response parameters for all of the get, update, and delete methods.
-	// These may need to be changed to just HttpSession objects.
-	// If we do these changes, these WILL NEED TO BE REFLECTED IN UserAspect!!!!!!
+	@PostMapping("/logout")
+	public ResponseEntity<Object> logout(HttpSession session, HttpServletResponse res) {
+		Cookie cookie = new Cookie("username",null);
+		cookie.setPath("/computerStore");
+		res.addCookie(cookie);
+		session.invalidate();
+		// TODO
+		// going to have to fix this for the angular side, this is just a placeholder
+		return new ResponseEntity<>("{ \"type\":\"redirect\",\"body\":\"index.html??\" }", HttpStatus.OK);
+	}
 	
 	@PostMapping("/user")
 	public User createUser(@RequestBody User u) {
