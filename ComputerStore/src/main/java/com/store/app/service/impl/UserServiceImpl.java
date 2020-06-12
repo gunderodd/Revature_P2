@@ -1,4 +1,4 @@
-package com.store.app.service;
+package com.store.app.service.impl;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.store.app.dao.UserRepo;
 import com.store.app.model.User;
+import com.store.app.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {

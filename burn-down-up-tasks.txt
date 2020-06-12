@@ -3,13 +3,13 @@
 
 to do:
 
-- add ngIf logic so that products from the database get displayed on store page
-
 - create user controller login method with session for user
 - create ts login method to call the user controller login method
 
-- create file of a couple dozen products that we can use to fill the database and
-refill it later if it gets deleted, with urls for images
+- it would be nice to be able to sort shopping items by type, and maybe only show a few at a time
+- definitely styling for them, probably bootstrap cards with images
+
+
 
 
 
@@ -19,3 +19,6 @@ done (cut and paste in here after):
 - add mock up of employee view
 - add mock up of admin view
 - add mock up of customer view
+- add ngIf logic so that products from the database get displayed on store page
+- create file of a couple dozen products that we can use to fill the database and
+refill it later if it gets deleted, with urls for images

@@ -2,5 +2,44 @@
 
 <ul>
     <li>view all orders</li>
-    <li>view all product quantities</li>
+
+
+
+
+
+    <!-- <div class ='col-md-2'>Filter by:</div>
+                <div class = 'col-md-4'>
+                    <input type = 'text' [(ngModel)] = 'inputField' placeholder = 'filter'>
+                </div> -->
+    <li>All product quantities
+        <table border="1px solid black;">
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Number in Stock</th>
+                <th>Image</th>
+                <th>Restock</th>
+            </tr>
+                <!-- <tr *ngFor="let temp of filteredProducts">
+                <td>{{ temp.name }}</td>
+                <td>{{ temp.description }}</td>
+                <td>{{ temp.price }}</td>
+                <td>{{ temp.stock }}</td>
+                <td><img style="width: 200px;" src= {{temp.url}} /></td>
+                 -->
+                <tr *ngFor="let product of products">
+                <td>{{ product.name }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.price }}</td>
+                     <td>{{ product.stock }}</td>
+                        <td><img style="width: 200px;" src= {{product.url}} /></td>
+                        <td>
+                                <input [(ngModel)]="product.stock" type="number">
+                                <button (click)="restockOrders()">Restock</button>
+                        </td>
+            </tr>
+        </table>
+    
+    </li>
 </ul>

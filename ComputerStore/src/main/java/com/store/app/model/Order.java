@@ -1,6 +1,7 @@
 package com.store.app.model;
 
 import java.util.List;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,111 +13,77 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 // general notes: 
 // 1. add in not nullable later if we want
 
 
 @Entity
-@Table(name = "\"Order\"")
+@Table(name = "Orders")
 public class Order {
 	
 	@OneToMany(mappedBy = "order")
-	private List<Order_Product> order_productList;
+	private List<OrderProduct> order_productList;
 	
 	@Id
 	@Column(name = "order_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private int orderId;
 	
-	// user_id
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 	
 	@Column(name = "status")
 	private String status;
 	
-	// Make this datetime object
-	@Column(name = "created_at")
-	private String created_at;
+	@Column(name = "createdAt")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date createdAt;
 
 	
-	
 	// Constructors
-	
 	public Order() {
 		super();
 	}
-
-
-
-	public Order(int id, User user, String status, String created_at) {
+	public Order(int orderId, User user, String status, Date createdAt) {
 		super();
-		this.id = id;
+		this.orderId = orderId;
 		this.user = user;
 		this.status = status;
-		this.created_at = created_at;
+		this.createdAt = createdAt;
 	}
-
-
-
 	
 	// Getters and Setters
-	
-	public int getId() {
-		return id;
+	public int getOrderId() {
+		return orderId;
 	}
-	
-	
-	
-	public void setId(int id) {
-		this.id = id;
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
 	}
-	
-	
-	
 	public User getUser() {
 		return user;
 	}
-	
-	
-	
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
-	
 	public String getStatus() {
 		return status;
 	}
-	
-	
-	
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	
-	
-	public String getCreated_at() {
-		return created_at;
+	public Date getCreatedAt() {
+		return createdAt;
 	}
-	
-	
-	
-	public void setCreated_at(String created_at) {
-		this.created_at = created_at;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
-
-
-	// To String
-	
+	// toString
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", user_id=" + user.getId() + ", status=" + status + ", created_at=" + created_at + "]";
+		return "Order [orderId=" + orderId + ", user_id=" + user.getUserId() + ", status=" + status + ", createdAt=" + createdAt + "]";
 	}
-	
-
 }
