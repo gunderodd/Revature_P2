@@ -20,8 +20,8 @@ export class ProductService {
     return this.http.get<Product[]>(this.url+"products");
   }
   
-  public restockOrders(stock){
-    return this.http.post<Product>(this.url+"restock", stock);
+  public restockOrders(name, stock){
+    return this.http.put<Product>(this.url+"product" + "/"+ name + "/" + stock, {name, stock});
   }
 
   public listProducts():Observable<Product[]>{

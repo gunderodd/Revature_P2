@@ -37,9 +37,10 @@ export class EmployeeViewComponent implements OnInit {
     // this.filteredProducts = this.products
    }
 
-   restockOrders(){
-     console.log(this.product.stock)
-     this.service.restockOrders(this.product.stock).subscribe(res=> this.router.navigate(['employeeview']));
+   restockOrders(name, stock){
+     console.log(stock)
+     console.log(name)
+     this.service.restockOrders(name, stock).subscribe(res=> this.router.navigate(['employeeview']));
    }
 
   ngOnInit() {
