@@ -1,7 +1,8 @@
 <h1>Employee View</h1>
 
-<ul>
-    <li>view all orders</li>
+
+    <button (click)="toggle()">{{buttonName}}</button>
+    <ng-container *ngIf="show">
     <table border="1px solid black;">
         <tr>
             <th>Time of Order</th>
@@ -15,14 +16,9 @@
                  <td>{{ order.user.username}}</td>
         </tr>
     </table>
-
-
-
-    <!-- <div class ='col-md-2'>Filter by:</div>
-                <div class = 'col-md-4'>
-                    <input type = 'text' [(ngModel)] = 'inputField' placeholder = 'filter'>
-                </div> -->
-    <li>All product quantities
+</ng-container>
+                <button (click)="secondToggle()">{{secondButtonName}}</button>
+                <ng-container *ngIf="secondShow">
         <table border="1px solid black;">
             <tr>
                 <th>Name</th>
@@ -32,13 +28,6 @@
                 <th>Image</th>
                 <th>Restock</th>
             </tr>
-                <!-- <tr *ngFor="let temp of filteredProducts">
-                <td>{{ temp.name }}</td>
-                <td>{{ temp.description }}</td>
-                <td>{{ temp.price }}</td>
-                <td>{{ temp.stock }}</td>
-                <td><img style="width: 200px;" src= {{temp.url}} /></td>
-                 -->
                 <tr *ngFor="let product of products">
                 <td>{{ product.name }}</td>
                     <td>{{ product.description }}</td>
@@ -51,6 +40,4 @@
                         </td>
             </tr>
         </table>
-    
-    </li>
-</ul>
+    </ng-container>

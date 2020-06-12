@@ -15,6 +15,10 @@ export class EmployeeViewComponent implements OnInit {
   public products:Product[];
   public order: Order;
   public orders: Order[];
+  public show: boolean = false;
+  public secondShow: boolean = false;
+  public buttonName: any = "Show Orders";
+  public secondButtonName: any = "Show Inventory List";
 //   public filteredProducts: Product[];
 
   // constructor() { }
@@ -41,7 +45,22 @@ export class EmployeeViewComponent implements OnInit {
   constructor(private service: ProductService, private router:Router, private orderService: OrderService) {
     // this.filteredProducts = this.products
    }
+    toggle() {
+    this.show = !this.show;
 
+    if(this.show){
+    this.buttonName = "Hide Orders";
+    }else{
+    this.buttonName = "Show Orders";
+  }}
+  secondToggle() {
+    this.secondShow = !this.secondShow;
+
+    if(this.secondShow){
+    this.secondButtonName= "Hide Inventory List";
+    }else{
+    this.secondButtonName = "Show Inventory List";
+  }}
    restockOrders(name, stock){
      console.log(stock)
      console.log(name)
