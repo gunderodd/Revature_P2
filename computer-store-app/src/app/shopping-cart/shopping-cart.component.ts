@@ -18,10 +18,10 @@ export class ShoppingCartComponent implements OnInit {
     });
   }
 
-  addToCart(pid:number) {
-    this.ops.updateOrderProduct().subscribe( res => {
-      // display the result to the user?
-      // or just ensure that the result is good, then just put a checkmark somewhere
-    });
-  }
+  // addToCart(pid:number) {
+  //   this.ops.updateOrderProduct().subscribe( res => {
+  //     // display the result to the user?
+  //     // or just ensure that the result is good, then just put a checkmark somewhere
+  //   });
+  // }
 }
