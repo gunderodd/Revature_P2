@@ -9,6 +9,8 @@ import com.store.app.model.Product;
 
 @Repository
 public interface ProductRepo extends JpaRepository<Product, Integer> {
-	public Optional<Product> findByName(String name);
+	//took optional out
+	public Product findByName(String name);
+
 
 }
