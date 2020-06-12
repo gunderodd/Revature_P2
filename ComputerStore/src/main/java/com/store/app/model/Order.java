@@ -25,7 +25,7 @@ import javax.persistence.TemporalType;
 public class Order {
 	
 	@OneToMany(mappedBy = "order")
-	private List<OrderProduct> order_productList;
+	private List<OrderProduct> orderProductList;
 	
 	@Id
 	@Column(name = "order_id")
@@ -80,6 +80,12 @@ public class Order {
 	}
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
+	}
+	public List<OrderProduct> getOrderProductList() {
+		return orderProductList;
+	}
+	public void setOrderProductList(List<OrderProduct> orderProductList) {
+		this.orderProductList = orderProductList;
 	}
 	// toString
 	@Override

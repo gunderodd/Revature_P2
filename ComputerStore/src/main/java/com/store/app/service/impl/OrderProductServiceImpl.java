@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.store.app.dao.OrderProductRepo;
-import com.store.app.dao.OrderRepo;
-import com.store.app.dao.ProductRepo;
 import com.store.app.model.OrderProduct;
 import com.store.app.service.OrderProductService;
 import com.store.app.service.OrderService;
@@ -41,7 +39,7 @@ public class OrderProductServiceImpl implements OrderProductService {
 	
 	@Override
 	public List<OrderProduct> getByOrderId(int id) {
-		return opr.findByOrder(os.getOrderByOrderId(id)).get();
+		return opr.findByOrder(os.getOrderByOrderId(id));
 	}
 
 	@Override
