@@ -36,6 +36,5 @@ export class UserService {
 
   public getAllUsers():Observable<User[]>{
     return this.http.get<User[]>(this.url+"users");
-  }
-  
+  } 
 }

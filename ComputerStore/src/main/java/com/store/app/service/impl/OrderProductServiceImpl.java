@@ -58,4 +58,9 @@ public class OrderProductServiceImpl implements OrderProductService {
 		
 	}
 
+	@Override
+	public void deleteOrderProduct(OrderProduct op) {
+		opr.delete(op);
+	}
+
 }

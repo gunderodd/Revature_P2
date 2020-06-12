@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,6 +38,7 @@ public class OrderProductController {
 	 * 	"order" : { "orderId" : 1 }
 	 *  "product" : { "productId" : 1 }
 	 *  "quantity" : 1
+	 * }
 	 */
 	// we only create OrderProducts for carts, so we don't have to update the Product quantity yet.
 	@PostMapping("/orderproduct")
@@ -72,4 +74,24 @@ public class OrderProductController {
 		ops.createOrderProduct(op);
 		return op;
 	}
+	
+	@PutMapping("/orderproduct")
+	public OrderProduct updateOrderProduct(HttpSession session, OrderProduct op) {
+		User sessionUser = (User) session.getAttribute("user");
+		User opUser = op.getOrder().getUser();
+		if (sessionUser.getUserId() == opUser.getUserId()) {
+			ops.updateOrderProduct(op);
+			return op;
+		}
+		throw new BusinessException("Current user " + sessionUser.getUsername() + " does not match the user associated with the orderProduct.");
+	}
+	
+//	@DeleteMapping("/orderproduct")
+//	public void deleteOrderProduct(HttpSession session, OrderProduct op) {
+//		// TODO
+//		// aspect for logged in
+//		// aspect for admin or if the user matches the associated orderProduct
+//			// this is a cross-cutting concern. might want to consider making an aspect for this and applying it to the update method.
+//		
+//	}
 }
