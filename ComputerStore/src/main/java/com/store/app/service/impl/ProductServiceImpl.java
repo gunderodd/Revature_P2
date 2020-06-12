@@ -52,6 +52,15 @@ public class ProductServiceImpl implements ProductService {
 	public void deleteProductById(int id) {
 		pr.deleteById(id);
 	}
+
+	@Override
+	public Product updateProductStockByName(String name, int stock) {
+		Product product = pr.findByName(name);
+		product.setStock(stock);
+		return pr.save(product);
+		
+	}
+
 	
 	// ...Other Methods:
 
