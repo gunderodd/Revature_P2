@@ -29,12 +29,12 @@ export class UserService {
     return this.http.post<User>(this.url+"login", {username, password});
   }
 
-  public createUser(user:User){
+  public createUser(user:User): Observable<User> {
     return this.http.post<User>(this.url+"user", user);
 
   }
 
-  public getAllUsers():Observable<User[]>{
+  public getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.url+"users");
   } 
 }
