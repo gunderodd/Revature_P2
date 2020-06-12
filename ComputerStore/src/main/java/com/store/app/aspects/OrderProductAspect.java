@@ -12,27 +12,21 @@ import com.store.app.model.User;
 
 @Aspect
 @Configuration
-public class OrderAspect {
+public class OrderProductAspect {
 	
-	@Before("execution(* com.store.app.controller.UserController.get*(..))"
-			+ "&& execution(* com.store.app.controller.UserController.delete*(..))")
+	@Before("execution(* com.store.app.controller.OrderProductController.create*(..))")
 	public void beforeGet(JoinPoint jp) {
 		HttpSession session = (HttpSession) jp.getArgs()[0];
-		int userId = (Integer) jp.getArgs()[1];
 		User u = null;
-		
 		try { // Check if the request is from someone who's logged in
 			u = (User) session.getAttribute("user");
-			if (u.getAccessLevel() < 1 && u.getUserId() != userId) {
+			if (u == null) {
 				// TODO LOG EXCEPTION
-				throw new BusinessException("You do not have a high enough access level to view this resource.");
+				throw new BusinessException("You are not logged in. Please log in before trying to access this resource.");
 			}
 		} catch (NullPointerException e) {
 			// TODO LOG EXCEPTION
 			throw new BusinessException("You are not logged in. Please log in before trying to access this resource.");
 		}
 	}
-	
-	// get, update, delete
-	// only controlled by admin or user associated with the order
 }

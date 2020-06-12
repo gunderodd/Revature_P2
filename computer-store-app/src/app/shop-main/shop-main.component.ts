@@ -14,7 +14,7 @@ export class ShopMainComponent implements OnInit {
   constructor(private service: ProductService) { }
 
   ngOnInit(): void {
-    console.log("we are in hte shop init");
+    console.log("we are in the shop init");
     
     this.service.listProducts().subscribe(data=>{
       this.products=data;

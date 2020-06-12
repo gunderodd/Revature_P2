@@ -3,6 +3,7 @@ package com.store.app.service;
 import java.util.List;
 
 import com.store.app.model.Order;
+import com.store.app.model.User;
 
 public interface OrderService {
 	// CRUD
@@ -12,13 +13,17 @@ public interface OrderService {
 	
 	// Read
 	public Order getOrderByOrderId(int id);
-	public Order getOrderByUserId(int user_id);
+	public List<Order> getOrderByUser(User user);
 	public List<Order> getAllOrders();
+	public Order getCartByUser(User user);
 	
 	// Update
 	public Order updateOrder(Order order);
+	public Order buyOrder(Order order);
 	
 	// Delete
 	public void deleteOrderById(int id);
+
+	
 
 }

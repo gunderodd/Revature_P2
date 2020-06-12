@@ -2,6 +2,8 @@ package com.store.app.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.store.app.model.Order;
+import com.store.app.model.User;
 import com.store.app.service.OrderService;
+import com.store.app.service.UserService;
 
 
 // Why are we accessing an instance of the interface? how does
@@ -29,6 +33,8 @@ public class OrderController {
 	// Access Bean Service
 	@Autowired
 	public OrderService os;
+	@Autowired
+	public UserService us;
 	
 	// Mappings
 	
@@ -49,15 +55,28 @@ public class OrderController {
 		return os.getOrderByOrderId(id);
 	}
 	
-	@GetMapping("/order/{user_id}")
-	public Order getOrderByUserId(@PathVariable("user_id") int user_id) {
-		return os.getOrderByUserId(user_id);
+	@GetMapping("/orders/{user_id}")
+	public List<Order> getOrdersByUserId(@PathVariable("user_id") int user_id) {
+		User user = us.getUserById(user_id);
+		return os.getOrderByUser(user);
+	}
+	
+	@GetMapping("/cart/{user_id}")
+	public Order getCartByUserId(@PathVariable("user_id") int user_id) {
+		User user = us.getUserById(user_id);
+		return os.getCartByUser(user);
 	}
 	
 		//update
 	@PutMapping("/order")
 	public Order updateOrder(@RequestBody Order order) {
 		return os.updateOrder(order);
+	}
+	
+	@PutMapping("/buyCart")
+	public Order buyOrder(HttpSession session, @RequestBody Order order) {
+		//TODO
+		return null;
 	}
 	
 		//delete
