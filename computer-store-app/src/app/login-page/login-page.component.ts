@@ -24,6 +24,7 @@ export class LoginPageComponent implements OnInit {
       {if (typeof res === "object"){
         this.service.setCurrentUser(res); this.router.navigate(['customerhome']);
         sessionStorage.setItem('username',this.user.username)
+        //  sessionStorage.setItem('emp',res)
 
         let test = sessionStorage.getItem('username')
         console.log(test);

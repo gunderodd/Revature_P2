@@ -27,4 +27,8 @@ export class ProductService {
   public listProducts():Observable<Product[]>{
     return this.http.get<Product[]>(this.url+"products");
   }
+
+  public getProductId(id:Product["productId"]){
+    return this.http.get<Product>(this.url+"product/"+id);
+  }
 }

@@ -21,6 +21,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { HeaderPageComponent } from './header-page/header-page.component';
 import { LogoutComponent } from './logout/logout.component';
 import { ProductService } from './product.service';
+import { HomePageComponent } from './home-page/home-page.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 
 @NgModule({
@@ -38,6 +40,8 @@ import { ProductService } from './product.service';
     AdminViewComponent,
     HeaderPageComponent,
     LogoutComponent,
+    HomePageComponent,
+    ProductDetailComponent,
     
   ],
   imports: [
@@ -49,7 +53,7 @@ import { ProductService } from './product.service';
   providers: [
     UserService,
     CookieService,
-    LoginPageComponent
+    LoginPageComponent,
     ProductService
 ],
   bootstrap: [AppComponent]
