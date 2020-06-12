@@ -25,5 +25,13 @@ export class ShopMainComponent implements OnInit {
     let amount = (<HTMLInputElement>document.getElementById(id)).value;
     console.log(id);
     console.log(amount);
+
+    /* user orderproductservice
+	   * {
+	   * 	"order" : {  } empty, gets cart on EC2 side
+	   *  "product" : { "productId" : id }
+	   *  "quantity" : amount
+     * }
+	   */
   }
 }

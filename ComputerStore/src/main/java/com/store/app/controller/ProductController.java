@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.store.app.model.Product;
 import com.store.app.service.ProductService;
 
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RestController
 public class ProductController {
 	

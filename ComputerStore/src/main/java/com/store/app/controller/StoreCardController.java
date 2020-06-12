@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.store.app.model.StoreCard;
 import com.store.app.service.StoreCardService;
 
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RestController
 public class StoreCardController {
 	

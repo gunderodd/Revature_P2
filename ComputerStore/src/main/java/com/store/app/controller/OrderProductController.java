@@ -21,7 +21,7 @@ import com.store.app.service.OrderProductService;
 import com.store.app.service.OrderService;
 import com.store.app.service.ProductService;
 
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RestController
 public class OrderProductController {
 	@Autowired

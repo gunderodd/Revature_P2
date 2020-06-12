@@ -14,9 +14,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.store.app.exception.BusinessException;
 import com.store.app.model.Order;
+import com.store.app.model.OrderProduct;
+import com.store.app.model.Product;
 import com.store.app.model.User;
+import com.store.app.service.OrderProductService;
 import com.store.app.service.OrderService;
+import com.store.app.service.ProductService;
 import com.store.app.service.UserService;
 
 
@@ -26,7 +31,7 @@ import com.store.app.service.UserService;
 // any with id don't work, why?
 // how to have user_id mapped, not user object? as in what is returned from postman
 
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RestController
 public class OrderController {
 
@@ -35,6 +40,8 @@ public class OrderController {
 	public OrderService os;
 	@Autowired
 	public UserService us;
+	@Autowired
+	public ProductService ps;
 	
 	// Mappings
 	
@@ -75,8 +82,24 @@ public class OrderController {
 	
 	@PutMapping("/buyCart")
 	public Order buyOrder(HttpSession session, @RequestBody Order order) {
-		//TODO
-		return null;
+		//TODO aspect
+		if (order.getStatus().equals("cart")) {
+			for (OrderProduct op : order.getOrderProductList()) {
+				if (op.getQuantity() > op.getProduct().getStock()) {
+					throw new BusinessException("You are trying to buy too much of this product:" + op.getProduct().getName());
+				}
+			}
+			for (OrderProduct op: order.getOrderProductList()) {
+				Product p = op.getProduct();
+				p.setStock(p.getStock() - op.getQuantity());
+				ps.updateProduct(p);
+			}
+			order.setStatus("bought");
+			os.updateOrder(order);
+			return order;
+		} else {
+			throw new BusinessException("You cannot buy an order not marked as \"cart\"");
+		}
 	}
 	
 		//delete
