@@ -21,6 +21,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { HeaderPageComponent } from './header-page/header-page.component';
 import { LogoutComponent } from './logout/logout.component';
 import { ProductService } from './Services/product.service';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { ProductService } from './Services/product.service';
     AdminViewComponent,
     HeaderPageComponent,
     LogoutComponent,
+    ShoppingCartComponent,
     
   ],
   imports: [

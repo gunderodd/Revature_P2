@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.store.app.service.UserService;
 import com.store.app.model.User;
 
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RestController
 public class UserController {
 	

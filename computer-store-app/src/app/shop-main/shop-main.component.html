@@ -7,7 +7,6 @@
         <th>Price</th>
         <th>Number in Stock</th>
         <th>Image</th>
-        <th>Purchase</th>
     </tr>
     <tr *ngFor="let product of products">
         <td>{{ product.name }}</td>
@@ -17,7 +16,7 @@
         <td><img style="width: 200px; height: 170px;" src= {{product.url}} /></td>
         <td>
             <input id= {{product.id}} type="number">
-            <button (click)="addToCart(product.id)">Buy</button>
+            <button (click)="addToCart(product.id)">Update</button>
         </td>
     </tr>
 </table>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.store.app.dao.OrderRepo;
 import com.store.app.model.Order;
+import com.store.app.model.User;
 import com.store.app.service.OrderService;
 
 
@@ -36,8 +37,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Order getOrderByUserId(int user_id) {
-		return or.findById(user_id).get();
+	public List<Order> getOrderByUser(User user) {
+		return or.findByUser(user);
 	}
 
 	@Override
@@ -54,7 +55,24 @@ public class OrderServiceImpl implements OrderService {
 	public void deleteOrderById(int id) {
 		or.deleteById(id);
 	}
+
+	// Other methods
 	
-	// ...and other Methods:
+	@Override
+	public Order getCartByUser(User user) {
+		List<Order> orders = or.findByUser(user);
+		for (Order order : orders) {
+			if (order.getStatus().equals("cart"))
+				return order;
+		}
+		return null;
+	}
+
+	@Override
+	public Order buyOrder(Order order) {
+		
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

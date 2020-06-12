@@ -14,7 +14,7 @@ export class ShopMainComponent implements OnInit {
   constructor(private service: ProductService) { }
 
   ngOnInit(): void {
-    console.log("we are in hte shop init");
+    console.log("we are in the shop init");
     
     this.service.listProducts().subscribe(data=>{
       this.products=data;
@@ -25,5 +25,13 @@ export class ShopMainComponent implements OnInit {
     let amount = (<HTMLInputElement>document.getElementById(id)).value;
     console.log(id);
     console.log(amount);
+
+    /* user orderproductservice
+	   * {
+	   * 	"order" : {  } empty, gets cart on EC2 side
+	   *  "product" : { "productId" : id }
+	   *  "quantity" : amount
+     * }
+	   */
   }
 }

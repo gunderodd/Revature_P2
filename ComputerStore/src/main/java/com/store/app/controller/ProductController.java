@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.store.app.model.Product;
 import com.store.app.service.ProductService;
 
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RestController
 public class ProductController {
 	
@@ -48,11 +48,6 @@ public class ProductController {
 		@PutMapping("/product")
 		public Product updateProduct(@RequestBody Product p) {
 			return ps.updateProduct(p);
-		}
-		
-		@PutMapping("/product/{name}/{stock}")
-		public void updateProductStockByName(@PathVariable("name") String name, @PathVariable("stock") int stock) {
-			ps.updateProductStockByName(name, stock);
 		}
 		
 		@DeleteMapping("/product/{id}") 
