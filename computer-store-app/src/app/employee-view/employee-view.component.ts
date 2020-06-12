@@ -13,6 +13,7 @@ export class EmployeeViewComponent implements OnInit {
   public products:Product[];
 //   public filteredProducts: Product[];
 
+  // constructor() { }
 //   actualInputfield = '';
 
 //   get inputField(){

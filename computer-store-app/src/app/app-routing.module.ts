@@ -10,6 +10,8 @@ import { ShopMainComponent } from './shop-main/shop-main.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { EmployeeViewComponent } from './employee-view/employee-view.component';
 import { AdminViewComponent } from './admin-view/admin-view.component';
+import { LoginSessionService } from './Services/login-session.service';
+import { LogoutComponent } from './logout/logout.component';
 
 
 const routes: Routes = [
@@ -19,11 +21,17 @@ const routes: Routes = [
   { path: "purchasehistory", component: PurchaseHistoryComponent},
   { path: "returnitems", component: ReturnItemsComponent},
   { path: "storecard", component: StorecardComponent},
-  { path: "shopmain", component: ShopMainComponent},
+  
+  // { path: "shopmain", component: ShopMainComponent },
+  { path: "shopmain", component: ShopMainComponent, canActivate:[LoginSessionService] },
+
+
   { path: "loginpage", component: LoginPageComponent},
   { path: "employeeview", component: EmployeeViewComponent},
-  { path: "adminview", component: AdminViewComponent}
+  { path: "adminview", component: AdminViewComponent},
 
+  // { path: "logout", component: LogoutComponent}
+  { path: "logout", component: LogoutComponent, canActivate:[LoginSessionService]}
 ];
 
 @NgModule({

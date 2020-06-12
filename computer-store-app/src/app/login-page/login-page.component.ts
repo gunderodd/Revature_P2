@@ -23,6 +23,11 @@ export class LoginPageComponent implements OnInit {
     this.service.loginUser(this.user.username, this.user.password).subscribe(res=>
       {if (typeof res === "object"){
         this.service.setCurrentUser(res); this.router.navigate(['customerhome']);
+        sessionStorage.setItem('username',this.user.username)
+
+        let test = sessionStorage.getItem('username')
+        console.log(test);
+        
         console.log(res)
       }else if (typeof res === "string"){
         console.log("type is string")
@@ -32,6 +37,16 @@ export class LoginPageComponent implements OnInit {
       
       });
     
+  }
+
+  isUserLoggedIn() {
+    let user = sessionStorage.getItem('username')
+    console.log(!(user === null))
+    return !(user === null)
+  }
+
+  logOut() {
+    sessionStorage.removeItem('username')
   }
 
   ngOnInit(): void {

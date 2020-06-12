@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../user.service';
 import { User } from '../user';
+import { LoginPageComponent } from '../login-page/login-page.component';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { User } from '../user';
 export class CustomerHomeComponent implements OnInit {
   public user: User;
 
-  constructor(private service: UserService) { }
+  constructor(private service: UserService, public loginService:LoginPageComponent) { }
 
   ngOnInit(): void {
     this.user = this.service.getCurrentUser();

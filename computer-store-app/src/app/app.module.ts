@@ -18,6 +18,8 @@ import { EmployeeViewComponent } from './employee-view/employee-view.component';
 import { AdminViewComponent } from './admin-view/admin-view.component';
 
 import { CookieService } from 'ngx-cookie-service';
+import { HeaderPageComponent } from './header-page/header-page.component';
+import { LogoutComponent } from './logout/logout.component';
 import { ProductService } from './product.service';
 
 
@@ -34,6 +36,9 @@ import { ProductService } from './product.service';
     LoginPageComponent,
     EmployeeViewComponent,
     AdminViewComponent,
+    HeaderPageComponent,
+    LogoutComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -44,6 +49,7 @@ import { ProductService } from './product.service';
   providers: [
     UserService,
     CookieService,
+    LoginPageComponent
     ProductService
 ],
   bootstrap: [AppComponent]
