@@ -4,6 +4,7 @@ import { ProductService } from '../Services/product.service';
 import { Router } from '@angular/router';
 import { OrderService } from '../Services/order.service';
 import { Order } from '../order';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-employee-view',
@@ -64,7 +65,11 @@ export class EmployeeViewComponent implements OnInit {
    restockOrders(name, stock){
      console.log(stock)
      console.log(name)
-     this.service.restockOrders(name, stock).subscribe(res=> this.router.navigate(['employeeview']));
+     if(stock >=0 ){
+     this.service.restockOrders(name, stock).subscribe(res=> window.location.reload);
+    } else{
+      window.location.reload;
+    }
    }
 
   ngOnInit() {
