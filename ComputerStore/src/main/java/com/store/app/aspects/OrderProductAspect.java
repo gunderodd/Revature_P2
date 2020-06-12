@@ -14,8 +14,10 @@ import com.store.app.model.User;
 @Configuration
 public class OrderProductAspect {
 	
-	@Before("execution(* com.store.app.controller.OrderProductController.create*(..))")
-	public void beforeGet(JoinPoint jp) {
+	// checks if we're logged in before doing anything
+	@Before("execution(* com.store.app.controller.OrderProductController.create*(..)) && "
+			+ "execution(* com.store.app.controller.OrderProductController.update*(..))")
+	public void checkIfLoggedIn(JoinPoint jp) {
 		HttpSession session = (HttpSession) jp.getArgs()[0];
 		User u = null;
 		try { // Check if the request is from someone who's logged in

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Order } from '../order';
-import { OrderService } from '../order.service';
-import { OrderProductService } from '../order-product.service';
+import { OrderService } from '../Services/order.service';
+import { OrderProductService } from '../Services/order-product.service';
+import { OrderProduct } from '../order-product';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -18,10 +19,27 @@ export class ShoppingCartComponent implements OnInit {
     });
   }
 
-  addToCart(pid:number) {
-    this.ops.updateOrderProduct().subscribe( res => {
+  updateOrderProduct(pid:number) {
+    let op:OrderProduct;
+    op = this.cart.orderProductList.find(obj => {
+      return obj.product.id === pid;
+    });
+    this.ops.updateOrderProduct(op).subscribe( res => {
+      console.log(res);
       // display the result to the user?
-      // or just ensure that the result is good, then just put a checkmark somewhere
+      // or just ensure that the result is good, then just put a checkmark somewheregit 
+    });
+  }
+
+  buyCart() {
+    this.os.buyCart(this.cart).subscribe( res => {
+      console.log(res);
+    });
+  }
+
+  clearCart() {
+    this.os.buyCart(this.cart).subscribe( res => {
+      console.log(res);
     });
   }
 }

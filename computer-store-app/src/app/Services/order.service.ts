@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Order } from './order';
+import { Order } from '../order';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -18,9 +18,11 @@ export class OrderService {
     return this.http.get<Order[]>(this.url+"orders/"+this.userService.getCurrentUser().id);
   }
 
-  // TODO
+  public buyCart(o:Order) {
+    return this.http.post<Order>(this.url+"buyCart", o);
+  }
 
-  // public buyCart() {
-  //   return this.http.post<Order>(this.url+"buyCart")
-  // }
+  public clearCart(o:Order) {
+    return this.http.post<Order>(this.url+"clearCart", o);
+  }
 }

@@ -8,7 +8,7 @@ public interface OrderProductService {
 	// CRUD
 	
 	// Create
-	public OrderProduct createOrderProduct(OrderProduct order_product);
+	public OrderProduct createOrderProduct(OrderProduct op);
 	
 	// Read
 	public OrderProduct getOrderProductByOrderProductId(int id);
@@ -16,8 +16,9 @@ public interface OrderProductService {
 	public List<OrderProduct> getAllOrderProducts();
 	
 	// Update
-	public OrderProduct updateOrderProduct(OrderProduct order_product);
+	public OrderProduct updateOrderProduct(OrderProduct op);
 	
 	// Delete
 	public void deleteOrderProductById(int id);
+	public void deleteOrderProduct(OrderProduct op);
 }

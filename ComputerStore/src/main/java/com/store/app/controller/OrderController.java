@@ -42,6 +42,8 @@ public class OrderController {
 	public UserService us;
 	@Autowired
 	public ProductService ps;
+	@Autowired
+	public OrderProductService ops;
 	
 	// Mappings
 	
@@ -99,6 +101,18 @@ public class OrderController {
 			return order;
 		} else {
 			throw new BusinessException("You cannot buy an order not marked as \"cart\"");
+		}
+	}
+	
+	@PutMapping("/clearcart")
+	public Order clearOrder(HttpSession session, @RequestBody Order order) {
+		if (order.getStatus().equals("cart")) {
+			for (OrderProduct op : order.getOrderProductList()) {
+				ops.deleteOrderProduct(op);
+			}
+			return order;
+		} else {
+			throw new BusinessException("You cannot clear an order not marked as \"cart\"");
 		}
 	}
 	
