@@ -103,11 +103,18 @@ public class Product {
 		this.url = url;
 	}
 
-	// To String
+	public List<OrderProduct> getOrder_productList() {
+		return order_productList;
+	}
+
+	public void setOrder_productList(List<OrderProduct> order_productList) {
+		this.order_productList = order_productList;
+	}
+
 	@Override
 	public String toString() {
-		return "Product [productId=" + productId + ", name=" + name + ", description=" + description + ", price=" + price + ", stock="
-				+ stock + ", url=" + url + "]";
+		return "Product [order_productList=" + order_productList + ", productId=" + productId + ", name=" + name
+				+ ", description=" + description + ", price=" + price + ", stock=" + stock + ", url=" + url + "]";
 	}
 	
 }

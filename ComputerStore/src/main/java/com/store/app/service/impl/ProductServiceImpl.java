@@ -35,7 +35,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Product getProductByName(String name) {
-		return pr.findByName(name);
+		return pr.findByName(name).get();
 	}
 
 	@Override
@@ -51,15 +51,6 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void deleteProductById(int id) {
 		pr.deleteById(id);
-	}
-
-
-	@Override
-	public void updateProductStockByName(String name, int stock) {
-		Product product = pr.findByName(name);
-		product.setStock(stock);
-		pr.save(product);
-		
 	}
 	
 	// ...Other Methods:
