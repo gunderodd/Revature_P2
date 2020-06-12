@@ -55,10 +55,10 @@ public class ProductServiceImpl implements ProductService {
 
 
 	@Override
-	public void updateProductStockByName(String name, int stock) {
+	public Product updateProductStockByName(String name, int stock) {
 		Product product = pr.findByName(name);
 		product.setStock(stock);
-		pr.save(product);
+		return pr.save(product);
 		
 	}
 	

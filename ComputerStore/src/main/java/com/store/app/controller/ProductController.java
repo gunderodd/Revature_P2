@@ -50,8 +50,8 @@ public class ProductController {
 			return ps.updateProduct(p);
 		}
 		@PutMapping("/product/{name}/{stock}")
-		public void updateProductStockByName(@PathVariable("name") String name, @PathVariable("stock") int stock) {
-			ps.updateProductStockByName(name, stock);
+		public Product updateProductStockByName(@PathVariable("name") String name, @PathVariable("stock") int stock) {
+			return ps.updateProductStockByName(name, stock);
 		}
 		
 		@DeleteMapping("/product/{id}") 
