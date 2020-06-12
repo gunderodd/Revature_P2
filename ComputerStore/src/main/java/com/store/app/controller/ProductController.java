@@ -49,7 +49,8 @@ public class ProductController {
 		public Product updateProduct(@RequestBody Product p) {
 			return ps.updateProduct(p);
 		}
-		@PutMapping("/product/{name}/{stock}")
+
+    @PutMapping("/product/{name}/{stock}")
 		public Product updateProductStockByName(@PathVariable("name") String name, @PathVariable("stock") int stock) {
 			return ps.updateProductStockByName(name, stock);
 		}

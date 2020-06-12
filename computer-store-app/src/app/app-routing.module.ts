@@ -12,6 +12,8 @@ import { EmployeeViewComponent } from './employee-view/employee-view.component';
 import { AdminViewComponent } from './admin-view/admin-view.component';
 import { LoginSessionService } from './Services/login-session.service';
 import { LogoutComponent } from './logout/logout.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 
 const routes: Routes = [
@@ -29,9 +31,18 @@ const routes: Routes = [
   { path: "loginpage", component: LoginPageComponent},
   { path: "employeeview", component: EmployeeViewComponent},
   { path: "adminview", component: AdminViewComponent},
+  { path: "homepage", component: HomePageComponent},
+  { path: "logout", component: LogoutComponent, canActivate:[LoginSessionService]},
+  { path: '**', component: HomePageComponent},
+  { path: 'productDetail/:id', component: ProductDetailComponent},
+
+
+
+
+
 
   // { path: "logout", component: LogoutComponent}
-  { path: "logout", component: LogoutComponent, canActivate:[LoginSessionService]}
+
 ];
 
 @NgModule({

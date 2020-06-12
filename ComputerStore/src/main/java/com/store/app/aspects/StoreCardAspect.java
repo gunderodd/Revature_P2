@@ -31,11 +31,11 @@ public class StoreCardAspect {
 		}
 	}
 	
-//	// check if the user is logged in before creating a card for them
-//	@Before("execution(* com.store.app.controller.StoreCardController.create*(..))")
-//	public void beforeCreate(JoinPoint jp) {
-//		HttpSession session = (HttpSession) jp.getArgs()[0];
-//		StoreCard storecard = (StoreCard) jp.getArgs()[1];
-//		// TODO stub
-//	}
+	// check if the user is logged in before creating a card for them
+	@Before("execution(* com.store.app.controller.StoreCardController.create*(..))")
+	public void beforeCreate(JoinPoint jp) {
+		HttpSession session = (HttpSession) jp.getArgs()[0];
+		StoreCard storecard = (StoreCard) jp.getArgs()[1];
+		// TODO stub
+	}
 }

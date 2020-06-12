@@ -22,7 +22,7 @@ export class ShoppingCartComponent implements OnInit {
   updateOrderProduct(pid:number) {
     let op:OrderProduct;
     op = this.cart.orderProductList.find(obj => {
-      return obj.product.id === pid;
+      return obj.product.productId === pid;
     });
     this.ops.updateOrderProduct(op).subscribe( res => {
       console.log(res);

@@ -22,4 +22,5 @@ public interface ProductService {
 	public void deleteProductById(int id);
 
 	public Product updateProductStockByName(String name, int stock);
+
 }
