@@ -10,8 +10,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-// Adding User to the constructor?
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+
+// Adding User to the constructor?
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="cardId")
 @Entity
 @Table(name = "StoreCard")
 public class StoreCard {

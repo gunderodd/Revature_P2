@@ -11,9 +11,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 // Ethan note: I think we should change this to 
 // User singular (but if we do use escapes for reserved keyword
 
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="userId")
 @Entity
 @Table(name = "Users")
 public class User {
@@ -90,9 +94,24 @@ public class User {
 	public void setAccessLevel(int accessLevel) {
 		this.accessLevel = accessLevel;
 	}
-
-	// To String
 	
+	
+	public StoreCard getStorecard() {
+		return storecard;
+	}
+
+	public void setStorecard(StoreCard storecard) {
+		this.storecard = storecard;
+	}
+
+	public List<Order> getOrderList() {
+		return orderList;
+	}
+
+	public void setOrderList(List<Order> orderList) {
+		this.orderList = orderList;
+	}
+
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", accessLevel=" + accessLevel

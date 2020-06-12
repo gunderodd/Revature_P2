@@ -9,9 +9,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 // This whole table maps out the ManyToMany relationship
 // between Orders/Products
 
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="orderProductId")
 @Entity
 @Table(name = "Order_Product")
 public class OrderProduct {

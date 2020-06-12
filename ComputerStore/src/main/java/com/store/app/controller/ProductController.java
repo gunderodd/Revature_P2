@@ -35,10 +35,10 @@ public class ProductController {
 			return ps.getProductById(id);
 		}
 		
-		@GetMapping("/product/{name}")
-		public Product getProductByName(@PathVariable("name") String name) {
-			return ps.getProductByName(name);
-		}
+//		@GetMapping("/product/{name}")
+//		public Product getProductByName(@PathVariable("name") String name) {
+//			return ps.getProductByName(name);
+//		}
 		
 		@GetMapping("/products")
 		public List<Product> getAllProducts() {
@@ -50,7 +50,7 @@ public class ProductController {
 			return ps.updateProduct(p);
 		}
 
-    @PutMapping("/product/{name}/{stock}")
+		@PutMapping("/product/{name}/{stock}")
 		public Product updateProductStockByName(@PathVariable("name") String name, @PathVariable("stock") int stock) {
 			return ps.updateProductStockByName(name, stock);
 		}
