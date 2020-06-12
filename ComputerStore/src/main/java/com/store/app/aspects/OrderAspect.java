@@ -19,7 +19,7 @@ public class OrderAspect {
 	@Before("execution(* com.store.app.controller.OrderController.get*(..)) "
 			+ "&& execution(* com.store.app.controller.OrderController.delete*(..)) "
 			+ "&& execution(* com.store.app.controller.OrderController.buy*(..)) "
-			+ "&& execution(* com.store.app.controller.OrderController.clear*(..)")
+			+ "&& execution(* com.store.app.controller.OrderController.clear*(..))")
 	public void verifyUser(JoinPoint jp) {
 		HttpSession session = (HttpSession) jp.getArgs()[0];
 		Order order = null;
