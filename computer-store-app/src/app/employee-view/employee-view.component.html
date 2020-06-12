@@ -2,8 +2,19 @@
 
 <ul>
     <li>view all orders</li>
-
-
+    <table border="1px solid black;">
+        <tr>
+            <th>Time of Order</th>
+            <th>Status</th>
+            <th>Username</th>
+            
+        </tr>
+        <tr *ngFor="let order of orders">
+                <td>{{ order.createdAt }}</td>
+                <td>{{ order.status }}</td>
+                 <td>{{ order.user.username}}</td>
+        </tr>
+    </table>
 
 
 
@@ -14,7 +25,6 @@
     <li>All product quantities
         <table border="1px solid black;">
             <tr>
-                <th>Id</th>
                 <th>Name</th>
                 <th>Description</th>
                 <th>Price</th>
@@ -30,7 +40,6 @@
                 <td><img style="width: 200px;" src= {{temp.url}} /></td>
                  -->
                 <tr *ngFor="let product of products">
-                <td>{{ product.id }}</td>
                 <td>{{ product.name }}</td>
                     <td>{{ product.description }}</td>
                     <td>{{ product.price }}</td>

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../product';
-import { ProductService } from '../product.service';
+import { ProductService } from '../Services/product.service';
 import { Router } from '@angular/router';
+import { OrderService } from '../Services/order.service';
+import { Order } from '../order';
 
 @Component({
   selector: 'app-employee-view',
@@ -11,6 +13,8 @@ import { Router } from '@angular/router';
 export class EmployeeViewComponent implements OnInit {
   public product: Product;
   public products:Product[];
+  public order: Order;
+  public orders: Order[];
 //   public filteredProducts: Product[];
 
   // constructor() { }
@@ -34,7 +38,7 @@ export class EmployeeViewComponent implements OnInit {
 //   );
 // }
 
-  constructor(private service: ProductService, private router:Router) {
+  constructor(private service: ProductService, private router:Router, private orderService: OrderService) {
     // this.filteredProducts = this.products
    }
 
@@ -45,6 +49,10 @@ export class EmployeeViewComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.orderService.getAllOrders().subscribe(data=>{
+      console.log(data)
+      this.orders = data;
+    })
     this.service.getAllProducts().subscribe(data=>{
       this.products = data;
     });
