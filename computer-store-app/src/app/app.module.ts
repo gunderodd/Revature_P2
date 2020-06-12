@@ -22,6 +22,8 @@ import { HeaderPageComponent } from './header-page/header-page.component';
 import { LogoutComponent } from './logout/logout.component';
 import { ProductService } from './Services/product.service';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 
 @NgModule({
@@ -40,6 +42,8 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     HeaderPageComponent,
     LogoutComponent,
     ShoppingCartComponent,
+    HomePageComponent,
+    ProductDetailComponent,
     
   ],
   imports: [
