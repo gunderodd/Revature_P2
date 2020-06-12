@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { UserListComponent } from './user-list/user-list.component';
-import {UserService} from './user.service';
+import {UserService} from './Services/user.service';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { CustomerHomeComponent } from './customer-home/customer-home.component';
@@ -20,7 +20,7 @@ import { AdminViewComponent } from './admin-view/admin-view.component';
 import { CookieService } from 'ngx-cookie-service';
 import { HeaderPageComponent } from './header-page/header-page.component';
 import { LogoutComponent } from './logout/logout.component';
-import { ProductService } from './product.service';
+import { ProductService } from './Services/product.service';
 
 
 @NgModule({
@@ -49,7 +49,7 @@ import { ProductService } from './product.service';
   providers: [
     UserService,
     CookieService,
-    LoginPageComponent
+    LoginPageComponent,
     ProductService
 ],
   bootstrap: [AppComponent]
