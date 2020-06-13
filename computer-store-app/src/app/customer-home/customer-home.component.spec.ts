@@ -4,8 +4,11 @@ import { CustomerHomeComponent } from './customer-home.component';
 import { RouterTestingModule } from '@angular/router/testing'
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { LoginPageComponent } from '../login-page/login-page.component';
+import { User } from '../user';
 
-describe('CustomerHomeComponent', () => {
+let user: new User();
+
+fdescribe('CustomerHomeComponent', () => {
   let component: CustomerHomeComponent;
   let fixture: ComponentFixture<CustomerHomeComponent>;
 

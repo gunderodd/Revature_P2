@@ -1,22 +1,26 @@
-<h1>Shop Parts</h1>
-
-<table border="1px solid black;">
-    <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Number in Stock</th>
-        <th>Image</th>
-    </tr>
-    <tr *ngFor="let product of products">
-        <td>{{ product.name }}</td>
-        <td>{{ product.description }}</td>
-        <td>{{ product.price }}</td>
-        <td>{{ product.stock }}</td>
-        <td><img style="width: 200px; height: 170px;" src= {{product.url}} /></td>
-        <td>
-            <input id= {{product.id}} type="number">
-            <button (click)="addToCart(product.id)">Update</button>
-        </td>
-    </tr>
-</table>
+<div class="container">
+    <table>
+        <!-- <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Number in Stock</th>
+            <th>Image</th>
+        </tr> -->
+        <tr *ngFor="let product of products" class="product-main-card">
+            <td><img style="width: 400px; height: 300px;" src= {{product.url}} /></td>
+            <div class="name-description">
+                <td><h2 style="text-decoration: underline;">{{ product.name }}</h2></td>
+                <td>{{ product.description }}</td>
+                <td><h3>${{ product.price }}</h3></td>
+            </div>
+            <div class="stock-buy">
+                <td><h4><span>In Stock: </span>{{ product.stock }}</h4></td>
+                <td>
+                    <input id= {{product.id}} type="number" min="0">
+                    <button class="form-control btn btn-primary" (click)="addToCart(product.id)">Add to Cart</button>
+                </td>
+            </div>
+        </tr>
+    </table>
+</div>
