@@ -72,7 +72,10 @@ public class OrderController {
 	
 	@GetMapping("/cart/user/id/{id}")
 	public Order getUserCart(HttpSession session, @PathVariable("id") int id) {
-		User user = (User) session.getAttribute("user");
+//		User user = (User) session.getAttribute("user");
+//		System.out.println(user);
+//		System.out.println("user is null here");
+		User user = us.getUserById(id);
 		return os.getCartByUser(user);
 	}
 	
