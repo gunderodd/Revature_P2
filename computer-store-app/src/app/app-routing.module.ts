@@ -14,6 +14,7 @@ import { LoginSessionService } from './Services/login-session.service';
 import { LogoutComponent } from './logout/logout.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 
 const routes: Routes = [
@@ -30,18 +31,19 @@ const routes: Routes = [
 
   { path: "loginpage", component: LoginPageComponent},
   { path: "employeeview", component: EmployeeViewComponent},
+  { path: "shoppingcart", component: ShoppingCartComponent},
+
   { path: "adminview", component: AdminViewComponent},
   { path: "homepage", component: HomePageComponent},
   { path: "logout", component: LogoutComponent, canActivate:[LoginSessionService]},
-  { path: '**', component: HomePageComponent},
   { path: 'productDetail/:id', component: ProductDetailComponent},
 
+// ALWAYS MAKE SURE THIS IS THE LAST ROUTE OR THE PROGRAM WILL BREAK
+  { path: '**', component: HomePageComponent},
 
 
 
 
-
-  // { path: "logout", component: LogoutComponent}
 
 ];
 

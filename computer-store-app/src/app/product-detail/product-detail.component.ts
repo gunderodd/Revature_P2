@@ -11,7 +11,7 @@ import { Location } from '@angular/common';
 })
 export class ProductDetailComponent implements OnInit {
 
-  product:Product;
+  public product:Product;
 
   constructor(
     private service: ProductService,
@@ -31,6 +31,7 @@ export class ProductDetailComponent implements OnInit {
   getProduct():void{
 
     const id = +this.route.snapshot.paramMap.get('productId');
+    
     this.service.getProductId(id).subscribe(data=>{
       this.product=data;
     });
