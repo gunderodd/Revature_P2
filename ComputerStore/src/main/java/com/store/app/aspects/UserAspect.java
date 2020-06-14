@@ -32,7 +32,7 @@ public class UserAspect {
 		
 		try { // Check if the request is from someone who's logged in
 			u = (User) session.getAttribute("user");
-			if (!u.getAccessLevel().equals("emp") && u.getUserId() != pathVarInt && !u.getUsername().equals(pathVar)) {
+			if (!u.getAccessLevel().equals("emp") && u.getId() != pathVarInt && !u.getUsername().equals(pathVar)) {
 				// TODO LOG EXCEPTION
 				throw new BusinessException("You do not have a high enough access level to view this resource.");
 			}
@@ -49,7 +49,7 @@ public class UserAspect {
 		User u = null;
 		try { // Check if the request is from someone who's logged in
 			u = (User) session.getAttribute("user");
-			if (!u.getAccessLevel().equals("emp") && u.getUserId() != updated.getUserId() && !u.getUsername().equals(updated.getUsername())) {
+			if (!u.getAccessLevel().equals("emp") && u.getId() != updated.getId() && !u.getUsername().equals(updated.getUsername())) {
 				// TODO LOG EXCEPTION
 				throw new BusinessException("You do not have a high enough access level to update this resource.");
 			} else if (u.getAccessLevel() != updated.getAccessLevel()) {

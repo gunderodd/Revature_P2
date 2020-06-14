@@ -28,13 +28,13 @@ public class OrderAspect {
 		// hacky but it works.
 		try {
 			order = (Order) jp.getArgs()[1];
-			orderUserId = order.getUser().getUserId();
+			orderUserId = order.getUser().getId();
 		} catch (Exception e) {}
 		
 		User u = null;
 		try { // Check if the request is from someone who's logged in
 			u = (User) session.getAttribute("user");
-			if (!u.getAccessLevel().equals("emp") && u.getUserId() != orderUserId) {
+			if (!u.getAccessLevel().equals("emp") && u.getId() != orderUserId) {
 				// TODO LOG EXCEPTION
 				throw new BusinessException("You do not have a high enough access level to view this resource.");
 			}
