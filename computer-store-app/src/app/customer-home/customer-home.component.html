@@ -1,13 +1,6 @@
-<h2 *ngIf="this.test"><i>{{this.test}}'s Account Details</i></h2>
-<!-- <p *ngIf="this.user">Welcome {{this.user.username}}</p> -->
-
-<h2>Options</h2>
-<ul>
-    <!-- <li><a routerLink="/storecard">StoreCards Stuff</a></li> -->
-    <li><a routerLink="/purchasehistory">See Purchase History</a></li>
-    <li><a routerLink="/returnitems">Return Items</a></li>
-    <li><a routerLink="/employeeview">Employee View</a></li>
-
-    <!-- <li><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/loginpage" class="nav-link">Log In</a></li> -->
-
-</ul>
+<div class="container text-center">
+    <h2 *ngIf="this.test"><i>{{this.test}}'s Account Details</i></h2>
+    <h3>Options</h3>
+    <a routerLink="/purchasehistory">See Purchase History</a>
+    <!-- <a routerLink="/returnitems">Return Items</a> -->
+</div>

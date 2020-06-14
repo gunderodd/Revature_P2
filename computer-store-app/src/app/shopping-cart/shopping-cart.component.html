@@ -1,6 +1,31 @@
-<h1>Your Shopping Cart</h1>
 
-<table border="1px solid black;">
+<div class="container text-center">
+    <h1>Cart</h1>
+    <table>
+        <ng-container *ngIf="this.cart">
+            <tr *ngFor="let op of this.orderProductList" class="product-main-card">
+                <td><img style="width: 400px; height: 300px;" src= {{op.product.url}} /></td>
+                <div class="name-description">
+                    <td><h2 style="text-decoration: underline;">{{ op.product.name }}</h2></td>
+                    <!-- <td>{{ op.product.description }}</td> -->
+                    <td><h3>${{ op.product.price }}</h3></td>
+                </div>
+                <div class="stock-buy">
+                    <td><h4><span>In Stock: </span>{{ op.product.stock }}</h4></td>
+                    <td>
+                        <input id= {{op.product.id}} type="number" min="1" value={{op.quantity}}>
+                        <button (click)="updateOrderProduct(op.product.id)">Update</button>
+                    </td>
+                </div>
+            </tr>
+        </ng-container>
+
+    </table>
+    <button class="btn btn-primary" (click) = "buyCart()">Purchase</button>
+    <button class="btn btn-secondary" (click) = "clearCart()">Clear Cart</button>
+</div>
+
+<!-- <table border="1px solid black;">
     <tr>
         <th>Name</th>
         <th>Description</th>
@@ -18,9 +43,8 @@
                 <input id= {{op.product.id}} type="number" value={{op.quantity}}>
                 <button (click)="updateOrderProduct(op.product.id)">Update</button>
                 <!-- need some feedback here... -->
-            </td>
+            <!-- </td>
         </tr>
     </ng-container>
-</table>
-<button (click) = "buyCart()">Purchase</button>
-<button (click) = "clearCart()">Clear Cart</button>
+</table> -->
+
