@@ -20,9 +20,27 @@ export class LoginPageComponent implements OnInit {
     console.log(this.user.password)
     this.service.loginUser(this.user.username, this.user.password).subscribe(res => {
       if (typeof res === "object") {
-        this.service.setCurrentUser(res); this.router.navigate(['customerhome']);
+        this.service.setCurrentUser(res); 
+
+        if (this.user.username == 'user')
+        this.router.navigate(['customerhome']);
+        else if(this.user.username == 'admin')
+        this.router.navigate(['employeeview']);
+
+        // let userid: number = this.user.access_level;
+        // let useridstring = userid.toString();
+
+        let mytestuser = {'id':this.user.id, 'username':this.user.username, 'password':this.user.password, 'access_level':this.user.access_level}
+        sessionStorage.setItem('user', JSON.stringify(mytestuser));
+        // sessionStorage.setItem('accesslevel',useridstring);
+        // console.log(sessionStorage.getItem('accesslevel'));
+        
         sessionStorage.setItem('username',this.user.username);
+
         let test = sessionStorage.getItem('username');
+        var myobject = JSON.parse(sessionStorage.getItem('user'));
+        console.log(myobject);
+        
         console.log(test);
         console.log(res);
       } else if (typeof res === "string") {
@@ -42,8 +60,22 @@ export class LoginPageComponent implements OnInit {
     return !(user === null);
   }
 
+  isUserAdmin() {
+    let user = sessionStorage.getItem('username')
+    console.log(!(user === null));
+    return (user == 'admin');
+  }
+
+  isUserCustomer() {
+    let user = sessionStorage.getItem('username')
+    // let myacc = sessionStorage.getItem('accesslevel')
+    console.log(!(user === null));
+    return (user == 'user');
+  }
+
   logOut() {
     sessionStorage.removeItem('username')
+    // sessionStorage.removeItem('accesslevel')
   }
 
   ngOnInit(): void {

@@ -7,35 +7,11 @@
 
 
 
-<!-- <div class="container">
+<div class="container">
     <div  class="row">
         <div *ngFor="let product of products" class="col-sm">
-            <h3>{{product.id}} </h3>
-            <img style="width: 200px; height: 170px;" src= {{product.url}} />
-
-        </div>
-    </div>
-</div> -->
-
-
-
-<!-- <h3>Top Heroes</h3> -->
- <div class="grid grid-pad">
-    <a *ngFor="let product of products" class="col-1-4"
-    routerLink="/productDetail/{{product.productId}}">
-  <div class="module hero">
-    <h4>{{product.productId}}</h4>
-  </div>
-</a>
-</div> 
-
-
-
-<!-- <div class="container">
-    <div  class="row">
-        <div *ngFor="let product of products" class="col-sm">
-            <a routerLink="/productDetail/{{product.id}}">
-                <img style="width: 200px; height: 170px;" src= {{product.url}} />
+            <a routerLink="/productDetail/{{product.productId}}">
+                <img id={{product.productId}} style="width: 200px; height: 170px;" src= {{product.url}} />
 
             </a>
 
@@ -44,4 +20,4 @@
 
         </div>
     </div>
-</div> -->
+</div>

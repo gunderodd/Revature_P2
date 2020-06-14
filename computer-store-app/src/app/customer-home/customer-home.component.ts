@@ -12,6 +12,8 @@ import { LoginPageComponent } from '../login-page/login-page.component';
 export class CustomerHomeComponent implements OnInit {
   public user: User;
 
+  public test = sessionStorage.getItem('username');
+
   constructor(private service: UserService, public loginService:LoginPageComponent) { }
 
   ngOnInit(): void {

@@ -2,24 +2,21 @@
   <nav class ="navbar navbar-expand-md navbar-dark bg-dark">
     <div><a href="http://localhost:4200/" class="navbar-brand">Component Dealz</a></div>
     
+<!--       <li class="nav-item"><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/user" class="nav-link">Create User</a></li>  -->
+<!--       <li class="nav-item"><a *ngIf="loginService.isUserCustomer()" routerLink="/shopmain" class="nav-link">PRODUCTS</a></li>  -->
+      <!-- <li class="nav-item"><a *ngIf="loginService.isUserCustomer()" routerLink="/storecard" class="nav-link">STORE CARD</a></li>  -->
+
+
+
     <ul class="navbar-nav ml-auto">
       <li class="nav-item"><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/user" class="nav-link">Sign Up!</a></li> 
-      <li class="nav-item"><a *ngIf="loginService.isUserLoggedIn()" routerLink="/shopmain" class="nav-link">Shop Computer Parts</a></li>
-      <li class="nav-item"><a *ngIf="loginService.isUserLoggedIn()" routerLink="/customerhome" class="nav-link">Customer Home</a></li>
+      <li class="nav-item"><a *ngIf="loginService.isUserCustomer()" routerLink="/shopmain" class="nav-link">Computer Parts</a></li> 
+      <li class="nav-item"><a *ngIf="loginService.isUserCustomer()" routerLink="/customerhome" class="nav-link">Home</a></li>
+      <li class="nav-item"><a *ngIf="loginService.isUserCustomer()" routerLink="/purchasehistory" class="nav-link">Purchase History</a></li> 
+      <li class="nav-item"><a *ngIf="loginService.isUserAdmin()" routerLink="/employeeview" class="nav-link">Employee Home</a></li> 
+      <li class="nav-item"><a *ngIf="loginService.isUserCustomer()" routerLink="/shoppingcart" class="nav-link">Shopping Cart</a></li>
       <li class="nav-item"><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/loginpage" class="nav-link">Log In</a></li>
-      <li class="nav-item"><a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" class="nav-link">LogOut</a></li>
-
-      <!-- <li class="nav-item dropdown">
-        <a *ngIf="loginService.isUserLoggedIn()"  href="#"  class="nav-link dropdown-toggle" data-toggle="dropdown">
-          Profile
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="#"> Update Profile</a>
-          <a class="dropdown-item" href="#"> Purchase History</a>
-          <a class="dropdown-item" href="#"> Return Items</a>
-          <a class="dropdown-item" href="#"> Store Card</a>
-        </div>
-      </li> -->
+      <li class="nav-item"><a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" class="nav-link">Log Out</a></li>
 
     </ul>
   </nav>
