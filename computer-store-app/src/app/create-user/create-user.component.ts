@@ -17,9 +17,8 @@ export class CreateUserComponent implements OnInit {
     }
 
     createUser(){
-      this.service.createUser(this.user).subscribe(res=>this.router.navigate(['customerhome']));
+      this.service.createUser(this.user).subscribe(res=>this.router.navigate(['loginpage']));
       this.user = new User();
-      console.log(this.user.username);
     }
 
   ngOnInit(){

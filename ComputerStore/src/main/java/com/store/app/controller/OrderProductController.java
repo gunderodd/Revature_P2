@@ -1,7 +1,5 @@
 package com.store.app.controller;
 
-import java.time.Instant;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -50,14 +48,6 @@ public class OrderProductController {
 		}
 		User user = (User) session.getAttribute("user");
 		Order cart = os.getCartByUser(user);
-		boolean newCart = false;
-		if (cart == null) {
-			cart = new Order();
-			cart.setUser(user);
-			cart.setStatus("cart");
-			cart.setCreatedAt(Date.from(Instant.now()));
-			newCart = true; 
-		}
 		op.setProduct(product);
 		op.setOrder(cart);
 		List<OrderProduct> cartProducts = cart.getOrderProductList();
@@ -67,9 +57,6 @@ public class OrderProductController {
 				ops.updateOrderProduct(current);
 				return current;
 			}
-		}
-		if (newCart) {
-			os.createOrder(cart);
 		}
 		ops.createOrderProduct(op);
 		return op;
