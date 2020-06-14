@@ -17,7 +17,7 @@ export class CreateUserComponent implements OnInit {
     }
 
     createUser(){
-      this.service.createUser(this.user).subscribe(res=>this.router.navigate(['loginpage']));
+      this.service.createUser(this.user.username, this.user.password).subscribe(res=>this.router.navigate(['loginpage']));
       this.user = new User();
     }
 
