@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'computer-store-app'`, () => {
+  it(`should have as title 'Component Dealz'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('Computer Store App');
+    expect(app.title).toEqual('Component Dealz');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('H3').textContent).toContain('Welcome to our Computer Store App');
+    expect(compiled.querySelector('H1').textContent).toContain('Component Dealz');
   });
 });

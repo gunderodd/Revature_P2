@@ -8,17 +8,19 @@
         <th>Image</th>
         <th>Quantity</th>
     </tr>
-    <tr *ngFor="let op of this.cart.orderProductList">
-        <td>{{op.product.name}}</td>
-        <td>{{op.product.description}}</td>
-        <td>{{op.product.price}}</td>
-        <td><img style="width: 200px; height: 170px;" src= {{op.product.url}} /></td>
-        <td>
-            <input id= {{op.product.id}} type="number" value={{op.quantity}}>
-            <button (click)="updateOrderProduct(op.product.id)">Update</button>
-            <!-- need some feedback here... -->
-        </td>
-    </tr>
+    <ng-container *ngIf="this.cart">
+        <tr *ngFor="let op of this.cart.orderProductList">
+            <td>{{op.product.name}}</td>
+            <td>{{op.product.description}}</td>
+            <td>{{op.product.price}}</td>
+            <td><img style="width: 200px; height: 170px;" src= {{op.product.url}} /></td>
+            <td>
+                <input id= {{op.product.id}} type="number" value={{op.quantity}}>
+                <button (click)="updateOrderProduct(op.product.id)">Update</button>
+                <!-- need some feedback here... -->
+            </td>
+        </tr>
+    </ng-container>
 </table>
 <button (click) = "buyCart()">Purchase</button>
 <button (click) = "clearCart()">Clear Cart</button>

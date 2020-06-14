@@ -56,7 +56,7 @@ export class LoginPageComponent implements OnInit {
   // Also, maybe this function would be better in the UserService. -WK
   isUserLoggedIn() {
     let user = sessionStorage.getItem('username')
-    console.log(!(user === null));
+    // console.log(!(user === null));
     return !(user === null);
   }
 
