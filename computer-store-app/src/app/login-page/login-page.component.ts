@@ -10,6 +10,7 @@ import {Router } from '@angular/router';
 })
 export class LoginPageComponent implements OnInit {
   user:User;
+  myuser:User;
 
   constructor(private service:UserService, private router:Router) {
     this.user= new User();
@@ -28,22 +29,22 @@ export class LoginPageComponent implements OnInit {
           this.router.navigate(['employeeview']);
         }
 
-        // let userid: number = this.user.access_level;
-        // let useridstring = userid.toString();
-
-        let mytestuser = {'id':this.user.id, 'username':this.user.username, 'password':this.user.password, 'accessLevel':this.user.accessLevel}
-        sessionStorage.setItem('user', JSON.stringify(mytestuser));
-        // sessionStorage.setItem('accesslevel',useridstring);
-        // console.log(sessionStorage.getItem('accesslevel'));
-        
         sessionStorage.setItem('username',this.user.username);
-        sessionStorage.setItem('userid',this.user.id);
+        sessionStorage.setItem('accesslevel',this.user.accessLevel);
+        sessionStorage.setItem('password',this.user.password);
 
-        let test = sessionStorage.getItem('username');
-        var myobject = JSON.parse(sessionStorage.getItem('user'));
-        console.log(myobject);
+
+        sessionStorage.setItem('user',JSON.stringify(res) );
+        var userJSONobject = JSON.parse(sessionStorage.getItem('user'));
+        console.log(userJSONobject);
+        let userOBJECT:User = userJSONobject;
+        console.log(userOBJECT.id);
+        console.log(userOBJECT.accessLevel);
+        console.log(userOBJECT.username);
+
+
+
         
-        console.log(test);
         console.log(res);
       } else if (typeof res === "string") {
         console.log("type is string");
@@ -58,14 +59,34 @@ export class LoginPageComponent implements OnInit {
   // Also, maybe this function would be better in the UserService. -WK
   isUserLoggedIn() {
     let user = sessionStorage.getItem('username')
+
+    var userJSONobject = JSON.parse(sessionStorage.getItem('user'));
+    // console.log(userJSONobject);
+    var userOBJECT:User = userJSONobject;
+    //  console.log(userOBJECT);
+    
+    // console.log(userOBJECT.id);
+    // console.log(userOBJECT.accessLevel);
+    // console.log(userOBJECT.username);
+
     // console.log(!(user === null));
     return !(user === null);
   }
 
   isUserAdmin() {
-    let user = sessionStorage.getItem('username')
-    // console.log(!(user === null));
+    let user = sessionStorage.getItem('username');
+
+    var userJSONobject = JSON.parse(sessionStorage.getItem('user'));
+    // console.log(userJSONobject);
+    var userOBJECT:User = userJSONobject;
+     console.log(userOBJECT);
+    
+    // console.log(userOBJECT.id);
+    // console.log(userOBJECT.accessLevel);
+    // console.log(userOBJECT.username);
+
     return (user == 'admin');
+
   }
 
   isUserCustomer() {
@@ -76,7 +97,8 @@ export class LoginPageComponent implements OnInit {
   }
 
   logOut() {
-    sessionStorage.removeItem('username')
+    // sessionStorage.removeItem('username')
+    sessionStorage.clear();
     // sessionStorage.removeItem('accesslevel')
   }
 
