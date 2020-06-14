@@ -1,5 +1,7 @@
 package com.store.app.service.impl;
 
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +67,12 @@ public class OrderServiceImpl implements OrderService {
 			if (order.getStatus().equals("cart"))
 				return order;
 		}
-		return null;
+		Order cart = new Order();
+		cart.setUser(user);
+		cart.setStatus("cart");
+		cart.setCreatedAt(Date.from(Instant.now()));
+		or.save(cart);
+		return cart;
 	}
 
 	@Override
