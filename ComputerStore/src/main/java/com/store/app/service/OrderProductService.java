@@ -11,7 +11,7 @@ public interface OrderProductService {
 	public OrderProduct createOrderProduct(OrderProduct op);
 	
 	// Read
-	public OrderProduct getOrderProductByOrderProductId(int id);
+	public OrderProduct getOrderProductById(int id);
 	public List<OrderProduct> getByOrderId(int id);
 	public List<OrderProduct> getAllOrderProducts();
 	
@@ -21,4 +21,6 @@ public interface OrderProductService {
 	// Delete
 	public void deleteOrderProductById(int id);
 	public void deleteOrderProduct(OrderProduct op);
+
+	
 }

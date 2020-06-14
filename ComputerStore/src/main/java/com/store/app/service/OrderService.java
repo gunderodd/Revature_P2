@@ -12,7 +12,7 @@ public interface OrderService {
 	public Order createOrder(Order order);
 	
 	// Read
-	public Order getOrderByOrderId(int id);
+	public Order getOrderById(int id);
 	public List<Order> getOrderByUser(User user);
 	public List<Order> getAllOrders();
 	public Order getCartByUser(User user);
@@ -23,6 +23,8 @@ public interface OrderService {
 	
 	// Delete
 	public void deleteOrderById(int id);
+
+	
 
 	
 

@@ -66,6 +66,7 @@ public class UserController {
 	@PostMapping("/user")
 	public User createUser(@RequestBody User u) {
 		// if the user has an access level greater than 0, send back an error
+		u.setAccessLevel("cust");
 		return us.createUser(u);
 	}
 	

@@ -2,11 +2,12 @@ package com.store.app.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -15,19 +16,19 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 // This whole table maps out the ManyToMany relationship
 // between Orders/Products
 
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="orderProductId")
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 @Entity
 @Table(name = "Order_Product")
 public class OrderProduct {
-	@EmbeddedId 
-	private OrderProductId orderProductId;
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
 	
-	@MapsId("orderId")
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "order_id")
 	private Order order;
 	
-	@MapsId("productId")
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "product_id")
 	private Product product;
@@ -42,8 +43,9 @@ public class OrderProduct {
 		super();
 	}
 
-	public OrderProduct(Order order, Product product, int quantity) {
+	public OrderProduct(int id, Order order, Product product, int quantity) {
 		super();
+		this.id = id;
 		this.order = order;
 		this.product = product;
 		this.quantity = quantity;
@@ -51,12 +53,12 @@ public class OrderProduct {
 
 	// Getters and Setters
 	
-	public OrderProductId getOrderProductId() {
-		return orderProductId;
+	public int getId() {
+		return id;
 	}
 
-	public void setOrderProductId(OrderProductId orderProductId) {
-		this.orderProductId = orderProductId;
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	public Order getOrder() {
@@ -64,7 +66,13 @@ public class OrderProduct {
 	}
 
 	public void setOrder(Order order) {
+		setOrder(order, true);
+	}
+	
+	public void setOrder(Order order, boolean reciprocate) {
 		this.order = order;
+		if (reciprocate)
+			order.addOrderProduct(this, false);
 	}
 
 	public Product getProduct() {
@@ -72,7 +80,13 @@ public class OrderProduct {
 	}
 
 	public void setProduct(Product product) {
+		setProduct(product, true);
+	}
+	
+	public void setProduct(Product product, boolean reciprocate) {
 		this.product = product;
+		if (reciprocate)
+			product.addOrderProduct(this, false);
 	}
 
 	public int getQuantity() {
@@ -83,11 +97,14 @@ public class OrderProduct {
 		this.quantity = quantity;
 	}
 
-	// toString
-
 	@Override
 	public String toString() {
-		return "Order_Product [order=" + order + ", product=" + product + ", quantity=" + quantity + "]";
+		return "OrderProduct [id=" + id + ", order=" + order + ", product=" + product + ", quantity=" + quantity + "]";
 	}
 	
+	public boolean equals(OrderProduct other) {
+		if (other.getId() == this.id)
+			return true;
+		return false;
+	}
 }

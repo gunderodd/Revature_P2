@@ -31,7 +31,7 @@ public class OrderProductServiceImpl implements OrderProductService {
 	}
 
 	@Override
-	public OrderProduct getOrderProductByOrderProductId(int id) {
+	public OrderProduct getOrderProductById(int id) {
 		return opr.findById(id).get();
 	}
 
@@ -39,7 +39,7 @@ public class OrderProductServiceImpl implements OrderProductService {
 	
 	@Override
 	public List<OrderProduct> getByOrderId(int id) {
-		return opr.findByOrder(os.getOrderByOrderId(id));
+		return opr.findByOrder(os.getOrderById(id));
 	}
 
 	@Override

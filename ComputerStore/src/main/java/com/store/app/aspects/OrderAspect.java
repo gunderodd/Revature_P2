@@ -34,7 +34,7 @@ public class OrderAspect {
 		User u = null;
 		try { // Check if the request is from someone who's logged in
 			u = (User) session.getAttribute("user");
-			if (u.getAccessLevel() < 1 && u.getUserId() != orderUserId) {
+			if (!u.getAccessLevel().equals("emp") && u.getUserId() != orderUserId) {
 				// TODO LOG EXCEPTION
 				throw new BusinessException("You do not have a high enough access level to view this resource.");
 			}

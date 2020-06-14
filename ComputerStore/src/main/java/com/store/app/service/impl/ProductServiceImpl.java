@@ -60,6 +60,15 @@ public class ProductServiceImpl implements ProductService {
 		return pr.save(product);
 		
 	}
+	
+	@Override
+	public Product updateProductStockById(int id, int stock) {
+		Product p = pr.findById(id).get();
+		p.setStock(stock);
+		return pr.save(p);
+	}
+	
+	
 
 	
 	// ...Other Methods:
