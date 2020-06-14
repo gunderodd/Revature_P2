@@ -11,6 +11,7 @@ import { Location } from '@angular/common';
 })
 
 export class ProductDetailComponent implements OnInit {
+  
   id: number;
   private sub: any;
 
@@ -24,6 +25,7 @@ export class ProductDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log(" in the init")
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id'];
       this.getProduct();
