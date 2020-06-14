@@ -61,7 +61,7 @@ public class OrderController {
 	
 	@GetMapping("/order/{id}")
 	public Order getOrderByOrderId(@PathVariable("id") int id) {
-		return os.getOrderByOrderId(id);
+		return os.getOrderById(id);
 	}
 	
 	@GetMapping("/orders/{user_id}")

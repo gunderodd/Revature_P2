@@ -30,29 +30,28 @@ public class OrderProductController {
 	@Autowired
 	OrderProductService ops;
 	
-	// accepts order products that look like this:
-	/*
-	 * {
-	 * 	"order" : { "orderId" : 1 }
-	 *  "product" : { "productId" : 1 }
-	 *  "quantity" : 1
-	 * }
-	 */
-	// we only create OrderProducts for carts, so we don't have to update the Product quantity yet.
 	@PostMapping("/orderproduct")
-	public OrderProduct createOrderProduct(HttpSession session, @RequestBody OrderProduct op) {
-		Product product = ps.getProductById(op.getProduct().getProductId());
-		if (op.getQuantity() > product.getStock()) {
+	public OrderProduct createOrderProduct(HttpSession session, @RequestBody int[] args) {
+		Product product;
+		int quantity;
+		try {
+			product = ps.getProductById(args[0]);
+			quantity = args[1];
+		} catch (IndexOutOfBoundsException e) {
+			// TODO LOG
+			throw new BusinessException("not enough arguments passed.");
+		}
+		if (quantity > product.getStock()) {
 			// TODO LOG
 			throw new BusinessException("You cannot buy more than what's currently in stock.");
 		}
 		User user = (User) session.getAttribute("user");
 		Order cart = os.getCartByUser(user);
-		op.setProduct(product);
-		op.setOrder(cart);
+		System.out.println("user:" +user+ "   order:" +cart+ "   product:" +product);
+		OrderProduct op = new OrderProduct(0, cart, product, quantity);
 		List<OrderProduct> cartProducts = cart.getOrderProductList();
 		for (OrderProduct current : cartProducts) {
-			if (current.getProduct().getProductId() == op.getProduct().getProductId()) {
+			if (current.getProduct().getId() == op.getProduct().getId()) {
 				current.setQuantity(current.getQuantity() + op.getQuantity());
 				ops.updateOrderProduct(current);
 				return current;

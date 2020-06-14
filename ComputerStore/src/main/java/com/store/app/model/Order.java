@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 // general notes: 
 // 1. add in not nullable later if we want
 
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="orderId")
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 @Entity
 @Table(name = "Orders")
 public class Order {
@@ -31,14 +31,15 @@ public class Order {
 	private List<OrderProduct> orderProductList;
 	
 	@Id
-	@Column(name = "order_id")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int orderId;
+	private int id;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id", nullable = false)
+	@JoinColumn(name = "user_id")
 	private User user;
 	
+	// "cart" or "bought"
 	@Column(name = "status")
 	private String status;
 	
@@ -51,26 +52,33 @@ public class Order {
 	public Order() {
 		super();
 	}
-	public Order(int orderId, User user, String status, Date createdAt) {
+	
+	public Order(int id, User user, String status, Date createdAt) {
 		super();
-		this.orderId = orderId;
+		this.id = id;
 		this.user = user;
 		this.status = status;
 		this.createdAt = createdAt;
 	}
 	
 	// Getters and Setters
-	public int getOrderId() {
-		return orderId;
+	public int getId() {
+		return id;
 	}
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public User getUser() {
 		return user;
 	}
 	public void setUser(User user) {
+		setUser(user, true);
+	}
+	public void setUser(User user, boolean reciprocate) {
 		this.user = user;
+		if (reciprocate) {
+			user.addOrder(this, false);
+		}
 	}
 	public String getStatus() {
 		return status;
@@ -87,12 +95,38 @@ public class Order {
 	public List<OrderProduct> getOrderProductList() {
 		return orderProductList;
 	}
+	public void addOrderProduct(OrderProduct op) {
+		this.addOrderProduct(op, true);
+	}
+	public void addOrderProduct(OrderProduct op, boolean reciprocate) {
+		if (op != null) {
+			if (this.orderProductList.contains(op)) {
+				this.orderProductList.set(orderProductList.indexOf(op), op);
+			} else {
+				this.orderProductList.add(op);
+			}
+			if (reciprocate) 
+				op.setOrder(this, false);
+		}
+	}
+	public void removeOrderProduct(OrderProduct op) {
+		this.orderProductList.remove(op);
+		op.setOrder(null);
+	}
 	public void setOrderProductList(List<OrderProduct> orderProductList) {
 		this.orderProductList = orderProductList;
 	}
-	// toString
+
+	
 	@Override
 	public String toString() {
-		return "Order [orderId=" + orderId + ", user_id=" + user.getUserId() + ", status=" + status + ", createdAt=" + createdAt + "]";
+		return "Order [orderProductList=" + orderProductList + ", id=" + id + ", user=" + user + ", status=" + status
+				+ ", createdAt=" + createdAt + "]";
+	}
+
+	public boolean equals(Order other) {
+		if (other.getId() == this.id)
+			return true;
+		return false;
 	}
 }

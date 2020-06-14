@@ -34,7 +34,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Order getOrderByOrderId(int id) {
+	public Order getOrderById(int id) {
 		return or.findById(id).get();
 	}
 

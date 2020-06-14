@@ -13,18 +13,18 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="productId")
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 @Entity
 @Table(name = "Product")
 public class Product {
 	
 	@OneToMany(mappedBy = "product")
-	private List<OrderProduct> order_productList;
+	private List<OrderProduct> orderProductList;
 
 	@Id
-	@Column(name = "product_id")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int productId;
+	private int id;
 	
 	@Column(name = "name")
 	private String name;
@@ -47,9 +47,9 @@ public class Product {
 		super();
 	}	
 	
-	public Product(int productId, String name, String description, double price, int stock, String url) {
+	public Product(int id, String name, String description, double price, int stock, String url) {
 		super();
-		this.productId = productId;
+		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.price = price;
@@ -59,12 +59,12 @@ public class Product {
 
 	
 	// Getters and Setters
-	public int getProductId() {
-		return productId;
+	public int getId() {
+		return id;
 	}
 
-	public void setProductId(int productId) {
-		this.productId = productId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -107,18 +107,44 @@ public class Product {
 		this.url = url;
 	}
 
-	public List<OrderProduct> getOrder_productList() {
-		return order_productList;
+	public List<OrderProduct> getOrderProductList() {
+		return orderProductList;
+	}
+	
+	public void addOrderProduct(OrderProduct op) {
+		this.addOrderProduct(op, true);
+	}
+	
+	public void addOrderProduct(OrderProduct op, boolean reciprocate) {
+		if (op != null) {
+			if (this.orderProductList.contains(op)) {
+				this.orderProductList.set(orderProductList.indexOf(op), op);
+			} else {
+				this.orderProductList.add(op);
+			}
+			if (reciprocate)
+				op.setProduct(this, false);
+		}
+	}
+	
+	public void removeOrderProduct(OrderProduct op) {
+		this.orderProductList.remove(op);
+		op.setProduct(null);
 	}
 
-	public void setOrder_productList(List<OrderProduct> order_productList) {
-		this.order_productList = order_productList;
+	public void setOrderProductList(List<OrderProduct> orderProductList) {
+		this.orderProductList = orderProductList;
 	}
 
 	@Override
 	public String toString() {
-		return "Product [order_productList=" + order_productList + ", productId=" + productId + ", name=" + name
-				+ ", description=" + description + ", price=" + price + ", stock=" + stock + ", url=" + url + "]";
+		return "Product [orderProductList=" + orderProductList + ", id=" + id + ", name=" + name + ", description="
+				+ description + ", price=" + price + ", stock=" + stock + ", url=" + url + "]";
 	}
 	
+	public boolean equals(Product other) {
+		if (other.getId() == this.id)
+			return true;
+		return false;
+	}
 }

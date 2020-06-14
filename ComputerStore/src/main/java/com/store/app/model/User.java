@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -17,35 +16,29 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 // Ethan note: I think we should change this to 
 // User singular (but if we do use escapes for reserved keyword
 
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="userId")
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 @Entity
 @Table(name = "Users")
 public class User {
-	
-	@OneToOne(mappedBy = "user")
-	private StoreCard storecard;
 	
 	@OneToMany(mappedBy = "user")
 	private List<Order> orderList;
 	
 	@Id
-	@Column(name = "user_id")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int userId;
+	private int id;
 	
-	// later, make unique
-	@Column(name = "username", nullable = false)
-	// regex, username must have a letter
+	@Column(name = "username", nullable = false, unique = true)
 	private String username;
 	
 	@Column(name = "password", nullable = false)
 	private String password;
 	
-	// 0 - Customer
-	// 1 - Employee
-	// 2 - Administrator
+	// "cust" - Customer
+	// "emp" - Employee
 	@Column(name = "access_level", nullable = false)
-	private int accessLevel;
+	private String accessLevel;
 	
 	// Constructors
 	
@@ -53,9 +46,9 @@ public class User {
 		super();
 	}
 
-	public User(int userId, String username, String password, int accessLevel) {
+	public User(int id, String username, String password, String accessLevel) {
 		super();
-		this.userId = userId;
+		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.accessLevel = accessLevel;
@@ -64,11 +57,11 @@ public class User {
 	// Getters and Setters
 
 	public int getUserId() {
-		return userId;
+		return id;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUserId(int id) {
+		this.id = id;
 	}
 
 	public String getUsername() {
@@ -87,25 +80,37 @@ public class User {
 		this.password = password;
 	}
 
-	public int getAccessLevel() {
+	public String getAccessLevel() {
 		return accessLevel;
 	}
 
-	public void setAccessLevel(int accessLevel) {
+	public void setAccessLevel(String accessLevel) {
 		this.accessLevel = accessLevel;
-	}
-	
-	
-	public StoreCard getStorecard() {
-		return storecard;
-	}
-
-	public void setStorecard(StoreCard storecard) {
-		this.storecard = storecard;
 	}
 
 	public List<Order> getOrderList() {
 		return orderList;
+	}
+	
+	public void addOrder(Order o) {
+		this.addOrder(o, true);
+	}
+	
+	public void addOrder(Order o, boolean reciprocate) {
+		if (o != null) {
+			if (this.orderList.contains(o)) {
+				this.orderList.set(this.getOrderList().indexOf(o), o);
+			} else {
+				this.orderList.add(o);
+			}
+			if (reciprocate)
+				o.setUser(this, false);
+		}
+	}
+	
+	public void removeOrder(Order o) {
+		this.orderList.remove(o);
+		o.setUser(null);
 	}
 
 	public void setOrderList(List<Order> orderList) {
@@ -114,9 +119,13 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", accessLevel=" + accessLevel
-				+ "]";
+		return "User [orderList=" + orderList + ", id=" + id + ", username=" + username + ", password=" + password
+				+ ", accessLevel=" + accessLevel + "]";
 	}
 	
-	
+	public boolean equals(User other) {
+		if (other.getUserId() == this.id)
+			return true;
+		return false;
+	}
 }

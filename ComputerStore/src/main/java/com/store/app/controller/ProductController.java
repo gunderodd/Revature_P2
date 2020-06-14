@@ -50,6 +50,10 @@ public class ProductController {
 			return ps.updateProduct(p);
 		}
 
+		// should we change this to id or just keep it as-is?
+		// id is forced to be unique, but names aren't.
+		// I don't want to change this however, since I don't want to ruin what we have in Angular already
+		// -WK
 		@PutMapping("/product/{name}/{stock}")
 		public Product updateProductStockByName(@PathVariable("name") String name, @PathVariable("stock") int stock) {
 			return ps.updateProductStockByName(name, stock);
