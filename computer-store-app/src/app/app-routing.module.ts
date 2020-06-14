@@ -24,27 +24,18 @@ const routes: Routes = [
   { path: "purchasehistory", component: PurchaseHistoryComponent},
   { path: "returnitems", component: ReturnItemsComponent},
   { path: "storecard", component: StorecardComponent},
-  
-  // { path: "shopmain", component: ShopMainComponent },
-  { path: "shopmain", component: ShopMainComponent, canActivate:[LoginSessionService] },
-
-
   { path: "loginpage", component: LoginPageComponent},
   { path: "employeeview", component: EmployeeViewComponent},
   { path: "shoppingcart", component: ShoppingCartComponent},
-
   { path: "adminview", component: AdminViewComponent},
   { path: "homepage", component: HomePageComponent},
-  { path: "logout", component: LogoutComponent, canActivate:[LoginSessionService]},
   { path: 'productDetail/:id', component: ProductDetailComponent},
   { path: 'shoppingcart', component: ShoppingCartComponent},
+  { path: "shopmain", component: ShopMainComponent, canActivate:[LoginSessionService] },
+  { path: "logout", component: LogoutComponent, canActivate:[LoginSessionService]},
 
 // ALWAYS MAKE SURE THIS IS THE LAST ROUTE OR THE PROGRAM WILL BREAK
   { path: '**', component: HomePageComponent},
-
-
-
-
 
 ];
 

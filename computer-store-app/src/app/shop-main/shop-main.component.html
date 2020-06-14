@@ -1,12 +1,5 @@
 <div class="container">
     <table>
-        <!-- <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Number in Stock</th>
-            <th>Image</th>
-        </tr> -->
         <tr *ngFor="let product of products" class="product-main-card">
             <td><img style="width: 400px; height: 300px;" src= {{product.url}} /></td>
             <div class="name-description">
@@ -17,10 +10,11 @@
             <div class="stock-buy">
                 <td><h4><span>In Stock: </span>{{ product.stock }}</h4></td>
                 <td>
-                    <input id= {{product.id}} type="number" min="0">
-                    <button class="form-control btn btn-primary" (click)="addToCart(product.id)">Add to Cart</button>
+                    <input id= {{product.id}} type="number" min="1">
+                    <button class="form-control btn btn-primary" style="width: 180px;" (click)="addToCart(product.id)">Add to Cart</button>
                 </td>
             </div>
         </tr>
     </table>
+    <h4 style="margin-top: 20px;">Check back in later for more hot dealz...</h4>
 </div>

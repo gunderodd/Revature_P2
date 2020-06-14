@@ -62,14 +62,14 @@ export class LoginPageComponent implements OnInit {
 
   isUserAdmin() {
     let user = sessionStorage.getItem('username')
-    console.log(!(user === null));
+    // console.log(!(user === null));
     return (user == 'admin');
   }
 
   isUserCustomer() {
     let user = sessionStorage.getItem('username')
     // let myacc = sessionStorage.getItem('accesslevel')
-    console.log(!(user === null));
+    // console.log(!(user === null));
     return (user == 'user');
   }
 

@@ -16,7 +16,7 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
 
     this.service.listProducts().subscribe(data=>{
-      this.products=data.slice(1,5);
+      this.products=data.slice(0,5);
     });
 
   }
