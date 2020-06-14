@@ -16,7 +16,7 @@ export class OrderService {
   }
 
   public getUserCart(): Observable<Order> {
-    return this.http.get<Order>(this.url+"cart/"+this.userService.getCurrentUser().id);
+    return this.http.get<Order>(this.url+"cart");
   }
 
   public getUserOrders(): Observable<Order[]> {

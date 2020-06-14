@@ -4,15 +4,14 @@ import { CustomerHomeComponent } from './customer-home.component';
 import { RouterTestingModule } from '@angular/router/testing'
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { LoginPageComponent } from '../login-page/login-page.component';
-import { User } from '../user';
 
-let user: new User();
 
-fdescribe('CustomerHomeComponent', () => {
+describe('CustomerHomeComponent', () => {
   let component: CustomerHomeComponent;
   let fixture: ComponentFixture<CustomerHomeComponent>;
 
   beforeEach(async(() => {
+
     TestBed.configureTestingModule({
       declarations: [ CustomerHomeComponent ],
       imports: [RouterTestingModule, HttpClientTestingModule],

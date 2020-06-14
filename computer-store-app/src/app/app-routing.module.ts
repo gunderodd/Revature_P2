@@ -37,6 +37,7 @@ const routes: Routes = [
   { path: "homepage", component: HomePageComponent},
   { path: "logout", component: LogoutComponent, canActivate:[LoginSessionService]},
   { path: 'productDetail/:id', component: ProductDetailComponent},
+  { path: 'shoppingcart', component: ShoppingCartComponent},
 
 // ALWAYS MAKE SURE THIS IS THE LAST ROUTE OR THE PROGRAM WILL BREAK
   { path: '**', component: HomePageComponent},
