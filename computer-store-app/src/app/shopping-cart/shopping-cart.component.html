@@ -1,4 +1,4 @@
-<!-- <h1>Your Shopping Cart</h1>
+<h1>Your Shopping Cart</h1>
 
 <table border="1px solid black;">
     <tr>
@@ -9,7 +9,7 @@
         <th>Quantity</th>
     </tr>
     <ng-container *ngIf="this.cart">
-        <tr *ngFor="let op of this.cart.orderProductList">
+        <tr *ngFor="let op of this.orderProductList">
             <td>{{op.product.name}}</td>
             <td>{{op.product.description}}</td>
             <td>{{op.product.price}}</td>
@@ -18,9 +18,9 @@
                 <input id= {{op.product.id}} type="number" value={{op.quantity}}>
                 <button (click)="updateOrderProduct(op.product.id)">Update</button>
                 <!-- need some feedback here... -->
-            <!-- </td>
+            </td>
         </tr>
     </ng-container>
 </table>
 <button (click) = "buyCart()">Purchase</button>
-<button (click) = "clearCart()">Clear Cart</button> --> -->
+<button (click) = "clearCart()">Clear Cart</button>

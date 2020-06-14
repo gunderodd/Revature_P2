@@ -1,7 +1,7 @@
 import { User } from './user';
 
 export class Order {
-  orderId: number;
+  id: number;
   user: User;
   status: string;
   createdAt: Date;

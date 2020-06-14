@@ -9,7 +9,10 @@ import { Observable } from 'rxjs';
 })
 export class OrderService {
   private url:string;
-  constructor(private userService:UserService, private http:HttpClient) { this.url = "http://54.244.36.228:9000/" }
+  constructor(private userService:UserService, private http:HttpClient) { 
+    // this.url = "http://localhost:9000/";
+    this.url = "http://54.244.36.228:9000/"; 
+  }
 
   public getAllOrders(): Observable<Order[]> {
     return this.http.get<Order[]>(this.url+"orders");
@@ -20,7 +23,8 @@ export class OrderService {
   }
 
   public getUserOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>(this.url+"orders/"+this.userService.getCurrentUser().id);
+    let id = parseInt(sessionStorage.getItem('userId'));
+    return this.http.get<Order[]>(this.url+"orders/"+id);
   }
 
   public buyCart(o:Order): Observable<Order> {

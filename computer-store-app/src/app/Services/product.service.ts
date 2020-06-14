@@ -12,6 +12,7 @@ export class ProductService {
   private url:string;
   
   constructor(private http:HttpClient) { 
+    // this.url = "http://localhost:9000/";
     this.url = "http://54.244.36.228:9000/";
   }
   
@@ -27,7 +28,7 @@ export class ProductService {
     return this.http.get<Product[]>(this.url+"products");
   }
 
-  public getProductId(id:Product["productId"]){
+  public getProductId(id:Product["id"]){
     return this.http.get<Product>(this.url+"product/"+id);
   }
 }

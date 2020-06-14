@@ -37,6 +37,7 @@ export class LoginPageComponent implements OnInit {
         // console.log(sessionStorage.getItem('accesslevel'));
         
         sessionStorage.setItem('username',this.user.username);
+        sessionStorage.setItem('userid',this.user.id);
 
         let test = sessionStorage.getItem('username');
         var myobject = JSON.parse(sessionStorage.getItem('user'));
