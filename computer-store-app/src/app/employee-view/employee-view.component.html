@@ -1,45 +1,44 @@
-<h1>Employee View</h1>
+<div class="container text-center">
+    <h1>Employee Portal</h1>
+    <button class="btn btn-primary" (click)="toggle()">{{buttonName}}</button>
+    <button class="btn btn-secondary" (click)="secondToggle()">{{secondButtonName}}</button>
 
-
-    <button (click)="toggle()">{{buttonName}}</button>
     <ng-container *ngIf="show">
-    <table border="1px solid black;">
-        <tr>
-            <th>Time of Order</th>
-            <th>Status</th>
-            <th>Username</th>
-            
-        </tr>
-        <tr *ngFor="let order of orders">
-                <td>{{ order.createdAt }}</td>
-                <td>{{ order.status }}</td>
-                <td>{{ order.user.username}}</td>
-        </tr>
-    </table>
-</ng-container>
-                <button (click)="secondToggle()">{{secondButtonName}}</button>
-                <ng-container *ngIf="secondShow">
-        <table border="1px solid black;">
+        <table class="table">
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Number in Stock</th>
-                <th>Image</th>
-                <th>Restock</th>
+                <th>Time of Order</th>
+                <th>Status</th>
+                <th>Username</th>
+                
             </tr>
-                <tr *ngFor="let product of products">
-                    <td>{{ product.productId }}</td>
-                <td>{{ product.name }}</td>
-                    <td>{{ product.description }}</td>
-                    <td>{{ product.price }}</td>
-                    <td>{{ product.stock }}</td>
-                        <td><img style="width: 200px;" src= {{product.url}} /></td>
-                        <td>
-                                <input  type="number" placeholder="Enter Restock Amount" [(ngModel)]="product.stock">
-                                <button (click)="restockOrders(product.name, product.stock)">Restock</button>
-                        </td>
+            <tr *ngFor="let order of orders">
+                    <td>{{ order.createdAt }}</td>
+                    <td>{{ order.status }}</td>
+                    <td>{{ order.user.username}}</td>
             </tr>
         </table>
     </ng-container>
+
+    <ng-container *ngIf="secondShow">
+        <table class="table">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Number in Stock</th>
+                <th scope="col">Restock</th>
+            </tr>
+            <tr *ngFor="let product of products">
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.stock }}</td>
+                <td>
+                    <input type="number" placeholder="Enter Restock Amount" min="1" [(ngModel)]="product.stock">
+                    <button class="btn btn-secondary" (click)="restockOrders(product.name, product.stock)">Restock</button>
+                </td>
+            </tr>
+        </table>
+    </ng-container>
+    
+</div>
