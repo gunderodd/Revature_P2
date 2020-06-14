@@ -21,17 +21,17 @@ export class ShoppingCartComponent implements OnInit {
     });
   }
 
-  updateOrderProduct(pid:number) {
-    let op:OrderProduct;
-    op = this.cart.orderProductList.find(obj => {
-      return obj.product.productId === pid;
-    });
-    this.ops.updateOrderProduct(op).subscribe( res => {
-      console.log(res);
-      // display the result to the user?
-      // or just ensure that the result is good, then just put a checkmark somewheregit 
-    });
-  }
+  // updateOrderProduct(pid:number) {
+  //   let op:OrderProduct;
+  //   op = this.cart.orderProductList.find(obj => {
+  //     return obj.product.id === pid;
+  //   });
+  //   this.ops.updateOrderProduct(op).subscribe( res => {
+  //     console.log(res);
+  //     // display the result to the user?
+  //     // or just ensure that the result is good, then just put a checkmark somewheregit 
+  //   });
+  // }
 
   buyCart() {
     this.os.buyCart(this.cart).subscribe( res => {

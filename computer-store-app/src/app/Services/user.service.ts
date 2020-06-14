@@ -26,7 +26,7 @@ export class UserService {
   }
   
   public loginUser(username, password) {
-    return this.http.post<User>(this.url+"login", {username, password});
+    return this.http.post<User>(this.url+"login", [username, password]);
   }
 
   public createUser(user:User): Observable<User> {

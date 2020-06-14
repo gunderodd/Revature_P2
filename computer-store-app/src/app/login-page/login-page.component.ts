@@ -22,15 +22,16 @@ export class LoginPageComponent implements OnInit {
       if (typeof res === "object") {
         this.service.setCurrentUser(res); 
 
-        if (this.user.username == 'user')
-        this.router.navigate(['customerhome']);
-        else if(this.user.username == 'admin')
-        this.router.navigate(['employeeview']);
+        if (this.user.username == 'user') {
+          this.router.navigate(['customerhome']);
+        } else if(this.user.username == 'admin') {
+          this.router.navigate(['employeeview']);
+        }
 
         // let userid: number = this.user.access_level;
         // let useridstring = userid.toString();
 
-        let mytestuser = {'id':this.user.id, 'username':this.user.username, 'password':this.user.password, 'access_level':this.user.access_level}
+        let mytestuser = {'id':this.user.id, 'username':this.user.username, 'password':this.user.password, 'accessLevel':this.user.accessLevel}
         sessionStorage.setItem('user', JSON.stringify(mytestuser));
         // sessionStorage.setItem('accesslevel',useridstring);
         // console.log(sessionStorage.getItem('accesslevel'));
