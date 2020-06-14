@@ -1,5 +1,5 @@
 export class User {
-    id: number;
+    id;
     username: string;
     password: string;
     accessLevel: string;

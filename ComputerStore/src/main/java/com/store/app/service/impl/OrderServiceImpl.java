@@ -1,6 +1,7 @@
 package com.store.app.service.impl;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.store.app.dao.OrderRepo;
 import com.store.app.model.Order;
+import com.store.app.model.OrderProduct;
 import com.store.app.model.User;
 import com.store.app.service.OrderService;
 
@@ -71,6 +73,7 @@ public class OrderServiceImpl implements OrderService {
 		cart.setUser(user);
 		cart.setStatus("cart");
 		cart.setCreatedAt(Date.from(Instant.now()));
+		cart.setOrderProductList(new ArrayList<OrderProduct>());
 		or.save(cart);
 		return cart;
 	}

@@ -6,6 +6,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -71,6 +73,13 @@ public class OrderProductController {
 			return op;
 		}
 		throw new BusinessException("Current user " + sessionUser.getUsername() + " does not match the user associated with the orderProduct.");
+	}
+	
+	@GetMapping("/orderproducts/order/{id}")
+	public List<OrderProduct> orderProductsByOrder(HttpSession session, @PathVariable("id") int id) {
+		// TODO ASPECT AND SECURITY
+		Order order = os.getOrderById(id);
+		return order.getOrderProductList();
 	}
 	
 //	@DeleteMapping("/orderproduct")

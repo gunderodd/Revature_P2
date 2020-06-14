@@ -11,27 +11,36 @@ import { OrderProduct } from '../order-product';
 })
 export class ShoppingCartComponent implements OnInit {
   cart:Order;
+  orderProductList:OrderProduct[];
+
   constructor(private os:OrderService, private ops:OrderProductService) { }
 
   ngOnInit(): void {
     this.os.getUserCart().subscribe(res => {
       console.log(res);
-      
       this.cart = res;
+      this.ops.getOrderProductsByOrder(this.cart).subscribe(res => {
+        this.orderProductList = res;
+      });
     });
+
   }
 
-  // updateOrderProduct(pid:number) {
-  //   let op:OrderProduct;
-  //   op = this.cart.orderProductList.find(obj => {
-  //     return obj.product.id === pid;
-  //   });
-  //   this.ops.updateOrderProduct(op).subscribe( res => {
-  //     console.log(res);
-  //     // display the result to the user?
-  //     // or just ensure that the result is good, then just put a checkmark somewheregit 
-  //   });
-  // }
+  updateOrderProduct(pid:number) {
+    let op:OrderProduct;
+    // need to get a list of OPs by order
+    op = this.orderProductList.find(obj => {
+      return obj.product.id === pid;
+    });
+    this.ops.updateOrderProduct(op).subscribe( res => {
+      console.log(res);
+      // display the result to the user?
+      // or just ensure that the result is good, then just put a checkmark somewhere
+      // or we can have the row flash green???
+
+      // also have to worry about updating the list and everything after we make changes to OPs and stuff
+    });
+  }
 
   buyCart() {
     this.os.buyCart(this.cart).subscribe( res => {
