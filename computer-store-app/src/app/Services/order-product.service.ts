@@ -13,8 +13,8 @@ export class OrderProductService {
   private url:string;
 
   constructor(private http:HttpClient, private userService:UserService) { 
-    this.url = "http://localhost:9000/";
-    // this.url = "http://54.244.36.228:9000/";
+    // this.url = "http://localhost:9000/";
+    this.url = "http://54.244.36.228:9000/";
   }
 
 	/*

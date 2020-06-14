@@ -12,8 +12,8 @@ export class ProductService {
   private url:string;
   
   constructor(private http:HttpClient) { 
-    this.url = "http://localhost:9000/";
-    // this.url = "http://54.244.36.228:9000/";
+    // this.url = "http://localhost:9000/";
+    this.url = "http://54.244.36.228:9000/";
   }
   
   public getAllProducts(): Observable<Product[]> {
