@@ -16,6 +16,7 @@ export class ShoppingCartComponent implements OnInit {
   constructor(private os:OrderService, private ops:OrderProductService) { }
 
   ngOnInit(): void {
+    // here it is firing for "cart"
     this.os.getUserCart().subscribe(res => {
       console.log(res);
       this.cart = res;

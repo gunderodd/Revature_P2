@@ -33,12 +33,12 @@ public class OrderProductController {
 	OrderProductService ops;
 	
 	@PostMapping("/orderproduct")
-	public OrderProduct createOrderProduct(HttpSession session, @RequestBody int[] args) {
+	public OrderProduct createOrderProduct(HttpSession session, @RequestBody int id, @RequestBody int quantity) {
 		Product product;
-		int quantity;
+//		int quantity;
 		try {
-			product = ps.getProductById(args[0]);
-			quantity = args[1];
+			product = ps.getProductById(id);
+//			quantity = quantity;
 		} catch (IndexOutOfBoundsException e) {
 			// TODO LOG
 			throw new BusinessException("not enough arguments passed.");
