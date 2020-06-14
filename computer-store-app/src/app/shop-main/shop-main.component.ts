@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../product';
 import { ProductService } from '../Services/product.service';
+import { OrderProductService } from '../Services/order-product.service';
 
 @Component({
   selector: 'app-shop-main',
@@ -11,7 +12,7 @@ export class ShopMainComponent implements OnInit {
 
   products:Product[];
 
-  constructor(private service: ProductService) { }
+  constructor(private service: ProductService, private opservice: OrderProductService) { }
 
   ngOnInit(): void {
     console.log("we are in the shop init");
@@ -22,9 +23,20 @@ export class ShopMainComponent implements OnInit {
   }
 
   addToCart(id) {
-    let amount = (<HTMLInputElement>document.getElementById(id)).value;
-    console.log(id);
-    console.log(amount);
+    let quantity = (<HTMLInputElement>document.getElementById(id)).value;
+    console.log(id + " product id");
+    console.log(quantity + " quantity");    
+    // let createOP: number[] = [id, quantity];
+    // create orderproduct
+    this.opservice.createOrderProduct(id, quantity).subscribe(data => {
+      console.log(data);
+    })
+
+    // put the orderproduct in the users cart
+    // this.opservice.putInUserCart(op).subscribe(data => {
+
+    // });
+    
 
     /* user orderproductservice
 	   * {

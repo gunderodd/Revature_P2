@@ -79,7 +79,7 @@ export class LoginPageComponent implements OnInit {
     var userJSONobject = JSON.parse(sessionStorage.getItem('user'));
     // console.log(userJSONobject);
     var userOBJECT:User = userJSONobject;
-     console.log(userOBJECT);
+    //  console.log(userOBJECT);
     
     // console.log(userOBJECT.id);
     // console.log(userOBJECT.accessLevel);

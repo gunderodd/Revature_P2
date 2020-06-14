@@ -4,6 +4,7 @@ import { OrderProduct } from '../order-product';
 import { UserService } from './user.service';
 import { Observable } from 'rxjs';
 import { Order } from '../order';
+import { Identifiers } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,10 @@ export class OrderProductService {
 	 *  "quantity" : 1
 	 * }
 	 */
+  public createOrderProduct(id, quantity) {
+    return this.http.post<number>(this.url+"orderproduct",id,quantity);
+  }
+
   public putInUserCart(op:OrderProduct): Observable<OrderProduct> {
     return this.http.post<OrderProduct>(this.url+"orderproduct",op);
   }
