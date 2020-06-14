@@ -70,9 +70,9 @@ public class OrderController {
 		return os.getOrderByUser(user);
 	}
 	
-	@GetMapping("/cart/{user_id}")
-	public Order getCartByUserId(@PathVariable("user_id") int user_id) {
-		User user = us.getUserById(user_id);
+	@GetMapping("/cart")
+	public Order getUserCart(HttpSession session) {
+		User user = (User) session.getAttribute("user");
 		return os.getCartByUser(user);
 	}
 	
