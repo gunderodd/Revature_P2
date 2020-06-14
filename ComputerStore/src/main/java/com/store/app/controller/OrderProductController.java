@@ -66,7 +66,7 @@ public class OrderProductController {
 	public OrderProduct updateOrderProduct(HttpSession session, @RequestBody OrderProduct op) {
 		User sessionUser = (User) session.getAttribute("user");
 		User opUser = op.getOrder().getUser();
-		if (sessionUser.getUserId() == opUser.getUserId()) {
+		if (sessionUser.getId() == opUser.getId()) {
 			ops.updateOrderProduct(op);
 			return op;
 		}

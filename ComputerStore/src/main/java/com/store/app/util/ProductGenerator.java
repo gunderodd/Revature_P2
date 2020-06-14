@@ -104,10 +104,10 @@ public class ProductGenerator {
 
 		System.out.println("before setting users, didnt persist the orders to the DB just yet.");
 		System.out.println("before getuserbyuserid");
-		System.out.println(us.getUserById(user.getUserId()));
+		System.out.println(us.getUserById(user.getId()));
 		System.out.println("after getuserbyuserid");
-		oc.setUser(us.getUserById(user.getUserId()));
-		ob.setUser(us.getUserById(user.getUserId()));
+		oc.setUser(us.getUserById(user.getId()));
+		ob.setUser(us.getUserById(user.getId()));
 		System.out.println("after setting users and before updating orders");
 		// we cant print anymore cause of recursion with toString()
 		System.out.println("before creating orders, after setting the users. Didnt persist before setting users.");

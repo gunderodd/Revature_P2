@@ -56,11 +56,11 @@ public class User {
 
 	// Getters and Setters
 
-	public int getUserId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setUserId(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -124,7 +124,7 @@ public class User {
 	}
 	
 	public boolean equals(User other) {
-		if (other.getUserId() == this.id)
+		if (other.getId() == this.id)
 			return true;
 		return false;
 	}
