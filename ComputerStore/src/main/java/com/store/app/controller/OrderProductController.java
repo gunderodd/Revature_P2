@@ -61,8 +61,9 @@ public class OrderProductController {
 		return op;
 	}
 	
+	// should this get an array of args or just stick with op parameter?
 	@PutMapping("/orderproduct")
-	public OrderProduct updateOrderProduct(HttpSession session, OrderProduct op) {
+	public OrderProduct updateOrderProduct(HttpSession session, @RequestBody OrderProduct op) {
 		User sessionUser = (User) session.getAttribute("user");
 		User opUser = op.getOrder().getUser();
 		if (sessionUser.getUserId() == opUser.getUserId()) {
