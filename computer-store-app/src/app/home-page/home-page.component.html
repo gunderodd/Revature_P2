@@ -1,23 +1,13 @@
-
-  <!-- <h3>Welcome to our {{title}}</h3> -->
-<br>
-
-<h3 class="text-center">FIRST 5 PRODUCT IN LIST</h3>
-
-
-
-
-<div class="container">
-    <div  class="row">
-        <div *ngFor="let product of products" class="col-sm">
-            <a routerLink="/productDetail/{{product.productId}}">
-                <img id={{product.productId}} style="width: 200px; height: 170px;" src= {{product.url}} />
-
-            </a>
-
-
-
-
+<div class="container text-center" id="home-container">
+    <h4>Sign up now</h4>
+    <h2>To access this month's Big 5 Dealz</h2>
+    <div class="row" id="product-shelf">
+        <div *ngFor="let product of products">
+            <div class="col-sm">
+                <a routerLink="/productDetail/{{product.productId}}">
+                    <img class="img-thumbnail detail-image" src= {{product.url}} />
+                </a>
+            </div>
         </div>
     </div>
 </div>

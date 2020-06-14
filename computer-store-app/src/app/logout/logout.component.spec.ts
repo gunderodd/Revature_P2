@@ -5,7 +5,7 @@ import { LoginPageComponent } from '../login-page/login-page.component';
 import { RouterTestingModule } from '@angular/router/testing'
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-describe('LogoutComponent', () => {
+fdescribe('LogoutComponent', () => {
   let component: LogoutComponent;
   let fixture: ComponentFixture<LogoutComponent>;
 

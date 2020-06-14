@@ -1,0 +1,18 @@
+#shopping-cart {
+    filter: invert(100%);
+    width: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.logo {
+    width: 30px;
+    height: 30px;
+    margin: 3px;
+    margin-right: 6px;
+}
+
+.navbar {
+    /* box-shadow: 2px 2px 4px #272d33; */
+    margin-bottom: 10px;
+}

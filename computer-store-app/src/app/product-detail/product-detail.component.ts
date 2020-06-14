@@ -9,7 +9,10 @@ import { Location } from '@angular/common';
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css']
 })
+
 export class ProductDetailComponent implements OnInit {
+  id: number;
+  private sub: any;
 
   public product:Product;
 
@@ -18,26 +21,21 @@ export class ProductDetailComponent implements OnInit {
     private location: Location,
     private route: ActivatedRoute
 
-
   ) { }
 
   ngOnInit(): void {
-
-    this.getProduct();
-
-
+    this.sub = this.route.params.subscribe(params => {
+      this.id = +params['id'];
+      this.getProduct();
+    })
   }
 
   getProduct():void{
-
-    const id = +this.route.snapshot.paramMap.get('productId');
-    
-    this.service.getProductId(id).subscribe(data=>{
+    console.log(this.id);
+    this.service.getProductId(this.id).subscribe(data=>{
       this.product=data;
     });
-
   }
-
 
   goBack(): void {
     this.location.back();

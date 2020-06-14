@@ -1,14 +1,16 @@
 
-<div *ngIf="product">
+<div *ngIf="product" class="container details-container text-center">
 
-    <h2>{{product.name | uppercase}} Details</h2>
-    <div><img style="width: 200px; height: 170px;" src= {{product.url}} /></div>  
-    <div><span>Product ID: </span>{{product.productId}}</div>
-    <div><span>Description: </span>{{product.description}}</div>
-    <div><span>Price: $</span>{{product.price}}</div>
-
-    <button (click)="goBack()">go back</button>
-
+  <h2>{{product.name | uppercase}}</h2>
+  <button class="btn btn-primary" (click)="goBack()">Back to Dealz</button>
+  <div style="display: flex;">
+    <img class="details-image" src= {{product.url}} />
+      <div class="details-details">
+        <h4>{{product.description}}</h4>
+        <br>
+        <h5><b><span>$</span>{{product.price}}</b></h5>
+      </div>
+  </div>  
 
   </div>
 
