@@ -85,6 +85,7 @@ public class OrderController {
 	@PutMapping("/buyCart")
 	public Order buyOrder(HttpSession session, @RequestBody Order order) {
 		//TODO aspect
+		// TODO ARRAY?
 		if (order.getStatus().equals("cart")) {
 			for (OrderProduct op : order.getOrderProductList()) {
 				if (op.getQuantity() > op.getProduct().getStock()) {
@@ -106,6 +107,7 @@ public class OrderController {
 	
 	@PutMapping("/clearcart")
 	public Order clearOrder(HttpSession session, @RequestBody Order order) {
+		// TODO ARRAY?
 		if (order.getStatus().equals("cart")) {
 			for (OrderProduct op : order.getOrderProductList()) {
 				ops.deleteOrderProduct(op);

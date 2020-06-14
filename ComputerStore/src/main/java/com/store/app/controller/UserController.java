@@ -2,7 +2,6 @@ package com.store.app.controller;
 
 import java.util.List;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -32,35 +31,29 @@ public class UserController {
 	// Mappings
 	
 	@PostMapping("/login")
-	public ResponseEntity<Object> login(@RequestBody User u, HttpSession session, HttpServletResponse res) {
+	public ResponseEntity<Object> login(HttpSession session, @RequestBody String[] args) {
 		try {
-			User real = us.getUserByUsername(u.getUsername());
-			if (real != null && real.getPassword().equals(u.getPassword())) {
-				Cookie cookie = new Cookie("username",u.getUsername());
-				cookie.setPath("/computerStore");
-				res.addCookie(cookie);
+			User real = us.getUserByUsername(args[0]);
+			if (real != null && real.getPassword().equals(args[1])) {
 				session.setAttribute("user", real);
 				return new ResponseEntity<>(real, HttpStatus.ACCEPTED);
 			}
 		} catch (Exception e) {
 			// TODO
 			// LOG THE ERROR
-			return new ResponseEntity<>("Invalid Login Credentials! Username: " + u.getUsername() + ", Password: " + u.getPassword(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>("Invalid Login Credentials! Username: " +args[0] + ", Password: " + args[1], HttpStatus.BAD_REQUEST);
 		}
 		// TODO
 		// LOG BAD LOGIN ATTEMPT
-		return new ResponseEntity<>("Invalid Login Credentials! Username: " + u.getUsername() + ", Password: " + u.getPassword(), HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>("Invalid Login Credentials! Username: " + args[0] + ", Password: " + args[1], HttpStatus.BAD_REQUEST);
 	}
 	
 	@PostMapping("/logout")
 	public ResponseEntity<Object> logout(HttpSession session, HttpServletResponse res) {
-		Cookie cookie = new Cookie("username",null);
-		cookie.setPath("/computerStore");
-		res.addCookie(cookie);
 		session.invalidate();
 		// TODO
 		// going to have to fix this for the angular side, this is just a placeholder
-		return new ResponseEntity<>("{ \"type\":\"redirect\",\"body\":\"index.html??\" }", HttpStatus.OK);
+		return new ResponseEntity<>("You have successfully logged out, have a nice day!", HttpStatus.OK);
 	}
 	
 	@PostMapping("/user")
