@@ -10,13 +10,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+//import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+//import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 // This whole table maps out the ManyToMany relationship
 // between Orders/Products
 
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+//@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 @Entity
 @Table(name = "Order_Product")
 public class OrderProduct {
@@ -27,10 +28,12 @@ public class OrderProduct {
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "order_id")
+	@JsonManagedReference
 	private Order order;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "product_id")
+	@JsonManagedReference
 	private Product product;
 	
 	// quantity is the number of products 
