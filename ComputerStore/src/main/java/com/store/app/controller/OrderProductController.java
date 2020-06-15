@@ -33,25 +33,12 @@ public class OrderProductController {
 	@Autowired
 	UserService us;
 	
-	// This is only for creating new orderProducts
 	@PostMapping("/orderproduct")
 	public OrderProduct createOrderProduct(@RequestBody String[] args) {
-		Product product;
-		int quantity;
-		User real;
-		try {
-			product = ps.getProductById(Integer.parseInt(args[0]));
-			quantity = Integer.parseInt(args[1]);
-			real = us.getUserByUsername(args[2]);
-			if (real == null || !(real.getPassword().equals(args[3]))) {
-				// TODO LOG
-				throw new BusinessException("You cannot add to cart without proper authentification");
-			}
-		} catch (IndexOutOfBoundsException | NumberFormatException e ) {
-			// TODO LOG
-			throw new BusinessException("Incorrect information passed");
-		}
-		if (quantity <= 0) {
+		Product product = ps.getProductById(Integer.parseInt(args[0]));
+		int quantity = Integer.parseInt(args[1]);
+		User real = us.getUserByUsername(args[2]);
+		if (quantity == 0) {
 			// TODO LOG
 			throw new BusinessException("You're trying to add a quantity of 0 or less to your shopping cart, which is not allowed.");
 		}
@@ -79,27 +66,11 @@ public class OrderProductController {
 		return ops.createOrderProduct(op);
 	}
 	
-	// this is only for updating existing orderProducts
 	@PutMapping("/orderproduct")
-	public OrderProduct updateOrderProduct(@RequestBody String[] args) { // TODO FIX THIS, GET RID OF SESSION
-		Product product;
-		int quantity;
-		User real;
-		try {
-			product = ps.getProductById(Integer.parseInt(args[0]));
-			quantity = Integer.parseInt(args[1]);
-			real = us.getUserByUsername(args[2]);
-			if (real == null || !(real.getPassword().equals(args[3]))) {
-				// TODO LOG
-				throw new BusinessException("You cannot add to cart without proper authentification");
-			}
-			if (quantity < 0) {
-				throw new BusinessException("You cannot set a quantity to a negative number.");
-			}
-		} catch (IndexOutOfBoundsException | NumberFormatException e ) {
-			// TODO LOG
-			throw new BusinessException("Incorrect information passed");
-		}
+	public OrderProduct updateOrderProduct(@RequestBody String[] args) {
+		Product product = ps.getProductById(Integer.parseInt(args[0]));
+		int quantity = Integer.parseInt(args[1]);
+		User real = us.getUserByUsername(args[2]);
 		Order cart = os.getCartByUser(real);
 		List<OrderProduct> cartProducts = cart.getOrderProductList();
 		for (OrderProduct current : cartProducts) {
@@ -123,22 +94,14 @@ public class OrderProductController {
 				}
 			}
 		}
+		// TODO LOG
 		throw new BusinessException("OrderProduct sent does not already exist. Can't update it if it doesn't already exist!");
 	}
 	
 	@GetMapping("/orderproducts/order/{id}")
 	public List<OrderProduct> orderProductsByOrder(@PathVariable("id") int id) {
-		// TODO ASPECT AND SECURITY
+		// TODO SECURITY
 		Order order = os.getOrderById(id);
 		return order.getOrderProductList();
 	}
-	
-//	@DeleteMapping("/orderproduct")
-//	public void deleteOrderProduct(HttpSession session, OrderProduct op) {
-//		// TODO
-//		// aspect for logged in
-//		// aspect for admin or if the user matches the associated orderProduct
-//			// this is a cross-cutting concern. might want to consider making an aspect for this and applying it to the update method.
-//		
-//	}
 }
