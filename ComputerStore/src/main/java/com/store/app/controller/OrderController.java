@@ -62,25 +62,15 @@ public class OrderController {
 		return os.getOrderById(id);
 	}
 	
-	@GetMapping("/orders/{user_id}")
-	public List<Order> getOrdersByUserId(@PathVariable("user_id") int user_id) {
-		User user = us.getUserById(user_id);
+	@GetMapping("/orders/{id}")
+	public List<Order> getOrdersByUserId(@PathVariable("id") int id) {
+		User user = us.getUserById(id);
 		return os.getOrderByUser(user);
 	}
 	
 	@PostMapping("/getusercart")
 	public Order getUserCart(@RequestBody String[] args) {
-		User user;
-		try {
-			user = us.getUserByUsername(args[0]);
-			if (user == null || !(user.getPassword().equals(args[1]))) {
-				// TODO LOG
-				throw new BusinessException("You cannot get your cart with incorrect login information");
-			}
-		} catch (IndexOutOfBoundsException | NumberFormatException e ) {
-			// TODO LOG
-			throw new BusinessException("Incorrect information passed");
-		}
+		User user = us.getUserByUsername(args[0]);
 		return os.getCartByUser(user);
 	}
 	
@@ -91,20 +81,8 @@ public class OrderController {
 	}
 	
 	@PutMapping("/buycart")
-	public Order buyCart(@RequestBody String[] args) {
-		User user;
-		try {
-			user = us.getUserByUsername(args[0]);
-			if (user == null || !(user.getPassword().equals(args[1]))) {
-				// TODO LOG
-				throw new BusinessException("You cannot get your cart with incorrect login information");
-			}
-		} catch (IndexOutOfBoundsException | NumberFormatException e ) {
-			// TODO LOG
-			throw new BusinessException("Incorrect information passed");
-		}
-		
-		
+	public Order buyUserCart(@RequestBody String[] args) {
+		User user = us.getUserByUsername(args[0]);
 		Order cart = os.getCartByUser(user);
 		if (cart.getOrderProductList().isEmpty()) {
 			throw new BusinessException("You cannot purchase an empty cart!");
@@ -116,20 +94,8 @@ public class OrderController {
 	
 	@PutMapping("/clearcart")
 	public Order clearUserCart(@RequestBody String[] args) {
-		User user;
-		try {
-			user = us.getUserByUsername(args[0]);
-			if (user == null || !(user.getPassword().equals(args[1]))) {
-				// TODO LOG
-				throw new BusinessException("You cannot get your cart with incorrect login information");
-			}
-		} catch (IndexOutOfBoundsException | NumberFormatException e ) {
-			// TODO LOG
-			throw new BusinessException("Incorrect information passed");
-		}
-		
-		Order cart = os.getCartByUser(user);
-		
+		User user = us.getUserByUsername(args[0]);		
+		Order cart = os.getCartByUser(user);	
 		while (!(cart.getOrderProductList().isEmpty())) {
 			OrderProduct op = cart.getOrderProductList().get(0);
 			Product product = op.getProduct();

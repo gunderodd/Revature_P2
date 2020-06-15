@@ -49,18 +49,13 @@ public class UserController {
 	
 	@PostMapping("/logout")
 	public ResponseEntity<Object> logout(HttpSession session, HttpServletResponse res) {
-		// TODO
-		// going to have to fix this for the angular side, this is just a placeholder
 		return new ResponseEntity<>("You have successfully logged out, have a nice day!", HttpStatus.OK);
 	}
 	
 	@PostMapping("/user")
-	public User createUser(@RequestBody String[] args) {
-		User newUser = new User();
-		newUser.setUsername(args[0]);
-		newUser.setPassword(args[1]);
-		newUser.setAccessLevel("cust");
-		return us.createUser(newUser);
+	public User createUser(@RequestBody User u) {
+		u.setAccessLevel("cust");
+		return us.createUser(u);
 	}
 	
 	@GetMapping("/user/id/{id}")
