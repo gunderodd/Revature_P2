@@ -7,3 +7,7 @@ button {
     margin-bottom: 5px;
     margin-top: 5px;
 }
+button:disabled,
+button[disabled]{
+    background-color: grey;
+}
