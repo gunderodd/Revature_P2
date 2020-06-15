@@ -12,7 +12,7 @@
                 
             </tr>
             <tr *ngFor="let order of orders">
-                    <td>{{ order.createdAt }}</td>
+                    <td>{{ order.createdAt | date: 'M/d/yy, h:mm a' }}</td>
                     <td>{{ order.status }}</td>
                     <td>{{ order.user.username}}</td>
             </tr>
