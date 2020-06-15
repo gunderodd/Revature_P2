@@ -21,14 +21,8 @@ export class OrderService {
   }
 
   public getUserCart(): Observable<Order> {
-    // user: User;
-
-    var userJSONobject = JSON.parse(sessionStorage.getItem('user'));
-    console.log(userJSONobject);
-    var userOBJECT:User = userJSONobject;
-    var id = userOBJECT.id;
-    // let id = parseInt(sessionStorage.getItem('userId'));
-    return this.http.get<Order>(this.url+"cart/user/id/"+id);
+    let request = [sessionStorage.getItem('username'), sessionStorage.getItem('password')];
+    return this.http.post<Order>(this.url + "getusercart", request);
   }
 
   public getUserOrders(): Observable<Order[]> {
@@ -40,11 +34,13 @@ export class OrderService {
     return this.http.get<Order[]>(this.url+"orders/"+id);
   }
 
-  public buyCart(o:Order): Observable<Order> {
-    return this.http.post<Order>(this.url+"buyCart", o);
+  public buyCart(): Observable<Order> {
+    let request = [sessionStorage.getItem('username'), sessionStorage.getItem('password')];
+    return this.http.put<Order>(this.url+"buycart", request);
   }
 
-  public clearCart(o:Order): Observable<Order> {
-    return this.http.post<Order>(this.url+"clearCart", o);
+  public clearCart(): Observable<Order> {
+    let request = [sessionStorage.getItem('username'), sessionStorage.getItem('password')];
+    return this.http.put<Order>(this.url+"clearcart", request);
   }
 }

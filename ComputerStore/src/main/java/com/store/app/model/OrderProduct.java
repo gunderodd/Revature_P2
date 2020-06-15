@@ -74,7 +74,7 @@ public class OrderProduct {
 	
 	public void setOrder(Order order, boolean reciprocate) {
 		this.order = order;
-		if (reciprocate)
+		if (reciprocate && order != null)
 			order.addOrderProduct(this, false);
 	}
 
@@ -88,7 +88,7 @@ public class OrderProduct {
 	
 	public void setProduct(Product product, boolean reciprocate) {
 		this.product = product;
-		if (reciprocate)
+		if (reciprocate && product != null)
 			product.addOrderProduct(this, false);
 	}
 

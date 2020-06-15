@@ -2,8 +2,6 @@ package com.store.app.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -70,12 +68,19 @@ public class OrderController {
 		return os.getOrderByUser(user);
 	}
 	
-	@GetMapping("/cart/user/id/{id}")
-	public Order getUserCart(HttpSession session, @PathVariable("id") int id) {
-//		User user = (User) session.getAttribute("user");
-//		System.out.println(user);
-//		System.out.println("user is null here");
-		User user = us.getUserById(id);
+	@PostMapping("/getusercart")
+	public Order getUserCart(@RequestBody String[] args) {
+		User user;
+		try {
+			user = us.getUserByUsername(args[0]);
+			if (user == null || !(user.getPassword().equals(args[1]))) {
+				// TODO LOG
+				throw new BusinessException("You cannot get your cart with incorrect login information");
+			}
+		} catch (IndexOutOfBoundsException | NumberFormatException e ) {
+			// TODO LOG
+			throw new BusinessException("Incorrect information passed");
+		}
 		return os.getCartByUser(user);
 	}
 	
@@ -85,40 +90,56 @@ public class OrderController {
 		return os.updateOrder(order);
 	}
 	
-	@PutMapping("/buyCart")
-	public Order buyOrder(HttpSession session, @RequestBody Order order) {
-		//TODO aspect
-		// TODO ARRAY?
-		if (order.getStatus().equals("cart")) {
-			for (OrderProduct op : order.getOrderProductList()) {
-				if (op.getQuantity() > op.getProduct().getStock()) {
-					throw new BusinessException("You are trying to buy too much of this product:" + op.getProduct().getName());
-				}
+	@PutMapping("/buycart")
+	public Order buyCart(@RequestBody String[] args) {
+		User user;
+		try {
+			user = us.getUserByUsername(args[0]);
+			if (user == null || !(user.getPassword().equals(args[1]))) {
+				// TODO LOG
+				throw new BusinessException("You cannot get your cart with incorrect login information");
 			}
-			for (OrderProduct op: order.getOrderProductList()) {
-				Product p = op.getProduct();
-				p.setStock(p.getStock() - op.getQuantity());
-				ps.updateProduct(p);
-			}
-			order.setStatus("bought");
-			os.updateOrder(order);
-			return order;
-		} else {
-			throw new BusinessException("You cannot buy an order not marked as \"cart\"");
+		} catch (IndexOutOfBoundsException | NumberFormatException e ) {
+			// TODO LOG
+			throw new BusinessException("Incorrect information passed");
 		}
+		
+		
+		Order cart = os.getCartByUser(user);
+		if (cart.getOrderProductList().isEmpty()) {
+			throw new BusinessException("You cannot purchase an empty cart!");
+		}
+		cart.setStatus("bought");
+		os.updateOrder(cart);
+		return cart;
 	}
 	
 	@PutMapping("/clearcart")
-	public Order clearOrder(HttpSession session, @RequestBody Order order) {
-		// TODO ARRAY?
-		if (order.getStatus().equals("cart")) {
-			for (OrderProduct op : order.getOrderProductList()) {
-				ops.deleteOrderProduct(op);
+	public Order clearUserCart(@RequestBody String[] args) {
+		User user;
+		try {
+			user = us.getUserByUsername(args[0]);
+			if (user == null || !(user.getPassword().equals(args[1]))) {
+				// TODO LOG
+				throw new BusinessException("You cannot get your cart with incorrect login information");
 			}
-			return order;
-		} else {
-			throw new BusinessException("You cannot clear an order not marked as \"cart\"");
+		} catch (IndexOutOfBoundsException | NumberFormatException e ) {
+			// TODO LOG
+			throw new BusinessException("Incorrect information passed");
 		}
+		
+		Order cart = os.getCartByUser(user);
+		
+		while (!(cart.getOrderProductList().isEmpty())) {
+			OrderProduct op = cart.getOrderProductList().get(0);
+			Product product = op.getProduct();
+			product.setStock(product.getStock() + op.getQuantity());
+			product.removeOrderProduct(op);
+			cart.removeOrderProduct(op);
+			ps.updateProduct(product);
+			ops.deleteOrderProduct(op);
+		}
+		return cart;
 	}
 	
 		//delete

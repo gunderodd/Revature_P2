@@ -25,25 +25,11 @@ export class ShopMainComponent implements OnInit {
   addToCart(id) {
     let quantity = (<HTMLInputElement>document.getElementById(id)).value;
     console.log(id + " product id");
-    console.log(quantity + " quantity");    
-    // let createOP: number[] = [id, quantity];
-    // create orderproduct
+    console.log(quantity + " quantity");  
+     
+    
     this.opservice.createOrderProduct(id, quantity).subscribe(data => {
       console.log(data);
     })
-
-    // put the orderproduct in the users cart
-    // this.opservice.putInUserCart(op).subscribe(data => {
-
-    // });
-    
-
-    /* user orderproductservice
-	   * {
-	   * 	"order" : {  } empty, gets cart on EC2 side
-	   *  "product" : { "productId" : id }
-	   *  "quantity" : amount
-     * }
-	   */
   }
 }

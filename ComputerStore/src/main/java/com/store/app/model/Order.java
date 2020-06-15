@@ -80,7 +80,7 @@ public class Order {
 	}
 	public void setUser(User user, boolean reciprocate) {
 		this.user = user;
-		if (reciprocate) {
+		if (reciprocate && user != null) {
 			user.addOrder(this, false);
 		}
 	}
