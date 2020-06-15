@@ -4,7 +4,7 @@
     <div class="row" id="product-shelf">
         <div *ngFor="let product of products">
             <div class="col-sm">
-                <a routerLink="/productDetail/{{product.productId}}">
+                <a routerLink="/productDetail/{{product.id}}">
                     <img class="img-thumbnail detail-image" src= {{product.url}} />
                 </a>
             </div>

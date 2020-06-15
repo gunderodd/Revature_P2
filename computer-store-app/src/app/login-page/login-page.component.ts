@@ -48,6 +48,7 @@ export class LoginPageComponent implements OnInit {
   isUserAdmin() {
     var user = sessionStorage.getItem('accesslevel');
     return (user == 'emp');
+
   }
 
   isUserCustomer() {
