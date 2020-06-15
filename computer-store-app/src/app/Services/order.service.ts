@@ -12,8 +12,8 @@ import { User } from '../user';
 export class OrderService {
   private url:string;
   constructor(private userService:UserService, private http:HttpClient) { 
-    this.url = "http://localhost:9000/";
-    // this.url = "http://54.244.36.228:9000/"; 
+    // this.url = "http://localhost:9000/";
+    this.url = "http://54.244.36.228:9000/"; 
   }
 
   public getAllOrders(): Observable<Order[]> {
