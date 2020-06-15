@@ -5,14 +5,32 @@
                 <h1 class="card-title" style="text-align: center; margin-bottom: 20px;">Log in: </h1>
                 <div class="form-group">
                     <label for="username">Please enter your prefered username: </label>
-                    <input type="text" placeholder="Enter Username" [(ngModel)]="user.username"/>
+                    <input type="text" placeholder="Enter Username" required minlength="4" [(ngModel)]="user.username" #username="ngModel"/>
+                    <div *ngIf="username.invalid && (username.dirty || username.touched)"
+                        class="alert alert-danger">
+                        <div *ngIf="username.errors.required">
+                        Username is required.
+                        </div>
+                      <div *ngIf="username.errors.minlength">
+                        Username must be at least 4 characters long.
+                      </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="password">Please enter a secure password: </label>
-                    <input type="password" placeholder="Enter Password" [(ngModel)]="user.password"/>
+                    <input type="password" placeholder="Enter Password" required minlength="4" [(ngModel)]="user.password" #password="ngModel"/>
+                    <div *ngIf="password.invalid && (password.dirty || password.touched)"
+                        class="alert alert-danger">
+                        <div *ngIf="password.errors.required">
+                        Password is required.
+                        </div>
+                      <div *ngIf="password.errors.minlength">
+                        Password must be at least 4 characters long.
+                      </div>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <button class="form-control btn btn-primary" (click)="loginUser()">Log in</button>
+                    <button class="form-control btn btn-primary" [disabled]="(username.invalid && (username.dirty || username.touched)) || (password.invalid && (password.dirty || password.touched))" (click)="loginUser()">Log in</button>
                 </div>
             </div>
         </div>
