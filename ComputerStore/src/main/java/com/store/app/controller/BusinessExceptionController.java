@@ -13,7 +13,7 @@ import com.store.app.exception.BusinessException;
 public class BusinessExceptionController {
 	
 	@ExceptionHandler(value = BusinessException.class)
-	public ResponseEntity<Object> exception(BusinessException e) {
-		return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+	public ResponseEntity<String> exception(BusinessException e) {
+		return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 	}
 }

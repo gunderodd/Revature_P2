@@ -2,8 +2,6 @@ package com.store.app.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +19,7 @@ import com.store.app.model.User;
 import com.store.app.service.OrderProductService;
 import com.store.app.service.OrderService;
 import com.store.app.service.ProductService;
+import com.store.app.service.UserService;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -31,52 +30,104 @@ public class OrderProductController {
 	ProductService ps;
 	@Autowired
 	OrderProductService ops;
+	@Autowired
+	UserService us;
 	
+	// This is only for creating new orderProducts
 	@PostMapping("/orderproduct")
-	public OrderProduct createOrderProduct(HttpSession session, @RequestBody int id, @RequestBody int quantity) {
+	public OrderProduct createOrderProduct(@RequestBody String[] args) {
 		Product product;
-//		int quantity;
+		int quantity;
+		User real;
 		try {
-			product = ps.getProductById(id);
-//			quantity = quantity;
-		} catch (IndexOutOfBoundsException e) {
+			product = ps.getProductById(Integer.parseInt(args[0]));
+			quantity = Integer.parseInt(args[1]);
+			real = us.getUserByUsername(args[2]);
+			if (real == null || !(real.getPassword().equals(args[3]))) {
+				// TODO LOG
+				throw new BusinessException("You cannot add to cart without proper authentification");
+			}
+		} catch (IndexOutOfBoundsException | NumberFormatException e ) {
 			// TODO LOG
-			throw new BusinessException("not enough arguments passed.");
+			throw new BusinessException("Incorrect information passed");
+		}
+		if (quantity <= 0) {
+			// TODO LOG
+			throw new BusinessException("You're trying to add a quantity of 0 or less to your shopping cart, which is not allowed.");
 		}
 		if (quantity > product.getStock()) {
 			// TODO LOG
-			throw new BusinessException("You cannot buy more than what's currently in stock.");
+			throw new BusinessException("You are putting too much in your cart. Not enough stock of item: " + product.getName());
 		}
-		User user = (User) session.getAttribute("user");
-		Order cart = os.getCartByUser(user);
-		System.out.println("user:" +user+ "   order:" +cart+ "   product:" +product);
-		OrderProduct op = new OrderProduct(0, cart, product, quantity);
+		Order cart = os.getCartByUser(real);
+		OrderProduct op = new OrderProduct();
 		List<OrderProduct> cartProducts = cart.getOrderProductList();
 		for (OrderProduct current : cartProducts) {
-			if (current.getProduct().getId() == op.getProduct().getId()) {
-				current.setQuantity(current.getQuantity() + op.getQuantity());
+			if (current.getProduct().getId() == product.getId()) {
+				current.setQuantity(current.getQuantity() + quantity);
 				ops.updateOrderProduct(current);
+				product.setStock(product.getStock() - quantity);
+				ps.updateProduct(product);
 				return current;
 			}
 		}
-		ops.createOrderProduct(op);
-		return op;
+		op.setOrder(cart);
+		op.setProduct(product);
+		op.setQuantity(quantity);
+		product.setStock(product.getStock() - quantity);
+		ps.updateProduct(product);
+		return ops.createOrderProduct(op);
 	}
 	
-	// should this get an array of args or just stick with op parameter?
+	// this is only for updating existing orderProducts
 	@PutMapping("/orderproduct")
-	public OrderProduct updateOrderProduct(HttpSession session, @RequestBody OrderProduct op) {
-		User sessionUser = (User) session.getAttribute("user");
-		User opUser = op.getOrder().getUser();
-		if (sessionUser.getId() == opUser.getId()) {
-			ops.updateOrderProduct(op);
-			return op;
+	public OrderProduct updateOrderProduct(@RequestBody String[] args) { // TODO FIX THIS, GET RID OF SESSION
+		Product product;
+		int quantity;
+		User real;
+		try {
+			product = ps.getProductById(Integer.parseInt(args[0]));
+			quantity = Integer.parseInt(args[1]);
+			real = us.getUserByUsername(args[2]);
+			if (real == null || !(real.getPassword().equals(args[3]))) {
+				// TODO LOG
+				throw new BusinessException("You cannot add to cart without proper authentification");
+			}
+			if (quantity < 0) {
+				throw new BusinessException("You cannot set a quantity to a negative number.");
+			}
+		} catch (IndexOutOfBoundsException | NumberFormatException e ) {
+			// TODO LOG
+			throw new BusinessException("Incorrect information passed");
 		}
-		throw new BusinessException("Current user " + sessionUser.getUsername() + " does not match the user associated with the orderProduct.");
+		Order cart = os.getCartByUser(real);
+		List<OrderProduct> cartProducts = cart.getOrderProductList();
+		for (OrderProduct current : cartProducts) {
+			if (current.getProduct().getId() == product.getId()) {
+				int stockTotal = product.getStock() + current.getQuantity();
+				if (quantity == 0) {
+					cart.removeOrderProduct(current);
+					product.setStock(stockTotal);
+					ops.deleteOrderProduct(current);
+					ps.updateProduct(product);
+					return new OrderProduct();
+				} else {
+					if (quantity > stockTotal) {
+						throw new BusinessException("You are putting too much in your cart. Not enough stock of item: " + product.getName());
+					}
+					current.setQuantity(quantity);
+					product.setStock(stockTotal - quantity);
+					ops.updateOrderProduct(current);
+					ps.updateProduct(product);
+					return current;
+				}
+			}
+		}
+		throw new BusinessException("OrderProduct sent does not already exist. Can't update it if it doesn't already exist!");
 	}
 	
 	@GetMapping("/orderproducts/order/{id}")
-	public List<OrderProduct> orderProductsByOrder(HttpSession session, @PathVariable("id") int id) {
+	public List<OrderProduct> orderProductsByOrder(@PathVariable("id") int id) {
 		// TODO ASPECT AND SECURITY
 		Order order = os.getOrderById(id);
 		return order.getOrderProductList();
