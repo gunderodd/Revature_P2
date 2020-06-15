@@ -1,1 +1,10 @@
-<p>purchase-history works!</p>
+<div class="container text-center">
+    <h1>Order History: </h1>
+    <ul class="list-group" *ngFor="let order of orders">
+        <h3 >Order</h3>
+        <li class="list-group-item">Your Order Tracking Number: {{ order.id }}</li>
+        <li class="list-group-item">Order Status: {{ order.status }}</li>
+        <li>{{ order.createdAt | date: 'M/d/yy, h:mm a' }}</li>
+    </ul>
+    <button class="btn btn-primary" style="margin-top: 30px;" (click)="goBack()">Back to Account</button>
+</div>

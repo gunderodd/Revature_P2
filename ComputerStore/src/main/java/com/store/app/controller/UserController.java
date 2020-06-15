@@ -55,10 +55,12 @@ public class UserController {
 	}
 	
 	@PostMapping("/user")
-	public User createUser(@RequestBody User u) {
-		// if the user has an access level greater than 0, send back an error
-		u.setAccessLevel("cust");
-		return us.createUser(u);
+	public User createUser(@RequestBody String[] args) {
+		User newUser = new User();
+		newUser.setUsername(args[0]);
+		newUser.setPassword(args[1]);
+		newUser.setAccessLevel("cust");
+		return us.createUser(newUser);
 	}
 	
 	@GetMapping("/user/id/{id}")

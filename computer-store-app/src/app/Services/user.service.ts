@@ -30,8 +30,8 @@ export class UserService {
     return this.http.post<User>(this.url+"login", [username, password]);
   }
 
-  public createUser(user:User): Observable<User> {
-    return this.http.post<User>(this.url+"user", user);
+  public createUser(username, password) {
+    return this.http.post<User>(this.url+"user", [username, password]);
 
   }
 
