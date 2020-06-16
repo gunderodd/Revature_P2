@@ -10,5 +10,4 @@ import com.store.app.model.User;
 @Repository
 public interface UserRepo extends JpaRepository<User, Integer> {
 	public Optional<User> findByUsername(String username);
-//	public Optional<User> findByUserId(int userId);
 }

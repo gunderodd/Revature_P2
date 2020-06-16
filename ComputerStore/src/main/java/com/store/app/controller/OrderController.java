@@ -63,7 +63,7 @@ public class OrderController {
 		User user = us.getUserByUsername(args[0]);
 		Order cart = os.getCartByUser(user);
 		if (cart.getOrderProductList().isEmpty()) {
-			throw new BusinessException("You cannot purchase an empty cart!");
+			throw new BusinessException("You cannot purchase an empty cart! username: " + user.getUsername() + " & cart: " + cart.getId());
 		}
 		cart.setStatus("bought");
 		os.updateOrder(cart);

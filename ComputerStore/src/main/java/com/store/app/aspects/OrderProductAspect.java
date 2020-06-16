@@ -29,20 +29,24 @@ public class OrderProductAspect {
 			int quantity = Integer.parseInt(args[1]);
 			User real = us.getUserByUsername(args[2]);
 			if (real == null || !(real.getPassword().equals(args[3]))) {
-				// TODO LOG
-				throw new BusinessException("You cannot add to cart without proper authentification");
+				throw new BusinessException("You cannot add to cart without proper authentification. Invalid information: username: " + args[2] + " & password: " + args[3]);
 			}
 			if (quantity < 0) {
-				// TODO LOG
-				throw new BusinessException("You cannot set a quantity to a negative number.");
+				throw new BusinessException("You cannot set a quantity to a negative number. quantity: " + quantity + "username: " + args[2]);
 			}
 			if (product == null) {
-				// TODO LOG
-				throw new BusinessException("You cannot create an OrderProduct with a null product");
+				throw new BusinessException("You cannot create an OrderProduct with a null product. productId: " + args[0] + " quantity: " + quantity + "username: " + args[2]);
 			}
 		} catch (IndexOutOfBoundsException | NumberFormatException e ) {
-			// TODO LOG
-			throw new BusinessException("Incorrect information passed");
+			String s = "";
+			int loops = args.length;
+			if (loops > 5)
+				loops = 5;
+			for (int i = 0; i < loops; i++) {
+				s = s.concat(" ");
+				s = s.concat(args[i]);
+			}
+			throw new BusinessException("Incorrect information passed. information: [ " + s + "] should be: [ productId, quantity, username, password ]");
 		}
 	}
 }
