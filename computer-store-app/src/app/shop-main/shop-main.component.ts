@@ -21,12 +21,13 @@ export class ShopMainComponent implements OnInit {
     });
   }
 
-  addToCart(id) {
+  addToCart(id, product:Product) {
     let quantity = (<HTMLInputElement>document.getElementById(id)).value;
-     
+     if (parseInt(quantity) <= product.stock) {
+       product.stock = product.stock - parseInt(quantity);
+     }
     
     this.opservice.createOrderProduct(id, quantity).subscribe(data => {
     })
-  window.location.reload();
-}
+  }
 }

@@ -26,8 +26,12 @@ export class ShoppingCartComponent implements OnInit {
 
   }
 
-  updateOrderProduct(pid) {
+  updateOrderProduct(pid, op:OrderProduct) {
     let quantity = (<HTMLInputElement>document.getElementById(pid)).value;
+    if (parseInt(quantity) < op.product.stock) {
+      op.product.stock = op.product.stock + (op.quantity - parseInt(quantity));
+      op.quantity = parseInt(quantity);
+    }
 
     this.ops.updateOrderProduct(pid, quantity).subscribe( res => {
       // display the result to the user?
@@ -35,7 +39,6 @@ export class ShoppingCartComponent implements OnInit {
       // or we can have the row flash green???
       // also have to worry about updating the list and everything after we make changes to OPs and stuff
     });
-    window.location.reload();
   }
 
   buyCart() {
