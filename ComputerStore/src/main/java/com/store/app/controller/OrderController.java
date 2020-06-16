@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +20,6 @@ import com.store.app.service.OrderProductService;
 import com.store.app.service.OrderService;
 import com.store.app.service.ProductService;
 import com.store.app.service.UserService;
-
 
 // Why are we accessing an instance of the interface? how does
 // that let us use the methods?
@@ -43,23 +41,9 @@ public class OrderController {
 	@Autowired
 	public OrderProductService ops;
 	
-	// Mappings
-	
-		// create
-	@PostMapping("/order")
-	public Order createOrder(@RequestBody Order order) {
-		return os.createOrder(order);
-	}
-	
-		//read
 	@GetMapping("/orders")
 	public List<Order> getAllOrders() {
 		return os.getAllOrders();
-	}
-	
-	@GetMapping("/order/{id}")
-	public Order getOrderByOrderId(@PathVariable("id") int id) {
-		return os.getOrderById(id);
 	}
 	
 	@GetMapping("/orders/{id}")
@@ -72,12 +56,6 @@ public class OrderController {
 	public Order getUserCart(@RequestBody String[] args) {
 		User user = us.getUserByUsername(args[0]);
 		return os.getCartByUser(user);
-	}
-	
-		//update
-	@PutMapping("/order")
-	public Order updateOrder(@RequestBody Order order) {
-		return os.updateOrder(order);
 	}
 	
 	@PutMapping("/buycart")
@@ -107,11 +85,4 @@ public class OrderController {
 		}
 		return cart;
 	}
-	
-		//delete
-	@DeleteMapping("/order/{id}")
-	public void deleteOrder(@PathVariable("id") int id) {
-		os.deleteOrderById(id);
-	}
-	
 }
