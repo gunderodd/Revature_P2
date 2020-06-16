@@ -9,7 +9,7 @@ import { OrderProductService } from '../Services/order-product.service';
   styleUrls: ['./shop-main.component.css']
 })
 export class ShopMainComponent implements OnInit {
-
+  quant:number;
   products:Product[];
 
   constructor(private service: ProductService, private opservice: OrderProductService) { }
@@ -21,12 +21,15 @@ export class ShopMainComponent implements OnInit {
     });
   }
 
-  addToCart(id) {
+  addToCart(id, product:Product) {
     let quantity = (<HTMLInputElement>document.getElementById(id)).value;
-     
+      if (parseInt(quantity) <= product.stock && parseInt(quantity) > 0) {
+        product.stock = product.stock - parseInt(quantity);
+      } else {
+        alert('Invalid amount entered. Ensure you are not buying more than we have in stock, and that you\'re entering a positive non-zero value.');
+      }
     
     this.opservice.createOrderProduct(id, quantity).subscribe(data => {
     })
-  window.location.reload();
-}
+  }
 }

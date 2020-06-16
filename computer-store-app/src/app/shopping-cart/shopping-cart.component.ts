@@ -3,6 +3,7 @@ import { Order } from '../order';
 import { OrderService } from '../Services/order.service';
 import { OrderProductService } from '../Services/order-product.service';
 import { OrderProduct } from '../order-product';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -16,37 +17,31 @@ export class ShoppingCartComponent implements OnInit {
   constructor(private os:OrderService, private ops:OrderProductService) { }
 
   ngOnInit(): void {
-    // here it is firing for "cart"
     this.os.getUserCart().subscribe(res => {
-      this.cart = res;
-      this.ops.getOrderProductsByOrder(this.cart).subscribe(res2 => {
+      this.ops.getOrderProductsByOrder(res).subscribe(res2 => {
         this.orderProductList = res2;
+        this.cart = res;
       });
     });
-
   }
 
-  updateOrderProduct(pid) {
+  updateOrderProduct(pid, op:OrderProduct) {
     let quantity = (<HTMLInputElement>document.getElementById(pid)).value;
-
-    this.ops.updateOrderProduct(pid, quantity).subscribe( res => {
-      // display the result to the user?
-      // or just ensure that the result is good, then just put a checkmark somewhere
-      // or we can have the row flash green???
-      // also have to worry about updating the list and everything after we make changes to OPs and stuff
-    });
-    window.location.reload();
+    if (parseInt(quantity) < op.product.stock && parseInt(quantity) > 0) {
+      op.product.stock = op.product.stock + (op.quantity - parseInt(quantity));
+      op.quantity = parseInt(quantity);
+    } else {
+      alert('Invalid amount entered. Ensure you are not buying more than we have in stock, and that you\'re entering a positive non-zero value.');
+    }
+    this.ops.updateOrderProduct(pid, quantity).subscribe();
   }
 
   buyCart() {
-    this.os.buyCart().subscribe( res => {
-    });
-    window.location.reload();
+    this.os.buyCart().subscribe(res => {this.ngOnInit();});
   }
 
   clearCart() {
-    this.os.clearCart().subscribe( res => {
-    });
-    window.location.reload();
+    this.os.clearCart().subscribe(res => {this.ngOnInit();});
+    
   }
 }

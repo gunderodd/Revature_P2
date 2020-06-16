@@ -14,18 +14,27 @@ export class CreateUserComponent implements OnInit {
 
   constructor(private service:UserService, private router:Router) {
     this.user= new User();
-    }
+  }
 
     createUser(){
       this.service.createUser(this.user.username, this.user.password).subscribe(res=>this.router.navigate(['loginpage'])
-      , error =>{
-        alert('Username and Password must only have letters and numbers, no spaces');
-      }
-      );
+      , error => {
+        if (error.status == 400) {
+          alert(error.error);
+        } else {
+          alert('Usernames and Passwords must contain letters and numbers ONLY, and must be between 4 and 16 characters long.');
+        }
+      });
       this.user = new User();
     }
 
   ngOnInit(){
+    document.getElementById('passinput').addEventListener('keypress', function (e) {
+      var key = e.which || e.keyCode;
+      if (key === 13) { // 13 is enter key
+        document.getElementById('submitbutton').click();
+      }
+    });
   }
 
 }

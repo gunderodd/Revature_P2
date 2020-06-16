@@ -7,14 +7,14 @@
                 <td><img style="width: 400px; height: 300px;" src= {{op.product.url}} /></td>
                 <div class="name-description">
                     <td><h2 style="text-decoration: underline;">{{ op.product.name }}</h2></td>
-                    <!-- <td>{{ op.product.description }}</td> -->
                     <td><h3>${{ op.product.price }}</h3></td>
                 </div>
                 <div class="stock-buy">
                     <td><h4><span>In Stock: </span>{{ op.product.stock }}</h4></td>
                     <td>
+                        <p>Amount in your cart: {{op.quantity}}</p>
                         <input id= {{op.product.id}} type="number" min="1" value={{op.quantity}}>
-                        <button (click)="updateOrderProduct(op.product.id)">Update</button>
+                        <button class="btn btn-primary" (click)="updateOrderProduct(op.product.id, op)">Update</button>
                     </td>
                 </div>
             </tr>
@@ -24,27 +24,4 @@
     <button class="btn btn-primary" (click) = "buyCart()">Purchase</button>
     <button class="btn btn-secondary" (click) = "clearCart()">Clear Cart</button>
 </div>
-
-<!-- <table border="1px solid black;">
-    <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Image</th>
-        <th>Quantity</th>
-    </tr>
-    <ng-container *ngIf="this.cart">
-        <tr *ngFor="let op of this.orderProductList">
-            <td>{{op.product.name}}</td>
-            <td>{{op.product.description}}</td>
-            <td>{{op.product.price}}</td>
-            <td><img style="width: 200px; height: 170px;" src= {{op.product.url}} /></td>
-            <td>
-                <input id= {{op.product.id}} type="number" value={{op.quantity}}>
-                <button (click)="updateOrderProduct(op.product.id)">Update</button>
-                <!-- need some feedback here... -->
-            <!-- </td>
-        </tr>
-    </ng-container>
-</table> -->
 

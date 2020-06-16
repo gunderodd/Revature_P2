@@ -11,7 +11,7 @@
                 <td><h4><span>In Stock: </span>{{ product.stock }}</h4></td>
                 <td>
                     <input id= {{product.id}} type="number" min="1">
-                    <button class="form-control btn btn-primary" style="width: 180px;" (click)="addToCart(product.id)">Add to Cart</button>
+                    <button class="form-control btn btn-primary" style="width: 180px;" (click)="addToCart(product.id, product)">Add to Cart</button>
                 </td>
             </div>
         </tr>
