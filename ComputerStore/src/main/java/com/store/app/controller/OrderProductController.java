@@ -39,12 +39,10 @@ public class OrderProductController {
 		int quantity = Integer.parseInt(args[1]);
 		User real = us.getUserByUsername(args[2]);
 		if (quantity == 0) {
-			// TODO LOG
-			throw new BusinessException("You're trying to add a quantity of 0 or less to your shopping cart, which is not allowed.");
+			throw new BusinessException("You're trying to add a quantity of 0 or less to your shopping cart, which is not allowed. User: " + real.getUsername());
 		}
 		if (quantity > product.getStock()) {
-			// TODO LOG
-			throw new BusinessException("You are putting too much in your cart. Not enough stock of item: " + product.getName());
+			throw new BusinessException("You are putting too much in your cart. Not enough stock of item: " + product.getName() + ", user: " + real.getUsername());
 		}
 		Order cart = os.getCartByUser(real);
 		OrderProduct op = new OrderProduct();
@@ -84,7 +82,7 @@ public class OrderProductController {
 					return new OrderProduct();
 				} else {
 					if (quantity > stockTotal) {
-						throw new BusinessException("You are putting too much in your cart. Not enough stock of item: " + product.getName());
+						throw new BusinessException("You are putting too much in your cart. Not enough stock of item: " + product.getName() + ", user: " + real.getUsername());
 					}
 					current.setQuantity(quantity);
 					product.setStock(stockTotal - quantity);
@@ -94,13 +92,11 @@ public class OrderProductController {
 				}
 			}
 		}
-		// TODO LOG
-		throw new BusinessException("OrderProduct sent does not already exist. Can't update it if it doesn't already exist!");
+		throw new BusinessException("OrderProduct sent does not already exist. Can't update it if it doesn't already exist! user: " + real.getUsername());
 	}
 	
 	@GetMapping("/orderproducts/order/{id}")
 	public List<OrderProduct> orderProductsByOrder(@PathVariable("id") int id) {
-		// TODO SECURITY
 		Order order = os.getOrderById(id);
 		return order.getOrderProductList();
 	}

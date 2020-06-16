@@ -24,12 +24,19 @@ public class OrderAspect {
 		try {
 			user = us.getUserByUsername(args[0]);
 			if (user == null || !(user.getPassword().equals(args[1]))) {
-				// TODO LOG
-				throw new BusinessException("You cannot get your cart with incorrect login information");
+				throw new BusinessException("You cannot get your cart with incorrect login information. "
+						+ "Incorrect information: username: " + args[0] + " & password: " + args[1]);
 			}
 		} catch (IndexOutOfBoundsException | NumberFormatException e ) {
-			// TODO LOG
-			throw new BusinessException("Incorrect information passed");
+			String s = "";
+			int loops = args.length;
+			if (loops > 2)
+				loops = 2;
+			for (int i = 0; i < loops; i++) {
+				s = s.concat(" ");
+				s = s.concat(args[i]);
+			}
+			throw new BusinessException("Incorrect information passed. Information: [ " + s + "] should be [ username, password ]");
 		}
 	}
 }

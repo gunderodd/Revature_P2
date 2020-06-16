@@ -12,5 +12,4 @@ import com.store.app.model.Product;
 public interface OrderProductRepo extends JpaRepository<OrderProduct, Integer> {
 	public List<OrderProduct> findByOrder(Order o);
 	public List<OrderProduct> findByProduct(Product p);
-//	public Optional<OrderProduct> findByOrderProductId(int orderProductId);
 }

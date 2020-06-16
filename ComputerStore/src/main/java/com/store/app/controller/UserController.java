@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.store.app.service.UserService;
 import com.store.app.exception.BusinessException;
 import com.store.app.model.User;
+import com.store.app.service.UserService;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -31,11 +31,9 @@ public class UserController {
 				return new ResponseEntity<>(real, HttpStatus.ACCEPTED);
 			}
 		} catch (Exception e) {
-			// TODO LOG THE ERROR
-			return new ResponseEntity<>("Invalid Login Credentials! Username: " +args[0] + ", Password: " + args[1], HttpStatus.BAD_REQUEST);
+			throw new BusinessException("Invalid Login Credentials! Username: " +args[0] + ", Password: " + args[1]);
 		}
-		// TODO LOG BAD LOGIN ATTEMPT
-		return new ResponseEntity<>("Invalid Login Credentials! Username: " + args[0] + ", Password: " + args[1], HttpStatus.BAD_REQUEST);
+		throw new BusinessException("Invalid Login Credentials! Username: " +args[0] + ", Password: " + args[1]);
 	}
 	
 	@PostMapping("/user")
