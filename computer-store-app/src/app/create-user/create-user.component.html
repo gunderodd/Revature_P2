@@ -8,7 +8,7 @@
             <div name="loginForm">
                 <h1 class="card-title" style="text-align: center; margin-bottom: 20px;">Sign up for your exclusive subscription...</h1>
                 <div class="form-group">
-                    <label for="username">Please enter your prefered username: </label>
+                    <label for="username">Please enter your preferred username: </label>
                     <input type="text" placeholder="Enter Username"  required minlength="4" [(ngModel)]="user.username" #username="ngModel"/>
                     <div *ngIf="username.invalid && (username.dirty || username.touched)"
                         class="alert alert-danger">
