@@ -37,18 +37,17 @@ public class UserController {
 	}
 	
 	@PostMapping("/user")
-	   public User createUser(@RequestBody String[] args) {
-        User user = new User();
-    if (args[0].matches("[a-zA-Z0-9]{4,16}") && args[1].matches("[a-zA-Z0-9]{4,16}")) {
-        user.setUsername(args[0]);
-        user.setPassword(args[1]);
-        user.setAccessLevel("cust");
-    
-        return us.createUser(user);
-        } else {
-			throw new BusinessException("Invalid User Registration Details: " + args[0] + ", " + args[1]);
+	public User createUser(@RequestBody String[] args) {
+		User test = us.getUserByUsername(args[0]);
+		if (test != null) {
+			throw new BusinessException("Username " + args[0] + " already exists, please choose another.");
 		}
-    }
+		User user = new User();
+		user.setUsername(args[0]);
+		user.setPassword(args[1]);
+		user.setAccessLevel("cust");
+		return us.createUser(user);
+	}
 	
 	@GetMapping("/users")
 	public List<User> getAllUsers(HttpSession session) {

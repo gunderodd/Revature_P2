@@ -19,9 +19,11 @@ export class CreateUserComponent implements OnInit {
     createUser(){
       this.service.createUser(this.user.username, this.user.password).subscribe(res=>this.router.navigate(['loginpage'])
       , error => {
-        
-        alert(JSON.stringify(error));
-        // alert('Usernames and Passwords must contain letters and numbers ONLY, and must be between 4 and 16 characters long.');
+        if (error.status == 400) {
+          alert(error.error);
+        } else {
+          alert('Usernames and Passwords must contain letters and numbers ONLY, and must be between 4 and 16 characters long.');
+        }
       });
       this.user = new User();
     }
