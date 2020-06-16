@@ -32,7 +32,6 @@ export class UserService {
 
   public createUser(username, password) {
     return this.http.post<User>(this.url+"user", [username, password]);
-
   }
 
   public getAllUsers(): Observable<User[]> {

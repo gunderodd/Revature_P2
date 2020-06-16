@@ -57,18 +57,22 @@ export class EmployeeViewComponent implements OnInit {
   secondToggle() {
     this.secondShow = !this.secondShow;
 
-    if(this.secondShow){
-    this.secondButtonName= "Hide Inventory List";
-    }else{
-    this.secondButtonName = "Show Inventory List";
-  }}
-   restockOrders(name, stock){
-     if(stock >=0 ){
-     this.service.restockOrders(name, stock).subscribe(res=> window.location.reload());
-    } else{
-        alert('Invalid Restock Amount');
+    if (this.secondShow) {
+      this.secondButtonName= "Hide Inventory List";
+    } else {
+      this.secondButtonName = "Show Inventory List";
     }
-   }
+  }
+
+  restockOrders(product:Product) {
+    let quantity = (<HTMLInputElement>document.getElementById(product.id.toString())).value;
+    if (parseInt(quantity) <= product.stock && parseInt(quantity) > 0) {
+      product.stock = product.stock + parseInt(quantity);
+      this.service.restockOrders(product.name, product.stock).subscribe(res => {this.ngOnInit();});
+    } else {
+      alert('Invalid amount entered. Ensure you are not buying more than we have in stock, and that you\'re entering a positive non-zero value.');
+    }
+  }
 
   ngOnInit() {
     this.orderService.getAllOrders().subscribe(data=>{

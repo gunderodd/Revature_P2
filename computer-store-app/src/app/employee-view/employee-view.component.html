@@ -9,7 +9,6 @@
                 <th>Time of Order</th>
                 <th>Status</th>
                 <th>Username</th>
-                
             </tr>
             <tr *ngFor="let order of orders">
                     <td>{{ order.createdAt | date: 'M/d/yy, h:mm a' }}</td>
@@ -19,6 +18,8 @@
         </table>
     </ng-container>
 
+    
+
     <ng-container *ngIf="secondShow">
         <table class="table">
             <tr>
@@ -26,7 +27,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Price</th>
                 <th scope="col">Number in Stock</th>
-                <th scope="col">Restock</th>
+                <th scope="col">Add to current stock</th>
             </tr>
             <tr *ngFor="let product of products">
                 <td>{{ product.id }}</td>
@@ -34,11 +35,10 @@
                 <td>{{ product.price }}</td>
                 <td>{{ product.stock }}</td>
                 <td>
-                    <input type="number" placeholder="Enter Restock Amount" min="1" [(ngModel)]="product.stock">
-                    <button class="btn btn-secondary" (click)="restockOrders(product.name, product.stock)">Restock</button>
+                    <input id={{product.id}} type="number" placeholder="Enter Restock Amount" min="1">
+                    <button class="btn btn-secondary" (click)="restockOrders(product)">Restock</button>
                 </td>
             </tr>
         </table>
     </ng-container>
-    
 </div>
