@@ -15,7 +15,6 @@ export class ShopMainComponent implements OnInit {
   constructor(private service: ProductService, private opservice: OrderProductService) { }
 
   ngOnInit(): void {
-    console.log("we are in the shop init");
     
     this.service.listProducts().subscribe(data=>{
       this.products=data;
@@ -24,12 +23,9 @@ export class ShopMainComponent implements OnInit {
 
   addToCart(id) {
     let quantity = (<HTMLInputElement>document.getElementById(id)).value;
-    console.log(id + " product id");
-    console.log(quantity + " quantity");  
      
     
     this.opservice.createOrderProduct(id, quantity).subscribe(data => {
-      console.log(data);
     })
   window.location.reload();
 }

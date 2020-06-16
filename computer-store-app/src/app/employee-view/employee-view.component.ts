@@ -63,8 +63,6 @@ export class EmployeeViewComponent implements OnInit {
     this.secondButtonName = "Show Inventory List";
   }}
    restockOrders(name, stock){
-     console.log(stock)
-     console.log(name)
      if(stock >=0 ){
      this.service.restockOrders(name, stock).subscribe(res=> window.location.reload());
     } else{
@@ -74,7 +72,6 @@ export class EmployeeViewComponent implements OnInit {
 
   ngOnInit() {
     this.orderService.getAllOrders().subscribe(data=>{
-      console.log(data)
       this.orders = data;
     })
     this.service.getAllProducts().subscribe(data=>{
