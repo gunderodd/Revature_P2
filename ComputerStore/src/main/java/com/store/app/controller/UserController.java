@@ -38,10 +38,10 @@ public class UserController {
 	
 	@PostMapping("/user")
 	public User createUser(@RequestBody String[] args) {
-		User test = us.getUserByUsername(args[0]);
-		if (test != null) {
-			throw new BusinessException("Username " + args[0] + " already exists, please choose another.");
-		}
+//		User test = us.getUserByUsername(args[0]);
+//		if (test != null) {
+//			throw new BusinessException("Username " + args[0] + " already exists, please choose another.");
+//		}
 		User user = new User();
 		user.setUsername(args[0]);
 		user.setPassword(args[1]);
