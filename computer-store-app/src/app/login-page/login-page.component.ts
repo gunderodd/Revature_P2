@@ -37,6 +37,8 @@ export class LoginPageComponent implements OnInit {
 
       } else if (typeof res === "string") {
       }
+    }, error =>{
+      alert('Invalid Login Credentials');
     });
   }
 
