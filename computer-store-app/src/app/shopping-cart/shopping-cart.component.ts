@@ -27,7 +27,8 @@ export class ShoppingCartComponent implements OnInit {
 
   updateOrderProduct(pid, op:OrderProduct) {
     let quantity = (<HTMLInputElement>document.getElementById(pid)).value;
-    if (parseInt(quantity) < op.product.stock && parseInt(quantity) > 0) {
+    let total = op.product.stock + op.quantity;
+    if (parseInt(quantity) < total && parseInt(quantity) > 0) {
       op.product.stock = op.product.stock + (op.quantity - parseInt(quantity));
       op.quantity = parseInt(quantity);
     } else {

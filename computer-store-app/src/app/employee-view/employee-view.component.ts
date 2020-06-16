@@ -66,7 +66,7 @@ export class EmployeeViewComponent implements OnInit {
 
   restockOrders(product:Product) {
     let quantity = (<HTMLInputElement>document.getElementById(product.id.toString())).value;
-    if (parseInt(quantity) <= product.stock && parseInt(quantity) > 0) {
+    if (parseInt(quantity) > 0) {
       product.stock = product.stock + parseInt(quantity);
       this.service.restockOrders(product.name, product.stock).subscribe(res => {this.ngOnInit();});
     } else {
