@@ -18,7 +18,6 @@ export class ShoppingCartComponent implements OnInit {
   ngOnInit(): void {
     // here it is firing for "cart"
     this.os.getUserCart().subscribe(res => {
-      console.log(res);
       this.cart = res;
       this.ops.getOrderProductsByOrder(this.cart).subscribe(res2 => {
         this.orderProductList = res2;
@@ -31,23 +30,23 @@ export class ShoppingCartComponent implements OnInit {
     let quantity = (<HTMLInputElement>document.getElementById(pid)).value;
 
     this.ops.updateOrderProduct(pid, quantity).subscribe( res => {
-      console.log(res);
       // display the result to the user?
       // or just ensure that the result is good, then just put a checkmark somewhere
       // or we can have the row flash green???
       // also have to worry about updating the list and everything after we make changes to OPs and stuff
     });
+    window.location.reload();
   }
 
   buyCart() {
     this.os.buyCart().subscribe( res => {
-      console.log(res);
     });
+    window.location.reload();
   }
 
   clearCart() {
     this.os.clearCart().subscribe( res => {
-      console.log(res);
     });
+    window.location.reload();
   }
 }

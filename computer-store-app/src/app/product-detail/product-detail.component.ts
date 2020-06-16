@@ -25,7 +25,6 @@ export class ProductDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(" in the init")
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id'];
       this.getProduct();
@@ -33,7 +32,6 @@ export class ProductDetailComponent implements OnInit {
   }
 
   getProduct():void{
-    console.log(this.id);
     this.service.getProductId(this.id).subscribe(data=>{
       this.product=data;
     });

@@ -36,8 +36,6 @@ export class LoginPageComponent implements OnInit {
         }
 
       } else if (typeof res === "string") {
-        console.log("type is string");
-        console.log(res);
       }
     });
   }

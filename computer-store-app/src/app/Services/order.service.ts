@@ -29,7 +29,6 @@ export class OrderService {
     var userJSONobject = JSON.parse(sessionStorage.getItem('user'));
     var userOBJECT:User = userJSONobject;
     var id = userOBJECT.id;
-    console.log(id);
     
     return this.http.get<Order[]>(this.url+"orders/"+id);
   }

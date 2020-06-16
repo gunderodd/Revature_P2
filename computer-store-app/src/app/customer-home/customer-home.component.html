@@ -1,6 +1,5 @@
 <div class="container text-center">
     <h2 *ngIf="this.test"><i>{{this.test}}'s Account Details</i></h2>
     <h3>Options</h3>
-    <a routerLink="/purchasehistory">See Purchase History</a>
-    <!-- <a routerLink="/returnitems">Return Items</a> -->
+    <button class="form-control btn btn-primary" (click)="viewHistory()">See Purchase History</button>
 </div>
