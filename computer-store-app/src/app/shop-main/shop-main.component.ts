@@ -31,5 +31,6 @@ export class ShopMainComponent implements OnInit {
     this.opservice.createOrderProduct(id, quantity).subscribe(data => {
       console.log(data);
     })
-  }
+  window.location.reload();
+}
 }

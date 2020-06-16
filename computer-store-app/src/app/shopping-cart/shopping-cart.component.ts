@@ -37,17 +37,20 @@ export class ShoppingCartComponent implements OnInit {
       // or we can have the row flash green???
       // also have to worry about updating the list and everything after we make changes to OPs and stuff
     });
+    window.location.reload();
   }
 
   buyCart() {
     this.os.buyCart().subscribe( res => {
       console.log(res);
     });
+    window.location.reload();
   }
 
   clearCart() {
     this.os.clearCart().subscribe( res => {
       console.log(res);
     });
+    window.location.reload();
   }
 }

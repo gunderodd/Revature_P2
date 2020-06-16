@@ -66,9 +66,9 @@ export class EmployeeViewComponent implements OnInit {
      console.log(stock)
      console.log(name)
      if(stock >=0 ){
-     this.service.restockOrders(name, stock).subscribe(res=> window.location.reload);
+     this.service.restockOrders(name, stock).subscribe(res=> window.location.reload());
     } else{
-      window.location.reload;
+      window.location.reload();
     }
    }
 
