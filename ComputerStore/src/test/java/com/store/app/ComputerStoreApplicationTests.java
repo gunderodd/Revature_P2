@@ -26,17 +26,17 @@ class ComputerStoreApplicationTests {
 	void contextLoads() {
 	}
 
-	@Autowired
-	private UserService us;
+// 	@Autowired
+// 	private UserService us;
 	
-	@MockBean
-	private UserRepo ur;
+// 	@MockBean
+// 	private UserRepo ur;
 	
-	@Test
-	public void getAllUsers() {
-//		int id = 20;
-		when(ur.findAll()).thenReturn(Stream.of(new User(45,"testuser","testtuser","cust")).collect(Collectors.toList()));
-		assertEquals(1, us.getAllUsers().size());
-	}
+// 	@Test
+// 	public void getAllUsers() {
+// //		int id = 20;
+// 		when(ur.findAll()).thenReturn(Stream.of(new User(45,"testuser","testtuser","cust")).collect(Collectors.toList()));
+// 		assertEquals(1, us.getAllUsers().size());
+// 	}
 
 }
