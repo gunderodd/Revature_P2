@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.store.app.service.UserService;
+import com.store.app.exception.BusinessException;
 import com.store.app.model.User;
 
 @CrossOrigin(origins = "*")
@@ -38,10 +39,18 @@ public class UserController {
 	}
 	
 	@PostMapping("/user")
-	public User createUser(@RequestBody User u) {
-		u.setAccessLevel("cust");
-		return us.createUser(u);
-	}
+	   public User createUser(@RequestBody String[] args) {
+        User user = new User();
+    if (args[0].matches("[a-zA-Z0-9]{4,16}") && args[1].matches("[a-zA-Z0-9]{4,16}")) {
+        user.setUsername(args[0]);
+        user.setPassword(args[1]);
+        user.setAccessLevel("cust");
+    
+        return us.createUser(user);
+        } else {
+			throw new BusinessException("Invalid User Registration Details: " + args[0] + ", " + args[1]);
+		}
+    }
 	
 	@GetMapping("/users")
 	public List<User> getAllUsers(HttpSession session) {

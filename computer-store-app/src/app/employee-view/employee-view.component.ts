@@ -66,7 +66,7 @@ export class EmployeeViewComponent implements OnInit {
      if(stock >=0 ){
      this.service.restockOrders(name, stock).subscribe(res=> window.location.reload());
     } else{
-      window.location.reload();
+        alert('Invalid Restock Amount');
     }
    }
 
